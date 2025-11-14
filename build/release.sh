@@ -33,7 +33,9 @@ then
   # commit
   git add -A
   git commit -m "[build] $VERSION"
-  npm version $VERSION --message "[release] $VERSION"
+  npm version $VERSION --no-git-tag-version --message "[release] $VERSION"
+  git add package.json package-lock.json
+  git commit --amend --no-edit
 
   # publish
   git push origin master

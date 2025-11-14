@@ -1,7 +1,7 @@
 {
-  "name": "element-ui",
-  "version": "2.15.5",
-  "description": "A Component Library for Vue.js.",
+  "name": "@liuzengwei/element-ui",
+  "version": "1.0.0",
+  "description": "A Component Library for Vue.js (Fork of Element UI).",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
@@ -46,9 +46,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": "git@github.com:liuzengwei/element.git"
   },
-  "homepage": "http://element.eleme.io",
+  "homepage": "https://github.com/liuzengwei/element",
   "keywords": [
     "eleme",
     "vue",

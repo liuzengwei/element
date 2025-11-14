@@ -33,9 +33,12 @@ then
   # commit
   git add -A
   git commit -m "[build] $VERSION"
-  npm version $VERSION --no-git-tag-version --message "[release] $VERSION"
-  git add package.json package-lock.json
-  git commit --amend --no-edit
+  
+  # update version in package.json
+  node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json')); pkg.version='$VERSION'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');"
+  git add package.json
+  git commit -m "[release] $VERSION"
+  git tag "v$VERSION"
 
   # publish
   git push origin master

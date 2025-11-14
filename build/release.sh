@@ -18,17 +18,17 @@ then
   # ssr test
   node test/ssr/require.test.js            
 
-  # publish theme
-  echo "Releasing theme-chalk $VERSION ..."
-  cd packages/theme-chalk
-  npm version $VERSION --message "[release] $VERSION"
-  if [[ $VERSION =~ "beta" ]]
-  then
-    npm publish --tag beta
-  else
-    npm publish
-  fi
-  cd ../..
+  # publish theme (skipped - theme is included in main package)
+  # echo "Releasing theme-chalk $VERSION ..."
+  # cd packages/theme-chalk
+  # npm version $VERSION --message "[release] $VERSION"
+  # if [[ $VERSION =~ "beta" ]]
+  # then
+  #   npm publish --tag beta
+  # else
+  #   npm publish
+  # fi
+  # cd ../..
 
   # commit
   git add -A
@@ -42,9 +42,10 @@ then
   git rebase master
   git push eleme dev
 
+  # publish to npm with public access (for scoped packages)
   if [[ $VERSION =~ "beta" ]]
   then
-    npm publish --tag beta
+    npm publish --tag beta --access public
   else
     npm publish --access public
   fi

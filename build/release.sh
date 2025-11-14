@@ -46,6 +46,6 @@ then
   then
     npm publish --tag beta
   else
-    npm publish
+    npm publish --access public
   fi
 fi

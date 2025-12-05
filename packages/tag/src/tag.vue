@@ -9,6 +9,8 @@
       disableTransitions: Boolean,
       color: String,
       size: String,
+      showIcon: Boolean,
+      round: Boolean,
       effect: {
         type: String,
         default: 'light',
@@ -32,19 +34,28 @@
       }
     },
     render(h) {
-      const { type, tagSize, hit, effect } = this;
+      const { type, tagSize, hit, effect, round } = this;
       const classes = [
         'el-tag',
         type ? `el-tag--${type}` : '',
         tagSize ? `el-tag--${tagSize}` : '',
         effect ? `el-tag--${effect}` : '',
+        round && 'is-round',
         hit && 'is-hit'
       ];
+      // 构建图标元素
+      const iconEl = this.$slots.icon ? (
+        <span class="el-tag__icon">
+          { this.$slots.icon }
+        </span>
+      ) : null;
+
       const tagEl = (
         <span
           class={ classes }
           style={{ backgroundColor: this.color }}
           on-click={ this.handleClick }>
+          { iconEl }
           { this.$slots.default }
           {
             this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>

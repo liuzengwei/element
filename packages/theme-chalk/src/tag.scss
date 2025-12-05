@@ -17,6 +17,10 @@
       background-color: mix($--tag-primary-color, $--color-white, $hoverColorWeight);
     }
   }
+  
+  .el-tag__icon {
+    background-color: mix($--tag-primary-color, $--color-white, max($backgroundColorWeight, 20%));
+  }
 
   &.el-tag--info {
     background-color: mix($--tag-info-color, $--color-white, $backgroundColorWeight);
@@ -33,6 +37,10 @@
         color: $--color-white;
         background-color: mix($--tag-info-color, $--color-white, $hoverColorWeight);
       }
+    }
+    
+    .el-tag__icon {
+      background-color: mix($--tag-info-color, $--color-white, max($backgroundColorWeight, 50%));
     }
   }
 
@@ -52,6 +60,10 @@
         background-color: mix($--tag-success-color, $--color-white, $hoverColorWeight);
       }
     }
+    
+    .el-tag__icon {
+      background-color: mix($--tag-success-color, $--color-white, max($backgroundColorWeight, 50%));
+    }
   }
 
   &.el-tag--warning {
@@ -69,6 +81,10 @@
         color: $--color-white;
         background-color: mix($--tag-warning-color, $--color-white, $hoverColorWeight);
       }
+    }
+    
+    .el-tag__icon {
+      background-color: mix($--tag-warning-color, $--color-white, max($backgroundColorWeight, 50%));
     }
   }
 
@@ -88,29 +104,35 @@
         background-color: mix($--tag-danger-color, $--color-white, $hoverColorWeight);
       }
     }
+    
+    .el-tag__icon {
+      background-color: mix($--tag-danger-color, $--color-white, max($backgroundColorWeight, 50%));
+    }
   }
 }
 
 @include b(tag) {
   @include genTheme(10%, 20%, 100%, 100%);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   height: 32px;
   padding: $--tag-padding;
   line-height: 30px;
   font-size: $--tag-font-size;
   color: $--tag-primary-color;
-  border-width: 1px;
-  border-style: solid;
+  border-width: $--border-width-base;
+  border-style: $--border-style-base;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
+  transition: $--all-transition;
 
   .el-icon-close {
-    border-radius: 50%;
+    border-radius: $--border-radius-circle;
     text-align: center;
     position: relative;
     cursor: pointer;
-    font-size: 12px;
+    font-size: $--font-size-extra-small;
     height: 16px;
     width: 16px;
     line-height: 16px;
@@ -158,6 +180,47 @@
     .el-icon-close {
       margin-left: -3px;
       transform: scale(.7);
+    }
+  }
+
+  @include when(round) {
+    border-radius: $--tag-round-border-radius;
+    
+    &.el-tag--large {
+      border-radius: $--tag-round-border-radius-large;
+    }
+    
+    &.el-tag--medium {
+      border-radius: $--tag-round-border-radius-medium;
+    }
+    
+    &.el-tag--small {
+      border-radius: $--tag-round-border-radius-small;
+    }
+    
+    &.el-tag--mini {
+      border-radius: $--tag-round-border-radius-mini;
+    }
+  }
+
+  .el-tag__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: $--border-radius-circle;
+    margin-right: 4px;
+    // background-color: currentColor;
+    
+    i {
+      font-size: 10px;
+    }
+    
+    svg {
+      width: 10px;
+      height: 10px;
+      fill: inherit;
     }
   }
 }

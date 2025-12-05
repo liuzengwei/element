@@ -9,6 +9,7 @@
       disableTransitions: Boolean,
       color: String,
       size: String,
+      showIcon: Boolean,
       round: Boolean,
       effect: {
         type: String,
@@ -42,7 +43,6 @@
         round && 'is-round',
         hit && 'is-hit'
       ];
-
       // 构建图标元素
       const iconEl = this.$slots.icon ? (
         <span class="el-tag__icon">

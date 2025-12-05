@@ -12,21 +12,21 @@
     
     <h3>带图标的标签测试</h3>
     <el-tag type="primary">
-      <template #icon>
-        <i class="el-icon-star-on"></i>
+      <template slot="icon">
+        <i class="el-icon-check"></i>
       </template>
       带图标的标签
     </el-tag>
     
     <el-tag type="success" round>
-      <template #icon>
+      <template slot="icon">
         <i class="el-icon-check"></i>
       </template>
       带图标的圆形标签
     </el-tag>
     
     <el-tag type="warning" closable>
-      <template #icon>
+      <template slot="icon">
         <i class="el-icon-warning"></i>
       </template>
       可关闭的带图标标签

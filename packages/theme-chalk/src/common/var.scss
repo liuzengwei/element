@@ -717,6 +717,16 @@ $--tag-danger-color: $--color-danger !default;
 /// fontSize||Font|1
 $--tag-font-size: 12px !default;
 $--tag-border-radius: 4px !default;
+/// borderRadius||Border|2
+$--tag-round-border-radius: 12px !default;
+/// borderRadius||Border|2
+$--tag-round-border-radius-large: 14px !default;
+/// borderRadius||Border|2
+$--tag-round-border-radius-medium: 12px !default;
+/// borderRadius||Border|2
+$--tag-round-border-radius-small: 10px !default;
+/// borderRadius||Border|2
+$--tag-round-border-radius-mini: 8px !default;
 $--tag-padding: 0 10px !default;
 
 /* Tree

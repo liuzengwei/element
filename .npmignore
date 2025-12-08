@@ -1,0 +1,29 @@
+# 开发配置文件
+.eslintrc
+.eslintignore
+.babelrc
+postcss.config.js
+.postcssrc
+.postcssrc.js
+
+# 开发目录
+examples/
+test/
+build/
+docs/
+temp_web/
+test-project/
+
+# 源码目录（已在 files 中明确指定需要的）
+# packages/ 和 src/ 已在 package.json files 中指定
+
+# 其他
+.github/
+.git/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+*.md
+!README.md
+Makefile

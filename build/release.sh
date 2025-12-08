@@ -38,7 +38,7 @@ then
   node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json')); pkg.version='$VERSION'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');"
   git add package.json
   git commit -m "[release] $VERSION"
-  # git tag "v$VERSION"
+  git tag "v$VERSION"
 
   # publish
   git push origin master

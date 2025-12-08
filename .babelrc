@@ -12,7 +12,16 @@
     ],
     "stage-2"
   ],
-  "plugins": ["transform-vue-jsx"],
+  "plugins": [
+    "transform-vue-jsx",
+    ["module-resolver", {
+      "root": ["@liuzengwei/element-ui"],
+      "alias": {
+        "element-ui/src": "@liuzengwei/element-ui/lib",
+        "@liuzengwei/element-ui/src": "@liuzengwei/element-ui/lib"
+      }
+    }]
+  ],
   "env": {
     "utils": {
       "presets": [

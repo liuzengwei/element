@@ -15,31 +15,16 @@ Object.keys(Components).forEach(function(key) {
 
 externals['element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
 externals['@liuzengwei/element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
-
-// 添加 utils 目录整体映射
-externals['element-ui/src/utils'] = '@liuzengwei/element-ui/lib/utils';
-externals['@liuzengwei/element-ui/src/utils'] = '@liuzengwei/element-ui/lib/utils';
-
 utilsList.forEach(function(file) {
   file = path.basename(file, '.js');
   externals[`element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
   externals[`@liuzengwei/element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
 });
-
-// 添加 mixins 目录整体映射
-externals['element-ui/src/mixins'] = '@liuzengwei/element-ui/lib/mixins';
-externals['@liuzengwei/element-ui/src/mixins'] = '@liuzengwei/element-ui/lib/mixins';
-
 mixinsList.forEach(function(file) {
   file = path.basename(file, '.js');
   externals[`element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
   externals[`@liuzengwei/element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
 });
-
-// 添加 transitions 目录整体映射
-externals['element-ui/src/transitions'] = '@liuzengwei/element-ui/lib/transitions';
-externals['@liuzengwei/element-ui/src/transitions'] = '@liuzengwei/element-ui/lib/transitions';
-
 transitionList.forEach(function(file) {
   file = path.basename(file, '.js');
   externals[`element-ui/src/transitions/${file}`] = `@liuzengwei/element-ui/lib/transitions/${file}`;

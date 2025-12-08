@@ -13,7 +13,7 @@
     "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
-    "@liuzengwei/element-ui": "^2.15.5-xn.13",
+    "@liuzengwei/element-ui": "^2.15.5-xn.15",
     "axios": "0.18.1",
     "core-js": "3.6.5",
     "dayjs": "^1.11.10",

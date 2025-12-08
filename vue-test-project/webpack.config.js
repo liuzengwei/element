@@ -27,15 +27,31 @@ module.exports = {
         ]
       },
       {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[hash:7][ext]'
+        }
       }
     ]
   },
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      inject: true
     })
   ],
   resolve: {
@@ -52,6 +68,7 @@ module.exports = {
     compress: true,
     port: 8081,
     hot: true,
-    open: true
+    open: true,
+    historyApiFallback: true
   }
 };

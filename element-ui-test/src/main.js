@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import ElementUI from '@liuzengwei/element-ui';
 import '@liuzengwei/element-ui/lib/theme-chalk/index.css';
-import 'normalize.css/normalize.css'; // CSS 重置样式
+import 'normalize.css/normalize.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -12,10 +12,8 @@ Vue.use(ElementUI);
 // 全局配置
 Vue.config.productionTip = false;
 
-// 创建 Vue 实例
 new Vue({
-  el: '#app',
   router,
   store,
   render: h => h(App)
-});
+}).$mount('#app');

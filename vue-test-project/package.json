@@ -33,7 +33,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "@liuzengwei/element-ui": "^2.15.5-xn.13",
+    "@liuzengwei/element-ui": "^2.15.5-xn.14",
     "core-js": "^3.47.0",
     "vue": "^2.6.14"
   },

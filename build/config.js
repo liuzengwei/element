@@ -13,24 +13,23 @@ Object.keys(Components).forEach(function(key) {
   externals[`@liuzengwei/element-ui/packages/${key}`] = `@liuzengwei/element-ui/lib/${key}`;
 });
 
-// 注释掉这些 externals 配置，让 webpack alias 处理路径转换
-// externals['element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
-// externals['@liuzengwei/element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
-// utilsList.forEach(function(file) {
-//   file = path.basename(file, '.js');
-//   externals[`element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
-//   externals[`@liuzengwei/element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
-// });
-// mixinsList.forEach(function(file) {
-//   file = path.basename(file, '.js');
-//   externals[`element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
-//   externals[`@liuzengwei/element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
-// });
-// transitionList.forEach(function(file) {
-//   file = path.basename(file, '.js');
-//   externals[`element-ui/src/transitions/${file}`] = `@liuzengwei/element-ui/lib/transitions/${file}`;
-//   externals[`@liuzengwei/element-ui/src/transitions/${file}`] = `@liuzengwei/element-ui/lib/transitions/${file}`;
-// });
+externals['element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
+externals['@liuzengwei/element-ui/src/locale'] = '@liuzengwei/element-ui/lib/locale';
+utilsList.forEach(function(file) {
+  file = path.basename(file, '.js');
+  externals[`element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
+  externals[`@liuzengwei/element-ui/src/utils/${file}`] = `@liuzengwei/element-ui/lib/utils/${file}`;
+});
+mixinsList.forEach(function(file) {
+  file = path.basename(file, '.js');
+  externals[`element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
+  externals[`@liuzengwei/element-ui/src/mixins/${file}`] = `@liuzengwei/element-ui/lib/mixins/${file}`;
+});
+transitionList.forEach(function(file) {
+  file = path.basename(file, '.js');
+  externals[`element-ui/src/transitions/${file}`] = `@liuzengwei/element-ui/lib/transitions/${file}`;
+  externals[`@liuzengwei/element-ui/src/transitions/${file}`] = `@liuzengwei/element-ui/lib/transitions/${file}`;
+});
 
 externals = [Object.assign({
   vue: 'vue'
@@ -43,7 +42,6 @@ exports.alias = {
   packages: path.resolve(__dirname, '../packages'),
   examples: path.resolve(__dirname, '../examples'),
   '@liuzengwei/element-ui': path.resolve(__dirname, '../'),
-  'element-ui/src': path.resolve(__dirname, '../src'),
   'element-ui': path.resolve(__dirname, '../')
 };
 

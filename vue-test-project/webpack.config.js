@@ -42,7 +42,9 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      // 解决 element-ui/src 路径问题
+      'element-ui/src': path.resolve(__dirname, 'node_modules/@liuzengwei/element-ui/lib')
     }
   },
   devServer: {

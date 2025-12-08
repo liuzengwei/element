@@ -36,7 +36,49 @@
   </a>
 </p>
 
-> A Vue.js 2.0 UI Toolkit for Web.
+> A Vue.js 2.0 UI Toolkit for Web (Fork of Element UI).
+
+## 📦 Installation
+
+```bash
+npm install @liuzengwei/element-ui --save
+```
+
+## 🚀 Quick Start
+
+### Full Import
+
+```javascript
+import Vue from 'vue';
+import ElementUI from '@liuzengwei/element-ui';
+import '@liuzengwei/element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+```
+
+### ⚠️ Important Configuration
+
+Due to internal module paths, you need to configure path mapping in your project:
+
+**Install babel-plugin-module-resolver:**
+```bash
+npm install --save-dev babel-plugin-module-resolver
+```
+
+**Add to your `babel.config.js`:**
+```javascript
+module.exports = {
+  plugins: [
+    ['module-resolver', {
+      'alias': {
+        'element-ui/src': '@liuzengwei/element-ui/lib'
+      }
+    }]
+  ]
+}
+```
+
+For more details, see [USAGE.md](./USAGE.md)
 
 Element will stay with Vue 2.x
 

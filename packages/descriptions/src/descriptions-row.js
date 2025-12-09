@@ -18,6 +18,13 @@ export default {
         }, {})
       };
     });
+
+    const renderSkeleton = () => {
+      return (
+        <span class={['el-descriptions__skeleton', elDescriptions.animated ? 'is-animated' : '']}></span>
+      );
+    };
+
     if (elDescriptions.direction === 'vertical') {
       return (
         <tbody>
@@ -48,7 +55,7 @@ export default {
                     class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span}
-                  >{item.slots.default}</td>
+                  >{elDescriptions.loading ? renderSkeleton() : item.slots.default}</td>
                 );
               })
             }
@@ -77,7 +84,7 @@ export default {
                     class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span * 2 - 1}
-                  >{item.slots.default}</td>
+                  >{elDescriptions.loading ? renderSkeleton() : item.slots.default}</td>
                 ]);
               })
             }
@@ -104,7 +111,7 @@ export default {
                     <span
                       class={['el-descriptions-item__content', item.contentClassName]}
                       style={item.contentStyle}
-                    >{item.slots.default}</span>
+                    >{elDescriptions.loading ? renderSkeleton() : item.slots.default}</span>
                   </div>
                 </td>);
             })

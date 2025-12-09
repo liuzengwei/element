@@ -48,6 +48,14 @@ export default {
     colon: {
       type: Boolean,
       default: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    animated: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

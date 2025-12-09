@@ -3,6 +3,36 @@
     <el-header>Header</el-header>
     <el-main>
       <div style="margin: 20px">
+        <div>
+          <el-switch v-model="loading" active-text="加载中"></el-switch>
+          <el-switch
+            v-model="animated"
+            active-text="动画效果"
+            style="margin-left: 20px"
+          ></el-switch>
+
+          <el-descriptions
+            class="margin-top"
+            title="用户信息"
+            :column="3"
+            :loading="loading"
+            :animated="animated"
+          >
+            <el-descriptions-item label="用户名"
+              >kooriookami</el-descriptions-item
+            >
+            <el-descriptions-item label="手机号"
+              >18100000000</el-descriptions-item
+            >
+            <el-descriptions-item label="居住地">苏州市</el-descriptions-item>
+            <el-descriptions-item label="备注">
+              -
+            </el-descriptions-item>
+            <el-descriptions-item label="联系地址"
+              >江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item
+            >
+          </el-descriptions>
+        </div>
         <h3>Affix 固钉组件测试</h3>
 
         <h4>基础用法</h4>
@@ -171,6 +201,8 @@
 export default {
   data() {
     return {
+      loading: false,
+      animated: false,
       list: [{}],
       input: "Hello Element UI!",
       value: "选项1",

@@ -152,6 +152,41 @@
 ```
 :::
 
+### 加载状态
+
+:::demo 通过设置 `loading` 属性，可以让内容显示为骨架屏。设置 `animated` 属性可以让骨架屏产生动画效果。
+
+```html
+<template>
+  <div>
+    <el-switch v-model="loading" active-text="加载中"></el-switch>
+    <el-switch v-model="animated" active-text="动画效果" style="margin-left: 20px;"></el-switch>
+    
+    <el-descriptions class="margin-top" title="用户信息" :column="3" :loading="loading" :animated="animated" border>
+      <el-descriptions-item label="用户名">kooriookami</el-descriptions-item>
+      <el-descriptions-item label="手机号">18100000000</el-descriptions-item>
+      <el-descriptions-item label="居住地">苏州市</el-descriptions-item>
+      <el-descriptions-item label="备注">
+        <el-tag size="small">学校</el-tag>
+      </el-descriptions-item>
+      <el-descriptions-item label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
+    </el-descriptions>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        loading: true,
+        animated: true
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### Descriptions Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
@@ -166,6 +201,8 @@
 | contentClassName | 自定义内容类名    | string |    —  | — |
 | labelStyle | 自定义标签样式 | object |    —  | — |
 | contentStyle | 自定义内容样式    | object |    —  | — |
+| loading | 是否显示加载状态（骨架屏）    | boolean |    —  | false |
+| animated | 骨架屏是否显示动画效果    | boolean |    —  | false |
 
 ### Descriptions Slots
 

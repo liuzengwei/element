@@ -108,4 +108,32 @@
       }
     }
   }
+
+  @include e(skeleton) {
+    display: inline-block;
+    height: 20px;
+    width: 60%;
+    background: $--skeleton-color;
+    border-radius: 2px;
+
+    @include when(animated) {
+      background: linear-gradient(
+        90deg,
+        $--skeleton-color 25%,
+        $--skeleton-to-color 37%,
+        $--skeleton-color 63%
+      );
+      background-size: 400% 100%;
+      animation: el-skeleton-loading 1.4s ease infinite;
+    }
+  }
+}
+
+@keyframes el-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }

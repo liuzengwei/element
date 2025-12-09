@@ -47,6 +47,12 @@ export declare class ElDescriptions extends ElementUIComponent {
   /* custom content style */
   contentStyle: object
 
+  /* loading state */
+  loading: boolean
+
+  /* animated skeleton */
+  animated: boolean
+
   $slots: ElDescriptionsSlots
 
 }

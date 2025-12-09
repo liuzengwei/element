@@ -1,6 +1,6 @@
 {
   "name": "@liuzengwei/element-ui",
-  "version": "2.15.5-xn.15",
+  "version": "2.15.5-xn.16",
   "description": "A Component Library for Vue.js (Fork of Element UI).",
   "main": "lib/element-ui.common.js",
   "files": [

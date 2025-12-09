@@ -103,6 +103,15 @@
         validator(val) {
           return val >= 0 && val === parseInt(val, 10);
         }
+      },
+      // 格式化展示值的函数
+      formatter: Function,
+      // 从格式化值中提取数字的函数
+      parser: Function,
+      // 千分符分隔符，true 使用逗号，或自定义分隔符
+      thousandSeparator: {
+        type: [Boolean, String],
+        default: false
       }
     },
     data() {
@@ -187,12 +196,29 @@
           if (this.precision !== undefined) {
             currentValue = currentValue.toFixed(this.precision);
           }
+
+          // 应用千分符
+          if (this.thousandSeparator) {
+            const separator = this.thousandSeparator === true ? ',' : this.thousandSeparator;
+            currentValue = this.formatWithThousandSeparator(currentValue, separator);
+          }
+
+          // 应用自定义格式化函数
+          if (this.formatter) {
+            currentValue = this.formatter(currentValue);
+          }
         }
 
         return currentValue;
       }
     },
     methods: {
+      // 千分符格式化
+      formatWithThousandSeparator(value, separator) {
+        const parts = String(value).split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+        return parts.join('.');
+      },
       toPrecision(num, precision) {
         if (precision === undefined) precision = this.numPrecision;
         return parseFloat(Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision));
@@ -253,11 +279,32 @@
         this.currentValue = newVal;
       },
       handleInput(value) {
-        this.userInput = value;
+        // 如果有千分符或自定义格式化,需要实时解析以便正确显示
+        if (this.thousandSeparator || this.parser) {
+          // 先保存原始输入,以便用户继续编辑
+          this.userInput = value;
+        } else {
+          this.userInput = value;
+        }
       },
       handleInputChange(value) {
-        const newVal = value === '' ? undefined : Number(value);
-        if (!isNaN(newVal) || value === '') {
+        // 使用 parser 解析格式化的值
+        let parsedValue = value;
+        
+        // 先移除千分符
+        if (this.thousandSeparator && value !== '') {
+          const separator = this.thousandSeparator === true ? ',' : this.thousandSeparator;
+          // 移除所有千分符
+          parsedValue = parsedValue.split(separator).join('');
+        }
+        
+        // 再应用自定义 parser
+        if (this.parser && parsedValue !== '') {
+          parsedValue = this.parser(parsedValue);
+        }
+
+        const newVal = parsedValue === '' ? undefined : Number(parsedValue);
+        if (!isNaN(newVal) || parsedValue === '') {
           this.setCurrentValue(newVal);
         }
         this.userInput = null;

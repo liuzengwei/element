@@ -165,6 +165,101 @@
 ```
 :::
 
+### 格式化展示
+
+:::demo 通过 `formatter` 和 `parser` 配合使用可以定义输入框的展示值。`formatter` 用于格式化显示值,`parser` 用于从格式化的值中提取数字。
+
+```html
+<template>
+  <div>
+    <p>货币格式</p>
+    <el-input-number
+      v-model="num1"
+      :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+      :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+      :min="0"
+      :max="100000"
+    ></el-input-number>
+    
+    <p>百分比格式</p>
+    <el-input-number
+      v-model="num2"
+      :formatter="value => `${value}%`"
+      :parser="value => value.replace('%', '')"
+      :min="0"
+      :max="100"
+    ></el-input-number>
+
+    <p>自定义单位</p>
+    <el-input-number
+      v-model="num3"
+      :formatter="value => `${value} kg`"
+      :parser="value => value.replace(' kg', '')"
+      :min="0"
+    ></el-input-number>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num1: 1000,
+        num2: 50,
+        num3: 100
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 千分符
+
+:::demo 设置 `thousand-separator` 属性可以启用千分符显示。设置为 `true` 时使用逗号作为分隔符,也可以传入自定义的分隔符字符串。
+
+```html
+<template>
+  <div>
+    <p>默认逗号分隔</p>
+    <el-input-number
+      v-model="num1"
+      :thousand-separator="true"
+      :min="0"
+      :max="10000000"
+    ></el-input-number>
+    
+    <p>自定义分隔符(空格)</p>
+    <el-input-number
+      v-model="num2"
+      thousand-separator=" "
+      :min="0"
+      :max="10000000"
+    ></el-input-number>
+
+    <p>千分符 + 精度</p>
+    <el-input-number
+      v-model="num3"
+      :thousand-separator="true"
+      :precision="2"
+      :step="0.01"
+      :min="0"
+    ></el-input-number>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num1: 1000000,
+        num2: 1234567,
+        num3: 12345.67
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
@@ -181,6 +276,9 @@
 | name | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
 | placeholder | 输入框默认 placeholder | string | - | - |
+| formatter | 指定输入框展示值的格式 | function(value: number \| string): string | — | — |
+| parser | 指定从 formatter 里转换回数字的方式 | function(string): string | — | — |
+| thousand-separator | 是否启用千分符,`true` 为逗号分隔,也可传入自定义分隔符 | boolean / string | — | false |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

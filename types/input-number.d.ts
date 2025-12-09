@@ -40,6 +40,15 @@ export declare class ElInputNumber extends ElementUIComponent {
   /** whether input value can only be multiple of step */
   stepStrictly: boolean
 
+  /** Specifies the format of the value presented */
+  formatter: (value: number | string) => string
+
+  /** Specifies the value extracted from formatter input */
+  parser: (value: string) => string
+
+  /** Enable thousand separator, true for comma or custom separator string */
+  thousandSeparator: boolean | string
+
   /**
    * Focus the Input component
    */

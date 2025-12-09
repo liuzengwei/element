@@ -1,6 +1,55 @@
 <template>
    <div style="margin: 20px">
 
+        <h3>InputNumber 计数器格式化功能测试</h3>
+
+        <h4>货币格式化</h4>
+        <div style="margin-bottom: 20px">
+          <el-input-number
+            v-model="money"
+            :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+            :min="0"
+            :max="100000"
+          ></el-input-number>
+          <span style="margin-left: 10px">当前值: {{ money }}</span>
+        </div>
+
+        <h4>千分符显示</h4>
+        <div style="margin-bottom: 20px">
+          <el-input-number
+            v-model="bigNumber"
+            :thousand-separator="true"
+            :min="0"
+            :max="10000000"
+          ></el-input-number>
+          <span style="margin-left: 10px">当前值: {{ bigNumber }}</span>
+        </div>
+
+        <h4>千分符 + 精度</h4>
+        <div style="margin-bottom: 20px">
+          <el-input-number
+            v-model="precisionNumber"
+            :thousand-separator="true"
+            :precision="2"
+            :step="0.01"
+            :min="0"
+          ></el-input-number>
+          <span style="margin-left: 10px">当前值: {{ precisionNumber }}</span>
+        </div>
+
+        <h4>百分比格式</h4>
+        <div style="margin-bottom: 30px">
+          <el-input-number
+            v-model="percent"
+            :formatter="value => `${value}%`"
+            :parser="value => value.replace('%', '')"
+            :min="0"
+            :max="100"
+          ></el-input-number>
+          <span style="margin-left: 10px">当前值: {{ percent }}</span>
+        </div>
+
         <h3>Switch 开关新功能测试</h3>
 
         <h4>内部文字显示</h4>
@@ -249,6 +298,12 @@
 export default {
   data() {
     return {
+      // InputNumber 测试数据
+      money: 1000,
+      bigNumber: 1234567,
+      precisionNumber: 12345.67,
+      percent: 50,
+      // 其他数据
       showTooltip: true,
       loading: false,
       animated: false,

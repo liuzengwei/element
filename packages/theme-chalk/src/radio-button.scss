@@ -6,7 +6,33 @@
   position: relative;
   display: inline-block;
   outline: none;
-
+  margin: 1.5px;
+  & + &::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 56%;
+    z-index: 1;
+    background-color: #E5E6EB;
+  }
+  
+  // hover 状态下隐藏分隔符
+  &:hover::before,
+  &:hover + &::before {
+    opacity: 0;
+  }
+  
+  // 选中状态下隐藏分隔符
+  &.is-active::before,
+  &.is-active + &::before,
+  &:has(.el-radio-button__orig-radio:checked)::before,
+  &:has(.el-radio-button__orig-radio:checked) + &::before {
+    opacity: 0;
+  }
+  
   @include e(inner) {
     display: inline-block;
     line-height: 1;
@@ -54,9 +80,10 @@
     outline: none;
     position: absolute;
     z-index: -1;
-
+    
     &:checked {
       & + .el-radio-button__inner {
+        border-radius: $--border-radius-base;
         color: $--radio-button-checked-font-color;
         background-color: $--radio-button-checked-background-color;
         border-color: $--radio-button-checked-border-color;

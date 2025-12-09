@@ -18,13 +18,14 @@
 
   @include when(bordered) {
     padding: $--radio-bordered-padding;
-    border-radius: $--border-radius-base;
-    border: $--border-base;
+    border-radius: $--border-radius-zero;
+    border: $--border-base-bold;
     box-sizing: border-box;
     height: $--radio-bordered-height;
-
+    background-color: mix($--border-color-base-bold,  $--color-white, 20%);
     &.is-checked {
       border-color: $--color-primary;
+      background-color: mix($--color-primary,  $--color-white, 20%);
     }
 
     &.is-disabled {

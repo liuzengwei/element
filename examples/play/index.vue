@@ -1,5 +1,23 @@
 <template>
   <div style="margin: 20px">
+    <h3>Affix 固钉组件测试</h3>
+    
+    <h4>基础用法</h4>
+    <div style="height: 200px; background: #f5f7fa; padding: 20px;">
+      <el-affix :offset="80">
+        <el-button type="primary">距离顶部 80px</el-button>
+      </el-affix>
+    </div>
+    
+    <h4>固定在底部</h4>
+    <div style="height: 200px; background: #e4e7ed; padding: 20px; margin-top: 20px;">
+      <el-affix position="bottom" :offset="20">
+        <el-button type="success">距离底部 20px</el-button>
+      </el-affix>
+    </div>
+
+    <hr style="margin: 30px 0"/>
+
     <h3>Text 组件测试</h3>
     
     <h4>基本用法</h4>

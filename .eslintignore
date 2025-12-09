@@ -11,4 +11,5 @@ coverage
 *.woff
 *.ttf
 yarn.lock
+yarn.lock
 package-lock.json

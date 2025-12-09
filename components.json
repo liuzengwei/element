@@ -88,5 +88,6 @@
   "descriptions": "./packages/descriptions/index.js",
   "descriptions-item": "./packages/descriptions-item/index.js",
   "result": "./packages/result/index.js",
-  "text": "./packages/text/index.js"
+  "text": "./packages/text/index.js",
+  "affix": "./packages/affix/index.js"
 }

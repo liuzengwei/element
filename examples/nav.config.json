@@ -315,6 +315,10 @@
             {
               "path": "/text",
               "title": "Text 文本"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix 固钉"
             }
           ]
         }
@@ -637,6 +641,10 @@
             {
               "path": "/text",
               "title": "Text"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
@@ -959,6 +967,10 @@
             {
               "path": "/text",
               "title": "Text"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
@@ -1281,6 +1293,10 @@
             {
               "path": "/text",
               "title": "Text"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }

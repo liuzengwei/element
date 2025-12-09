@@ -1,141 +1,170 @@
 <template>
-  <div style="margin: 20px">
-    <h3>Affix 固钉组件测试</h3>
-    
-    <h4>基础用法</h4>
-    <div style="height: 200px; background: #f5f7fa; padding: 20px;">
-      <el-affix :offset="80">
-        <el-button type="primary">距离顶部 80px</el-button>
-      </el-affix>
-    </div>
-    
-    <h4>固定在底部（完全贴底 bottom: 0）</h4>
-    <div style="height: 200px; background: #e4e7ed; padding: 20px; margin-top: 20px; position: relative;">
-      <el-affix position="bottom" :offset="0">
-        <el-button type="danger">贴底固定 (bottom: 0)</el-button>
-      </el-affix>
-    </div>
+  <el-container>
+    <el-header>Header</el-header>
+    <el-main>
+      <div style="margin: 20px">
+        <h3>Affix 固钉组件测试</h3>
 
-    <h4>固定在底部（有间距）</h4>
-    <div style="height: 200px; background: #d3dce6; padding: 20px; margin-top: 20px;">
-      <el-affix position="bottom" :offset="20">
-        <el-button type="success">距离底部 20px</el-button>
-      </el-affix>
-    </div>
+        <h4>基础用法</h4>
+        <div style="height: 200px; background: #f5f7fa; padding: 20px">
+          <el-affix :offset="80">
+            <el-button type="primary">距离顶部 80px</el-button>
+          </el-affix>
+        </div>
 
-    <hr style="margin: 30px 0"/>
+        <h4>固定在底部（完全贴底 bottom: 0）</h4>
+        <div
+          style="
+            height: 200px;
+            background: #e4e7ed;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+          "
+        >
+          <el-affix position="bottom" :offset="0">
+            <el-button type="danger">贴底固定 (bottom: 0)</el-button>
+          </el-affix>
+        </div>
 
-    <h3>Text 组件测试</h3>
-    
-    <h4>基本用法</h4>
-    <el-text>默认文本</el-text>
-    <br/>
-    <el-text type="primary">Primary 文本</el-text>
-    <br/>
-    <el-text type="success">Success 文本</el-text>
-    <br/>
-    <el-text type="warning">Warning 文本</el-text>
-    <br/>
-    <el-text type="danger">Danger 文本</el-text>
-    <br/>
-    <el-text type="info">Info 文本</el-text>
-    
-    <h4>尺寸</h4>
-    <el-text size="large">大号文本</el-text>
-    <br/>
-    <el-text size="default">默认文本</el-text>
-    <br/>
-    <el-text size="small">小号文本</el-text>
-    
-    <h4>单行省略</h4>
-    <div style="width: 200px">
-      <el-text truncated>这是一段很长的文本，会被截断并显示省略号，测试文本省略功能是否正常工作</el-text>
-    </div>
-    
-    <h4>多行省略</h4>
-    <div style="width: 200px">
-      <el-text line-clamp="2">这是一段很长的文本，会被截断到两行并显示省略号。这段文本用来测试多行省略功能是否正常工作。继续添加更多文本来测试效果。</el-text>
-    </div>
-    
-    <h4>自定义标签</h4>
-    <el-text tag="p" type="primary">段落标签的文本</el-text>
-    <el-text tag="div" type="success">DIV标签的文本</el-text>
+        <h4>固定在底部（有间距）</h4>
+        <div
+          style="
+            height: 200px;
+            background: #d3dce6;
+            padding: 20px;
+            margin-top: 20px;
+          "
+        >
+          <el-affix position="bottom" :offset="20">
+            <el-button type="success">距离底部 20px</el-button>
+          </el-affix>
+        </div>
 
-    <hr style="margin: 30px 0"/>
+        <hr style="margin: 30px 0" />
 
-    <el-radio-group v-model="value" size="normal" @change="">
-      <el-radio-button
-        v-for="item in items"
-        :key="item.key"
-        :label="item.label"
-      >
-        {{ item.title }}
-      </el-radio-button>
-    </el-radio-group>
+        <h3>Text 组件测试</h3>
 
-    <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
-      <el-checkbox
-        v-for="item in items"
-        border
-        :key="item.key"
-        :label="item.label"
-      >
-        {{ item.title }}
-      </el-checkbox>
-    </el-checkbox-group>
+        <h4>基本用法</h4>
+        <el-text>默认文本</el-text>
+        <br />
+        <el-text type="primary">Primary 文本</el-text>
+        <br />
+        <el-text type="success">Success 文本</el-text>
+        <br />
+        <el-text type="warning">Warning 文本</el-text>
+        <br />
+        <el-text type="danger">Danger 文本</el-text>
+        <br />
+        <el-text type="info">Info 文本</el-text>
 
-    <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
-      <el-checkbox v-for="item in items" :key="item.key" :label="item.label">
-        {{ item.label }}
-      </el-checkbox>
-    </el-checkbox-group>
+        <h4>尺寸</h4>
+        <el-text size="large">大号文本</el-text>
+        <br />
+        <el-text size="default">默认文本</el-text>
+        <br />
+        <el-text size="small">小号文本</el-text>
 
-    <el-radio v-model="value" label="" border @change="">Nihao</el-radio>
-    <el-radio v-model="value" label="" @change="">Nihao</el-radio>
+        <h4>单行省略</h4>
+        <div style="width: 200px">
+          <el-text truncated
+            >这是一段很长的文本，会被截断并显示省略号，测试文本省略功能是否正常工作</el-text
+          >
+        </div>
 
-    <el-upload
-      action=""
-      ref="upload"
-      list-type="picture-card"
-      :auto-upload="false"
-      multiple
-      :limit="5"
-      :file-list="list"
-    >
-    </el-upload>
+        <h4>多行省略</h4>
+        <div style="width: 200px">
+          <el-text line-clamp="2"
+            >这是一段很长的文本，会被截断到两行并显示省略号。这段文本用来测试多行省略功能是否正常工作。继续添加更多文本来测试效果。</el-text
+          >
+        </div>
 
-    <el-input v-model="input" placeholder="请输入内容" clearable></el-input>
-    <el-button type="info" @click="">按钮</el-button>
-    <el-button @click="">按钮</el-button>
+        <h4>自定义标签</h4>
+        <el-text tag="p" type="primary">段落标签的文本</el-text>
+        <el-text tag="div" type="success">DIV标签的文本</el-text>
 
-    <h3>Round Tag 测试</h3>
-    <el-tag type="danger" size="normal" round>圆形标签</el-tag>
-    <el-tag type="success" size="normal" round>成功圆形标签</el-tag>
-    <el-tag type="warning" size="small" round>小型圆形标签</el-tag>
-    <el-tag type="info" size="mini" round>迷你圆形标签</el-tag>
+        <hr style="margin: 30px 0" />
 
-    <h3>带图标的标签测试</h3>
-    <el-tag type="primary">
-      <template slot="icon">
-        <i class="el-icon-check"></i>
-      </template>
-      带图标的标签
-    </el-tag>
+        <el-radio-group v-model="value" size="normal" @change="">
+          <el-radio-button
+            v-for="item in items"
+            :key="item.key"
+            :label="item.label"
+          >
+            {{ item.title }}
+          </el-radio-button>
+        </el-radio-group>
 
-    <el-tag type="success" round>
-      <template slot="icon">
-        <i class="el-icon-check"></i>
-      </template>
-      带图标的圆形标签
-    </el-tag>
+        <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
+          <el-checkbox
+            v-for="item in items"
+            border
+            :key="item.key"
+            :label="item.label"
+          >
+            {{ item.title }}
+          </el-checkbox>
+        </el-checkbox-group>
 
-    <el-tag type="warning" closable>
-      <template slot="icon">
-        <i class="el-icon-warning"></i>
-      </template>
-      可关闭的带图标标签
-    </el-tag>
-  </div>
+        <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
+          <el-checkbox
+            v-for="item in items"
+            :key="item.key"
+            :label="item.label"
+          >
+            {{ item.label }}
+          </el-checkbox>
+        </el-checkbox-group>
+
+        <el-radio v-model="value" label="" border @change="">Nihao</el-radio>
+        <el-radio v-model="value" label="" @change="">Nihao</el-radio>
+
+        <el-upload
+          action=""
+          ref="upload"
+          list-type="picture-card"
+          :auto-upload="false"
+          multiple
+          :limit="5"
+          :file-list="list"
+        >
+        </el-upload>
+
+        <el-input v-model="input" placeholder="请输入内容" clearable></el-input>
+        <el-button type="info" @click="">按钮</el-button>
+        <el-button @click="">按钮</el-button>
+
+        <h3>Round Tag 测试</h3>
+        <el-tag type="danger" size="normal" round>圆形标签</el-tag>
+        <el-tag type="success" size="normal" round>成功圆形标签</el-tag>
+        <el-tag type="warning" size="small" round>小型圆形标签</el-tag>
+        <el-tag type="info" size="mini" round>迷你圆形标签</el-tag>
+
+        <h3>带图标的标签测试</h3>
+        <el-tag type="primary">
+          <template slot="icon">
+            <i class="el-icon-check"></i>
+          </template>
+          带图标的标签
+        </el-tag>
+
+        <el-tag type="success" round>
+          <template slot="icon">
+            <i class="el-icon-check"></i>
+          </template>
+          带图标的圆形标签
+        </el-tag>
+
+        <el-tag type="warning" closable>
+          <template slot="icon">
+            <i class="el-icon-warning"></i>
+          </template>
+          可关闭的带图标标签
+        </el-tag>
+      </div>
+    </el-main>
+    <el-footer>Footer</el-footer>
+  </el-container>
 </template>
 
 <script>
@@ -144,7 +173,7 @@ export default {
     return {
       list: [{}],
       input: "Hello Element UI!",
-      value: '选项1',
+      value: "选项1",
       valueCheckbox: ["选项1"],
       items: [
         { key: 1, label: "选项1", title: "黄金糕" },

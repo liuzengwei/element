@@ -224,10 +224,10 @@
 |---------|----------|---------|-------------|--------|
 | direction | 子元素的排列方向 | string | horizontal / vertical | 子元素中有 `el-header` 或 `el-footer` 时为 vertical，否则为 horizontal |
 
-### Header Attributes
+### Footer Attributes
 | 参数    | 说明     | 类型    | 可选值      | 默认值 |
 |---------|----------|---------|-------------|--------|
-| height | 顶栏高度 | string | — | 60px |
+| height | 底栏高度 | string | — | 60px |
 
 ### Aside Attributes
 | 参数    | 说明     | 类型    | 可选值      | 默认值 |

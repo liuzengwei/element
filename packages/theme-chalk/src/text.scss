@@ -1,0 +1,54 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(text) {
+  font-size: $--font-size-base;
+  line-height: $--font-line-height-primary;
+  color: $--color-text-primary;
+  
+  // Type variations
+  @include m(primary) {
+    color: $--color-primary;
+  }
+  
+  @include m(success) {
+    color: $--color-success;
+  }
+  
+  @include m(warning) {
+    color: $--color-warning;
+  }
+  
+  @include m(danger) {
+    color: $--color-danger;
+  }
+  
+  @include m(info) {
+    color: $--color-info;
+  }
+  
+  // Size variations
+  @include m(large) {
+    font-size: $--font-size-large;
+  }
+  
+  @include m(small) {
+    font-size: $--font-size-small;
+  }
+  
+  // Truncated single line
+  @include when(truncated) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  // Line clamp for multiline
+  @include when(line-clamp) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+}
+

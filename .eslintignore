@@ -10,3 +10,5 @@ coverage
 *.scss
 *.woff
 *.ttf
+yarn.lock
+package-lock.json

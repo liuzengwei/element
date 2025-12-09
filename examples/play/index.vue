@@ -1,5 +1,43 @@
 <template>
   <div style="margin: 20px">
+    <h3>Text 组件测试</h3>
+    
+    <h4>基本用法</h4>
+    <el-text>默认文本</el-text>
+    <br/>
+    <el-text type="primary">Primary 文本</el-text>
+    <br/>
+    <el-text type="success">Success 文本</el-text>
+    <br/>
+    <el-text type="warning">Warning 文本</el-text>
+    <br/>
+    <el-text type="danger">Danger 文本</el-text>
+    <br/>
+    <el-text type="info">Info 文本</el-text>
+    
+    <h4>尺寸</h4>
+    <el-text size="large">大号文本</el-text>
+    <br/>
+    <el-text size="default">默认文本</el-text>
+    <br/>
+    <el-text size="small">小号文本</el-text>
+    
+    <h4>单行省略</h4>
+    <div style="width: 200px">
+      <el-text truncated>这是一段很长的文本，会被截断并显示省略号，测试文本省略功能是否正常工作</el-text>
+    </div>
+    
+    <h4>多行省略</h4>
+    <div style="width: 200px">
+      <el-text line-clamp="2">这是一段很长的文本，会被截断到两行并显示省略号。这段文本用来测试多行省略功能是否正常工作。继续添加更多文本来测试效果。</el-text>
+    </div>
+    
+    <h4>自定义标签</h4>
+    <el-text tag="p" type="primary">段落标签的文本</el-text>
+    <el-text tag="div" type="success">DIV标签的文本</el-text>
+
+    <hr style="margin: 30px 0"/>
+
     <el-radio-group v-model="value" size="normal" @change="">
       <el-radio-button
         v-for="item in items"
@@ -10,7 +48,7 @@
       </el-radio-button>
     </el-radio-group>
 
-    <el-checkbox-group v-model="value" size="normal" @change="">
+    <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
       <el-checkbox
         v-for="item in items"
         border
@@ -21,13 +59,14 @@
       </el-checkbox>
     </el-checkbox-group>
 
-    <el-checkbox-group v-model="value" size="normal" @change="">
+    <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
       <el-checkbox v-for="item in items" :key="item.key" :label="item.label">
         {{ item.label }}
       </el-checkbox>
     </el-checkbox-group>
 
     <el-radio v-model="value" label="" border @change="">Nihao</el-radio>
+    <el-radio v-model="value" label="" @change="">Nihao</el-radio>
 
     <el-upload
       action=""
@@ -80,7 +119,8 @@ export default {
     return {
       list: [{}],
       input: "Hello Element UI!",
-      value: ["选项1"],
+      value: '选项1',
+      valueCheckbox: ["选项1"],
       items: [
         { key: 1, label: "选项1", title: "黄金糕" },
         { key: 2, label: "选项2", title: "双皮奶" },

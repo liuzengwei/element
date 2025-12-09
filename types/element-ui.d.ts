@@ -89,6 +89,7 @@ import { ElDescriptions } from './descriptions'
 import { ElDescriptionsItem } from './descriptions-item'
 import { ElResult } from './result'
 import { ElStatistic } from './statistic'
+import { ElText } from './text'
 
 export interface InstallationOptions {
   locale: any,
@@ -380,3 +381,5 @@ export class Result extends ElResult {}
 
 /** Statistic Component */
 export class Statistic extends ElStatistic {}
+/** Text Component */
+export class Text extends ElText {}

@@ -15,7 +15,9 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': require('path').resolve(__dirname, 'src')
+        '@': require('path').resolve(__dirname, 'src'),
+        'element-ui/src': '@liuzengwei/element-ui/lib',
+        '@liuzengwei/element-ui/src': '@liuzengwei/element-ui/lib'
       }
     }
   },

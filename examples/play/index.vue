@@ -9,8 +9,15 @@
       </el-affix>
     </div>
     
-    <h4>固定在底部</h4>
-    <div style="height: 200px; background: #e4e7ed; padding: 20px; margin-top: 20px;">
+    <h4>固定在底部（完全贴底 bottom: 0）</h4>
+    <div style="height: 200px; background: #e4e7ed; padding: 20px; margin-top: 20px; position: relative;">
+      <el-affix position="bottom" :offset="0">
+        <el-button type="danger">贴底固定 (bottom: 0)</el-button>
+      </el-affix>
+    </div>
+
+    <h4>固定在底部（有间距）</h4>
+    <div style="height: 200px; background: #d3dce6; padding: 20px; margin-top: 20px;">
       <el-affix position="bottom" :offset="20">
         <el-button type="success">距离底部 20px</el-button>
       </el-affix>

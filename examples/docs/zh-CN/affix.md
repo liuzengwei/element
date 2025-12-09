@@ -36,11 +36,17 @@
 
 提供了两个固定位置：`top` 和 `bottom`。
 
-:::demo 通过设置 `position` 属性来改变固定位置，默认值为 `top`。
+:::demo 通过设置 `position` 属性来改变固定位置，默认值为 `top`。设置 `offset="0"` 可以让组件完全贴底（bottom: 0）。
 
 ```html
+<!-- 贴底固定 -->
+<el-affix position="bottom" :offset="0">
+  <el-button type="primary">贴底固定 (bottom: 0)</el-button>
+</el-affix>
+
+<!-- 距底部有间距 -->
 <el-affix position="bottom" :offset="20">
-  <el-button type="primary">距离底部 20px</el-button>
+  <el-button type="success">距离底部 20px</el-button>
 </el-affix>
 ```
 :::

@@ -16,6 +16,13 @@
     }
   }
 
+  @include when(loading) {
+    & .el-switch__core,
+    & .el-switch__label {
+      cursor: not-allowed;
+    }
+  }
+
   @include e(label) {
     transition: .2s;
     height: $--switch-height;
@@ -76,7 +83,50 @@
       width: $--switch-button-size;
       height: $--switch-button-size;
       background-color: $--color-white;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+  }
+
+  @include when(loading) {
+    .el-switch__core:after {
+      content: "";
+      border: 1px solid $--color-primary;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: rotating 1s linear infinite;
+    }
+  }
+
+  @keyframes rotating {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @include e(inner) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+
+  @include e(inner-text) {
+    color: $--color-white;
+    font-size: 12px;
+    user-select: none;
+    white-space: nowrap;
   }
 
   @include when(checked) {
@@ -87,6 +137,15 @@
         left: 100%;
         margin-left: -$--switch-button-size - 1px;
       }
+    }
+    .el-switch__inner {
+      justify-content: flex-start;
+    }
+  }
+
+  &:not(.is-checked) {
+    .el-switch__inner {
+      justify-content: flex-end;
     }
   }
 

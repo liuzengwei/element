@@ -1,8 +1,59 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-main>
-      <div style="margin: 20px">
+   <div style="margin: 20px">
+
+        <h3>Switch 开关新功能测试</h3>
+
+        <h4>内部文字显示</h4>
+        <div style="margin-bottom: 20px">
+          <el-switch
+            v-model="switchValue1"
+            active-inner-text="ON"
+            inactive-inner-text="OFF"
+          ></el-switch>
+          <el-switch
+            v-model="switchValue2"
+            active-inner-text="开"
+            inactive-inner-text="关"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            style="margin-left: 10px"
+          ></el-switch>
+          <el-switch
+            v-model="switchValue3"
+            active-inner-text="YES"
+            inactive-inner-text="NO"
+            style="margin-left: 10px"
+          ></el-switch>
+        </div>
+
+        <h4>异步控制 + Loading</h4>
+        <div style="margin-bottom: 20px">
+          <el-switch
+            v-model="asyncValue1"
+            :before-change="beforeChange1"
+          ></el-switch>
+          <span style="margin-left: 10px">带确认框的异步切换</span>
+        </div>
+        <div style="margin-bottom: 30px">
+          <el-switch
+            v-model="asyncValue2"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            :before-change="beforeChange2"
+            active-inner-text="开"
+            inactive-inner-text="关"
+            :width="60"
+          ></el-switch>
+          <span style="margin-left: 10px">模拟异步请求(随机成功/失败)</span>
+        </div>
+
+        <el-tooltip content="content to trigger tooltip here" placement="top" effect="dark">
+          <el-link type="primary" :underline="false" v-if="showTooltip" @click="onClick">测试</el-link>
+          
+          
+        </el-tooltip>
+        
+        
         <div>
           <el-switch v-model="loading" active-text="加载中"></el-switch>
           <el-switch
@@ -192,17 +243,20 @@
           可关闭的带图标标签
         </el-tag>
       </div>
-    </el-main>
-    <el-footer>Footer</el-footer>
-  </el-container>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      showTooltip: true,
       loading: false,
       animated: false,
+      switchValue1: true,
+      switchValue2: false,
+      switchValue3: true,
+      asyncValue1: false,
+      asyncValue2: false,
       list: [{}],
       input: "Hello Element UI!",
       value: "选项1",
@@ -216,5 +270,44 @@ export default {
       ],
     };
   },
+  methods: {
+    onClick(){
+      setTimeout(() => {
+        this.showTooltip = false;
+      }, 300);
+    },
+    beforeChange1() {
+      return new Promise((resolve) => {
+        this.$confirm('确认切换开关状态吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          // 模拟异步操作
+          setTimeout(() => {
+            this.$message.success('切换成功');
+            resolve(true);
+          }, 1000);
+        }).catch(() => {
+          this.$message.info('已取消');
+          resolve(false);
+        });
+      });
+    },
+    beforeChange2() {
+      return new Promise((resolve) => {
+        // 模拟异步请求
+        setTimeout(() => {
+          if (Math.random() > 0.5) {
+            this.$message.success('切换成功');
+            resolve(true);
+          } else {
+            this.$message.error('切换失败');
+            resolve(false);
+          }
+        }, 1500);
+      });
+    }
+  }
 };
 </script>

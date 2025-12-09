@@ -23,6 +23,12 @@ export declare class ElSwitch extends ElementUIComponent {
   /** Text displayed when in off state */
   inactiveText: string
 
+  /** Inner text displayed inside switch when in on state */
+  activeInnerText: string
+
+  /** Inner text displayed inside switch when in off state */
+  inactiveInnerText: string
+
   /** Background color when in on state */
   activeColor: string
 
@@ -40,4 +46,7 @@ export declare class ElSwitch extends ElementUIComponent {
 
   /** Whether to trigger form validation */
   validateEvent: boolean
+
+  /** Before change hook, return a boolean or Promise, if false or reject, stop switching */
+  beforeChange: () => boolean | Promise<boolean>
 }

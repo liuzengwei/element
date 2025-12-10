@@ -290,14 +290,14 @@
       handleInputChange(value) {
         // 使用 parser 解析格式化的值
         let parsedValue = value;
-        
+
         // 先移除千分符
         if (this.thousandSeparator && value !== '') {
           const separator = this.thousandSeparator === true ? ',' : this.thousandSeparator;
           // 移除所有千分符
           parsedValue = parsedValue.split(separator).join('');
         }
-        
+
         // 再应用自定义 parser
         if (this.parser && parsedValue !== '') {
           parsedValue = this.parser(parsedValue);

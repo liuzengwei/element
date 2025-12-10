@@ -10,24 +10,14 @@
       'el-table--scrollable-x': layout.scrollX,
       'el-table--scrollable-y': layout.scrollY,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100,
-      'is-sticky-header': stickyHeader !== false
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <!-- sticky header 占位符 -->
-    <div
-      v-if="showHeader && stickyHeader !== false"
-      class="el-table__header-placeholder"
-      ref="headerPlaceholder"
-      :style="{ height: '0px', visibility: 'hidden' }">
-    </div>
     <div
       v-if="showHeader"
       v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__header-wrapper"
-      :class="{ 'is-sticky': stickyHeader !== false }"
-      :style="stickyHeaderStyle"
       ref="headerWrapper">
       <table-header
         ref="tableHeader"
@@ -346,12 +336,7 @@
 
       lazy: Boolean,
 
-      load: Function,
-
-      stickyHeader: {
-        type: [Boolean, Number, String],
-        default: false
-      }
+      load: Function
     },
 
     components: {
@@ -512,97 +497,6 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
-      },
-
-      // 初始化 sticky 滚动处理
-      initStickyScroll() {
-        if (this.stickyHeader === false) return;
-
-        this.$nextTick(() => {
-          const headerWrapper = this.$refs.headerWrapper;
-          const headerPlaceholder = this.$refs.headerPlaceholder;
-          if (!headerWrapper) return;
-
-          this.stickyScrollHandler = () => {
-            const tableRect = this.$el.getBoundingClientRect();
-            const stickyOffset = typeof this.stickyHeader === 'number' ? this.stickyHeader : 0;
-
-            // 判断是否应该吸顶
-            const shouldStick = tableRect.top <= stickyOffset;
-            const shouldUnstick = tableRect.bottom <= headerWrapper.offsetHeight + stickyOffset;
-
-            if (shouldStick && !shouldUnstick) {
-              // 需要吸顶
-              if (!headerWrapper.classList.contains('is-fixed')) {
-                // 设置占位符高度，防止页面跳动
-                if (headerPlaceholder) {
-                  headerPlaceholder.style.height = `${headerWrapper.offsetHeight}px`;
-                  headerPlaceholder.style.visibility = 'visible';
-                }
-
-                headerWrapper.classList.add('is-fixed');
-                headerWrapper.style.position = 'fixed';
-                headerWrapper.style.top = `${stickyOffset}px`;
-                headerWrapper.style.left = `${tableRect.left}px`;
-                headerWrapper.style.width = `${tableRect.width}px`;
-                headerWrapper.style.zIndex = '2000';
-                headerWrapper.style.backgroundColor = '#fff';
-              } else {
-                // 更新位置（处理水平滚动）
-                headerWrapper.style.left = `${tableRect.left}px`;
-              }
-            } else {
-              // 不需要吸顶，恢复原状
-              if (headerWrapper.classList.contains('is-fixed')) {
-                headerWrapper.classList.remove('is-fixed');
-                headerWrapper.style.position = '';
-                headerWrapper.style.top = '';
-                headerWrapper.style.left = '';
-                headerWrapper.style.width = '';
-                headerWrapper.style.zIndex = '';
-                headerWrapper.style.backgroundColor = '';
-
-                // 隐藏占位符
-                if (headerPlaceholder) {
-                  headerPlaceholder.style.height = '0px';
-                  headerPlaceholder.style.visibility = 'hidden';
-                }
-              }
-            }
-          };
-
-          // 监听 window 滚动
-          window.addEventListener('scroll', this.stickyScrollHandler, { passive: true });
-          // 监听 window resize
-          window.addEventListener('resize', this.stickyScrollHandler, { passive: true });
-        });
-      },
-
-      // 销毁 sticky 滚动处理
-      destroyStickyScroll() {
-        if (this.stickyScrollHandler) {
-          window.removeEventListener('scroll', this.stickyScrollHandler);
-          window.removeEventListener('resize', this.stickyScrollHandler);
-
-          // 清理样式
-          const headerWrapper = this.$refs.headerWrapper;
-          const headerPlaceholder = this.$refs.headerPlaceholder;
-          if (headerWrapper && headerWrapper.classList.contains('is-fixed')) {
-            headerWrapper.classList.remove('is-fixed');
-            headerWrapper.style.position = '';
-            headerWrapper.style.top = '';
-            headerWrapper.style.left = '';
-            headerWrapper.style.width = '';
-            headerWrapper.style.zIndex = '';
-            headerWrapper.style.backgroundColor = '';
-          }
-          if (headerPlaceholder) {
-            headerPlaceholder.style.height = '0px';
-            headerPlaceholder.style.visibility = 'hidden';
-          }
-
-          this.stickyScrollHandler = null;
-        }
       }
 
     },
@@ -700,20 +594,6 @@
         };
       },
 
-      stickyHeaderStyle() {
-        if (this.stickyHeader === false) return {};
-        
-        const top = typeof this.stickyHeader === 'number' 
-          ? `${this.stickyHeader}px` 
-          : typeof this.stickyHeader === 'string'
-            ? this.stickyHeader
-            : '0px';
-        
-        return {
-          top: top
-        };
-      },
-
       ...mapStates({
         selection: 'selection',
         columns: 'columns',
@@ -789,17 +669,11 @@
         }
       });
 
-      // 初始化滚动容器检测
-      if (this.stickyHeader !== false) {
-        this.initStickyScroll();
-      }
-
       this.$ready = true;
     },
 
     destroyed() {
       this.unbindEvents();
-      this.destroyStickyScroll();
     },
 
     data() {
@@ -831,9 +705,7 @@
         },
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left',
-        // sticky 滚动处理函数
-        stickyScrollHandler: null
+        scrollPosition: 'left'
       };
     }
   };

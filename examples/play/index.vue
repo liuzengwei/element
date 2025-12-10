@@ -2,24 +2,41 @@
   <div style="margin: 20px">
     <h3>Table 表头吸顶功能测试</h3>
 
-    <p>向下滚动页面，表头会固定在顶部</p>
-    <el-card shadow="always" :body-style="{ padding: '20px' }">
-      <div slot="header">
-        <span>card title - Table 在卡片内</span>
-      </div>
+    <p>向下滚动页面，表头会固定在顶部（设置 sticky-header="56"）</p>
       <el-table
         :data="tableData"
-        :sticky-header="0"
         border
         style="width: 100%; margin-bottom: 30px"
       >
-        <el-table-column prop="date" label="日期" width="180">
+        <el-table-column prop="date" label="日期">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="name" label="姓名" >
         </el-table-column>
-        <el-table-column prop="address" label="地址"> </el-table-column>
+        <el-table-column prop="address" label="地址" width="300">
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="province" label="省份" >
+        </el-table-column>
+        <el-table-column prop="city" label="城市" >
+        </el-table-column>
+        <el-table-column prop="zip" label="邮编" width="120" fixed="right">
+        </el-table-column>
       </el-table>
-    </el-card>
 
     <div
       style="
@@ -334,41 +351,65 @@ export default {
           date: "2016-05-02",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1518 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-04",
           name: "李小龙",
           address: "上海市普陀区金沙江路 1517 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-01",
           name: "张小明",
-          address: "上海市普陀区金沙江路 1519 弄",
+          address: "上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路上海市普陀区金沙江路 1519 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-03",
           name: "赵小红",
           address: "上海市普陀区金沙江路 1516 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-05",
           name: "钱小白",
           address: "上海市普陀区金沙江路 1520 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-06",
           name: "孙小黑",
           address: "上海市普陀区金沙江路 1521 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-07",
           name: "周小青",
           address: "上海市普陀区金沙江路 1522 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
         {
           date: "2016-05-08",
           name: "吴小紫",
           address: "上海市普陀区金沙江路 1523 弄",
+          province: "上海",
+          city: "普陀区",
+          zip: "200333",
         },
       ],
       // InputNumber 测试数据

@@ -1848,86 +1848,6 @@
 ```
 :::
 
-### 表头吸顶
-
-表头可以吸附在视口顶部,方便查看长表格数据。
-
-:::demo 通过设置 `sticky-header` 属性可以让表头在页面滚动时吸附在顶部。设置为 `true` 时吸附在页面顶部（top: 0），也可以传入数字或字符串设置距离顶部的偏移量，例如 `:sticky-header="80"` 表示距离顶部 80px。
-
-```html
-<template>
-  <div>
-    <p>向下滚动页面，表头会固定在距离顶部 80px 的位置</p>
-    <el-table
-      :data="tableData"
-      :sticky-header="80"
-      border
-      style="width: 100%">
-      <el-table-column
-        prop="date"
-        label="日期"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="地址">
-      </el-table-column>
-    </el-table>
-    <div style="height: 800px; padding: 20px; background: #f5f7fa; margin-top: 20px;">
-      <p>占位内容区域 - 向下滚动查看吸顶效果</p>
-    </div>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-05',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1520 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1521 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1522 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1523 弄'
-        }]
-      }
-    }
-  };
-</script>
-```
-:::
-
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1965,7 +1885,6 @@
 | lazy        | 是否懒加载子节点数据 | Boolean | — | — |
 | load        | 加载子节点数据的函数，lazy 为 true 时生效，函数第二个参数包含了节点的层级信息 | Function(row, treeNode, resolve) | — | — |
 | tree-props  | 渲染嵌套数据的配置选项 | Object | — | { hasChildren: 'hasChildren', children: 'children' } |
-| sticky-header | 表头吸顶。设置为 `true` 时吸附在顶部（top: 0），也可以传入数字或字符串设置距离顶部的偏移量 | boolean/number/string | — | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

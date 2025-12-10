@@ -15,12 +15,6 @@
   font-size: 14px;
   color: $--table-font-color;
 
-  // 启用表头吸顶时需要允许表头溢出，但保持水平方向隐藏
-  @include when(sticky-header) {
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
-
   // 数据为空
   @include e(empty-block) {
     min-height: 60px;
@@ -375,7 +369,7 @@
     left: 0;
     top: 37px;
     overflow: hidden;
-    z-index: 3;
+    z-index: 2;
   }
 
   @include e((header-wrapper, body-wrapper, footer-wrapper)) {
@@ -404,12 +398,7 @@
   }
 
   @include e(header-wrapper) {
-    @include when(sticky) {
-      position: sticky;
-      background-color: $--color-white;
-      z-index: 10;
-      overflow: visible;
-    }
+    overflow: hidden;
   }
 
   @include e(body-wrapper) {

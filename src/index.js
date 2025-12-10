@@ -189,6 +189,7 @@ const install = function(Vue, opts = {}) {
   locale.i18n(opts.i18n);
 
   components.forEach(component => {
+    console.log('🚀 ~ install ~ component:', component.name, component);
     Vue.component(component.name, component);
   });
 

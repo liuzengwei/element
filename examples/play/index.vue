@@ -9,7 +9,7 @@
     
     <el-table
       :data="tableData"
-      :header-affixed-top="true"
+      :header-affixed-top="56"
       border
       style="width: 100%; margin-bottom: 40px;">
       <el-table-column

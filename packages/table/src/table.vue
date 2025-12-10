@@ -10,7 +10,8 @@
       'el-table--scrollable-x': layout.scrollX,
       'el-table--scrollable-y': layout.scrollY,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100,
+      'el-table--header-affixed': showAffixHeader
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
@@ -209,6 +210,82 @@
         height: layout.headerHeight + 'px'
       }"></div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
+    <!-- 吸顶表头 -->
+    <div
+      v-if="isHeaderAffixed && showAffixHeader && showHeader"
+      class="el-table__affix-header-wrapper"
+      :style="affixHeaderStyle">
+      <!-- 主表头 -->
+      <div
+        v-mousewheel="handleHeaderFooterMousewheel"
+        class="el-table__header-wrapper"
+        ref="affixHeaderWrapper">
+        <table-header
+          ref="affixTableHeader"
+          :store="store"
+          :border="border"
+          :default-sort="defaultSort"
+          :style="{
+            width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
+          }">
+        </table-header>
+      </div>
+      <!-- 左固定列表头 -->
+      <div
+        v-if="fixedColumns.length > 0"
+        class="el-table__fixed"
+        :style="{
+          width: layout.fixedWidth ? layout.fixedWidth + 'px' : '',
+          height: layout.headerHeight ? layout.headerHeight + 'px' : '',
+          left: '0'
+        }">
+        <div
+          class="el-table__fixed-header-wrapper"
+          ref="affixFixedHeaderWrapper">
+          <table-header
+            ref="affixFixedTableHeader"
+            fixed="left"
+            :border="border"
+            :store="store"
+            :style="{
+              width: bodyWidth
+            }">
+          </table-header>
+        </div>
+      </div>
+      <!-- 右固定列表头 -->
+      <div
+        v-if="rightFixedColumns.length > 0"
+        class="el-table__fixed-right"
+        :style="{
+          width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
+          height: layout.headerHeight ? layout.headerHeight + 'px' : '',
+          right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : '0'
+        }">
+        <div
+          class="el-table__fixed-header-wrapper"
+          ref="affixRightFixedHeaderWrapper">
+          <table-header
+            ref="affixRightFixedTableHeader"
+            fixed="right"
+            :border="border"
+            :store="store"
+            :style="{
+              width: bodyWidth
+            }">
+          </table-header>
+        </div>
+      </div>
+      <!-- 右侧滚动条补丁 -->
+      <div
+        v-if="rightFixedColumns.length > 0 && layout.scrollY"
+        class="el-table__fixed-right-patch"
+        :style="{
+          width: layout.gutterWidth + 'px',
+          height: layout.headerHeight + 'px'
+        }">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -336,7 +413,12 @@
 
       lazy: Boolean,
 
-      load: Function
+      load: Function,
+
+      headerAffixedTop: {
+        type: [Boolean, Object],
+        default: false
+      }
     },
 
     components: {
@@ -438,6 +520,10 @@
         this.syncPostion();
       }),
 
+      throttleUpdateAffixHeader: throttle(16, function() {
+        this.updateAffixHeader();
+      }),
+
       onScroll(evt) {
         let raf = window.requestAnimationFrame;
         if (!raf) {
@@ -445,6 +531,8 @@
         } else {
           raf(this.syncPostion);
         }
+        // 同步吸顶表头的滚动
+        this.syncAffixHeaderScroll();
       },
 
       bindEvents() {
@@ -452,12 +540,20 @@
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
         }
+        if (this.isHeaderAffixed) {
+          window.addEventListener('scroll', this.onDocumentScroll, { passive: true });
+          window.addEventListener('resize', this.throttleUpdateAffixHeader);
+        }
       },
 
       unbindEvents() {
         this.bodyWrapper.removeEventListener('scroll', this.onScroll, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
+        }
+        if (this.isHeaderAffixed) {
+          window.removeEventListener('scroll', this.onDocumentScroll, { passive: true });
+          window.removeEventListener('resize', this.throttleUpdateAffixHeader);
         }
       },
 
@@ -497,6 +593,58 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
+      },
+
+      updateAffixHeader() {
+        if (!this.isHeaderAffixed || !this.$el) return;
+
+        const tableRect = this.$el.getBoundingClientRect();
+        const headerHeight = this.layout.headerHeight || 0;
+        const offsetTop = this.affixHeaderOffsetTop;
+
+        // 保存 tableRect 到组件数据中，供模板使用
+        this.tableRect = {
+          top: tableRect.top,
+          left: tableRect.left,
+          width: tableRect.width,
+          height: tableRect.height
+        };
+
+        // 判断表头是否应该吸顶
+        // 当表格顶部滚动到视口上方，且表格底部仍在视口内时，显示吸顶表头
+        const shouldShow = tableRect.top < offsetTop &&
+                          tableRect.bottom > offsetTop + headerHeight;
+
+        this.showAffixHeader = shouldShow;
+
+        if (shouldShow) {
+          // 吸顶容器的宽度应该等于表格的宽度
+          // 注意：固定列是绝对定位，会覆盖在主表格上，所以不影响容器宽度
+          this.affixHeaderStyle = {
+            top: offsetTop + 'px',
+            width: tableRect.width + 'px',
+            left: tableRect.left + 'px'
+          };
+        }
+      },
+
+      onDocumentScroll() {
+        if (this.isHeaderAffixed) {
+          this.updateAffixHeader();
+        }
+      },
+
+      syncAffixHeaderScroll() {
+        // 同步吸顶表头与主表格的横向滚动
+        if (!this.isHeaderAffixed) return;
+
+        const scrollLeft = this.bodyWrapper.scrollLeft;
+        const affixHeaderWrapper = this.$refs.affixHeaderWrapper;
+
+        if (affixHeaderWrapper) {
+          affixHeaderWrapper.scrollLeft = scrollLeft;
+        }
+        // 固定列不需要同步横向滚动
       }
 
     },
@@ -594,6 +742,17 @@
         };
       },
 
+      isHeaderAffixed() {
+        return !!(this.headerAffixedTop);
+      },
+
+      affixHeaderOffsetTop() {
+        if (typeof this.headerAffixedTop === 'object') {
+          return this.headerAffixedTop.offsetTop || 0;
+        }
+        return 0;
+      },
+
       ...mapStates({
         selection: 'selection',
         columns: 'columns',
@@ -670,6 +829,13 @@
       });
 
       this.$ready = true;
+
+      // 初始化吸顶表头位置
+      if (this.isHeaderAffixed) {
+        this.$nextTick(() => {
+          this.updateAffixHeader();
+        });
+      }
     },
 
     destroyed() {
@@ -705,7 +871,19 @@
         },
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left'
+        scrollPosition: 'left',
+        // 表头吸顶相关
+        showAffixHeader: false,
+        affixHeaderStyle: {
+          top: '0px',
+          width: '100%'
+        },
+        tableRect: {
+          top: 0,
+          left: 0,
+          width: 0,
+          height: 0
+        }
       };
     }
   };

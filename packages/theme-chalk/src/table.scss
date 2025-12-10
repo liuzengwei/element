@@ -310,6 +310,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
+    z-index: 3;
 
     &::before {
       content: '';
@@ -534,6 +535,68 @@
       transform: scale(.75);
     }
   }
+
+  @include e(affix-header-wrapper) {
+    position: fixed;
+    z-index: 100;
+    background-color: $--color-white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .el-table__header-wrapper {
+      overflow: hidden;
+    }
+
+    .el-table__fixed,
+    .el-table__fixed-right {
+      position: absolute !important;
+      top: 0;
+      bottom: auto;
+      height: auto;
+      box-shadow: none;
+      background-color: $--color-white;
+      overflow-x: hidden !important;
+      overflow-y: hidden !important;
+      z-index: 101;
+
+      &::before {
+        display: none;
+      }
+
+      .el-table__fixed-header-wrapper {
+        position: absolute;
+        top: 0;
+        z-index: auto;
+      }
+    }
+
+    .el-table__fixed {
+      left: 0 !important;
+      
+      .el-table__fixed-header-wrapper {
+        left: 0;
+      }
+    }
+
+    .el-table__fixed-right {
+      right: 0 !important;
+      left: auto !important;
+
+      .el-table__fixed-header-wrapper {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    .el-table__fixed-right-patch {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: $--color-white;
+      border-bottom: $--table-border;
+    }
+  }
+
+
 
   @include m(enable-row-transition) {
     .el-table__body td.el-table__cell {

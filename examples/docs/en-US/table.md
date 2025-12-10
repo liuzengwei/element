@@ -1816,6 +1816,7 @@ You can customize row index in `type=index` columns.
 | size | size of Table | string | medium / small / mini | — |
 | fit | whether width of column automatically fits its container | boolean | — | true |
 | show-header | whether Table header is visible | boolean | — | true |
+| header-affixed-top | Configuration for sticky table header. Set to `true` to enable sticky header (defaults to 0px from page top); set to object `{ offsetTop: 60 }` to customize the offset from page top when sticky | boolean / object | — | false |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | highlight-selection-row | whether selection row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |

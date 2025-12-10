@@ -1823,6 +1823,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | size | Taille de la table. | string | medium / small / mini | — |
 | fit | Si la largeur des colonnes s'adapte au conteneur. | boolean | — | true |
 | show-header | Si le header de la table est visible. | boolean | — | true |
+| header-affixed-top | Configuration pour l'en-tête collant. Défini sur `true` pour activer l'en-tête collant (par défaut à 0px du haut de la page); défini sur objet `{ offsetTop: 60 }` pour personnaliser le décalage par rapport au haut de la page lorsqu'il est collant | boolean / object | — | false |
 | highlight-current-row | Si la ligne courante est mise en valeur. | boolean | — | false |
 | highlight-selection-row | Sélectionner la ligne à cocher en surbrillance | boolean | — | false |
 | current-row-key | Clé de la ligne actuelle. Propriété set-only. | string,number | — | — |

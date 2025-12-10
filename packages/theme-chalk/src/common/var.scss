@@ -655,7 +655,7 @@ $--pagination-font-size: 13px !default;
 $--pagination-background-color: $--color-white !default;
 /// color||Color|0
 $--pagination-font-color: $--color-text-primary !default;
-$--pagination-border-radius: 3px !default;
+$--pagination-border-radius: $--border-radius-zero !default;
 /// color||Color|0
 $--pagination-button-color: $--color-text-primary !default;
 /// height||Other|4
@@ -765,7 +765,7 @@ $--badge-size: 18px !default;
 --------------------------*/
 /// color||Color|0
 $--card-border-color: $--border-color-lighter !default;
-$--card-border-radius: 4px !default;
+$--card-border-radius: $--border-radius-zero !default;
 /// padding||Spacing|3
 $--card-padding: 20px !default;
 

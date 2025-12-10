@@ -1,6 +1,34 @@
 <template>
    <div style="margin: 20px">
 
+        <h3>Table 表头吸顶功能测试</h3>
+        
+        <p>向下滚动页面，表头会固定在顶部</p>
+        <el-table
+          :data="tableData"
+          :sticky-header="0"
+          border
+          style="width: 100%; margin-bottom: 30px">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址">
+          </el-table-column>
+        </el-table>
+
+        <div style="height: 500px; background: #f0f0f0; padding: 20px; margin-bottom: 30px">
+          <p>占位内容区域 - 向下滚动查看吸顶效果</p>
+        </div>
+
         <h3>InputNumber 计数器格式化功能测试</h3>
 
         <h4>货币格式化</h4>
@@ -298,6 +326,49 @@
 export default {
   data() {
     return {
+      // Table 测试数据
+      tableData: [
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        },
+        {
+          date: '2016-05-04',
+          name: '李小龙',
+          address: '上海市普陀区金沙江路 1517 弄'
+        },
+        {
+          date: '2016-05-01',
+          name: '张小明',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },
+        {
+          date: '2016-05-03',
+          name: '赵小红',
+          address: '上海市普陀区金沙江路 1516 弄'
+        },
+        {
+          date: '2016-05-05',
+          name: '钱小白',
+          address: '上海市普陀区金沙江路 1520 弄'
+        },
+        {
+          date: '2016-05-06',
+          name: '孙小黑',
+          address: '上海市普陀区金沙江路 1521 弄'
+        },
+        {
+          date: '2016-05-07',
+          name: '周小青',
+          address: '上海市普陀区金沙江路 1522 弄'
+        },
+        {
+          date: '2016-05-08',
+          name: '吴小紫',
+          address: '上海市普陀区金沙江路 1523 弄'
+        }
+      ],
       // InputNumber 测试数据
       money: 1000,
       bigNumber: 1234567,

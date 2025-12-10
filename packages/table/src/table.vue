@@ -10,7 +10,8 @@
       'el-table--scrollable-x': layout.scrollX,
       'el-table--scrollable-y': layout.scrollY,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100,
+      'is-sticky-header': stickyHeader !== false
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
@@ -18,6 +19,8 @@
       v-if="showHeader"
       v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__header-wrapper"
+      :class="{ 'is-sticky': stickyHeader !== false }"
+      :style="stickyHeaderStyle"
       ref="headerWrapper">
       <table-header
         ref="tableHeader"
@@ -336,7 +339,12 @@
 
       lazy: Boolean,
 
-      load: Function
+      load: Function,
+
+      stickyHeader: {
+        type: [Boolean, Number, String],
+        default: false
+      }
     },
 
     components: {
@@ -591,6 +599,20 @@
         return {
           width: this.bodyWidth,
           height
+        };
+      },
+
+      stickyHeaderStyle() {
+        if (this.stickyHeader === false) return {};
+        
+        const top = typeof this.stickyHeader === 'number' 
+          ? `${this.stickyHeader}px` 
+          : typeof this.stickyHeader === 'string'
+            ? this.stickyHeader
+            : '0px';
+        
+        return {
+          top: top
         };
       },
 

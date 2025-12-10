@@ -129,6 +129,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
   selectOnIndeterminate: boolean
 
+  /** Enable sticky header. Set to true for sticky at top:0, or pass a number/string for custom top offset */
+  stickyHeader: boolean | number | string
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 

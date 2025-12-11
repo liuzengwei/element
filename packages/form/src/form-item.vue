@@ -308,7 +308,7 @@
           this.isLabelSingleLine = false;
           return;
         }
-        
+
         this.$nextTick(() => {
           if (this.$refs.label) {
             // 创建一个临时元素来测量文本宽度
@@ -318,13 +318,13 @@
             tempElement.style.whiteSpace = 'nowrap';
             tempElement.textContent = this.$refs.label.textContent;
             document.body.appendChild(tempElement);
-            
+
             const textWidth = tempElement.offsetWidth;
             const labelWidth = this.$refs.label.offsetWidth;
-            
+
             // 如果文本宽度小于等于标签宽度，则为单行
             this.isLabelSingleLine = textWidth <= labelWidth;
-            
+
             document.body.removeChild(tempElement);
           }
         });
@@ -344,7 +344,7 @@
 
         this.addValidateEvents();
       }
-      
+
       // 检测label是否为单行
       this.checkLabelSingleLine();
     },

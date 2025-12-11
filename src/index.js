@@ -91,6 +91,7 @@ import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
 import Text from '../packages/text/index.js';
 import Affix from '../packages/affix/index.js';
+import AreaLoading from '../packages/area-loading/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -181,6 +182,7 @@ const components = [
   Result,
   Text,
   Affix,
+  AreaLoading,
   CollapseTransition
 ];
 
@@ -311,5 +313,6 @@ export default {
   DescriptionsItem,
   Result,
   Text,
-  Affix
+  Affix,
+  AreaLoading
 };

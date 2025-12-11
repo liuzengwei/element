@@ -319,6 +319,10 @@
             {
               "path": "/affix",
               "title": "Affix 固钉"
+            },
+            {
+              "path": "/area-loading",
+              "title": "AreaLoading 区域加载"
             }
           ]
         }
@@ -645,6 +649,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/area-loading",
+              "title": "AreaLoading"
             }
           ]
         }
@@ -971,6 +979,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/area-loading",
+              "title": "AreaLoading"
             }
           ]
         }
@@ -1297,6 +1309,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/area-loading",
+              "title": "AreaLoading"
             }
           ]
         }

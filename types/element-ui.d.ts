@@ -91,6 +91,7 @@ import { ElResult } from './result'
 import { ElStatistic } from './statistic'
 import { ElText } from './text'
 import { ElAffix } from './affix'
+import { ElAreaLoading } from './area-loading'
 
 export interface InstallationOptions {
   locale: any,
@@ -387,3 +388,6 @@ export class Text extends ElText {}
 
 /** Affix Component */
 export class Affix extends ElAffix {}
+
+/** AreaLoading Component */
+export class AreaLoading extends ElAreaLoading {}

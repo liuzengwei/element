@@ -1,6 +1,127 @@
 <template>
   <div style="margin: 20px">
+    <!-- Area Loading 组件测试 -->
+    <h3>Area Loading 区域加载组件</h3>
+    
+    <el-row :gutter="20">
+      <el-col :span="8">
+        <h4>基础用法</h4>
+        <el-area-loading :loading="loading1">
+          <div style="padding: 40px; background: #f5f7fa; text-align: center;">
+            <p>这是一段需要加载的内容</p>
+            <p>当loading为true时，会显示加载状态</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading1 = !loading1" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
 
+      <el-col :span="8">
+        <h4>自定义文本</h4>
+        <el-area-loading :loading="loading2" text="加载中...">
+          <div style="padding: 40px; background: #f5f7fa; text-align: center;">
+            <p>带有自定义文本的加载</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading2 = !loading2" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+
+      <el-col :span="8">
+        <h4>使用 ref 方法控制</h4>
+        <el-area-loading ref="areaLoading3" text="方法控制">
+          <div style="padding: 30px; background: #f5f7fa; text-align: center;">
+            <p>通过 ref 方法控制</p>
+          </div>
+        </el-area-loading>
+        <div style="margin-top: 10px;">
+          <el-button size="mini" @click="$refs.areaLoading3.show()">显示</el-button>
+          <el-button size="mini" @click="$refs.areaLoading3.hide()">隐藏</el-button>
+          <el-button size="mini" @click="$refs.areaLoading3.toggle()">切换</el-button>
+        </div>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20" style="margin-top: 20px;">
+      <el-col :span="8">
+        <h4>大尺寸</h4>
+        <el-area-loading :loading="loading4" text="大尺寸加载" size="large">
+          <div style="padding: 50px; background: #f5f7fa; text-align: center;">
+            <p>大尺寸加载效果</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading4 = !loading4" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+
+      <el-col :span="8">
+        <h4>自定义背景色</h4>
+        <el-area-loading 
+          :loading="loading5" 
+          text="自定义背景" 
+          background="rgba(0, 0, 0, 0.8)">
+          <div style="padding: 40px; background: #f5f7fa; text-align: center;">
+            <p>深色背景的加载</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading5 = !loading5" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+
+      <el-col :span="8">
+        <h4>自定义图标</h4>
+        <el-area-loading 
+          :loading="loading6" 
+          text="自定义图标" 
+          spinner="el-icon-loading">
+          <div style="padding: 40px; background: #f5f7fa; text-align: center;">
+            <p>使用自定义图标</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading6 = !loading6" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20" style="margin-top: 20px;">
+      <el-col :span="12">
+        <h4>内容模糊效果</h4>
+        <el-area-loading 
+          :loading="loading7" 
+          text="加载中，请稍候..." 
+          :blur="true">
+          <div style="padding: 40px; background: #f5f7fa;">
+            <h5>文章标题</h5>
+            <p>这是一段示例文本。当开启blur属性时，加载期间内容会变模糊。</p>
+            <p>这提供了更好的视觉反馈效果。</p>
+          </div>
+        </el-area-loading>
+        <el-button @click="loading7 = !loading7" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+
+      <el-col :span="12">
+        <h4>表格加载示例</h4>
+        <el-area-loading :loading="loading8" text="正在加载表格数据...">
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="date" label="日期" width="180"></el-table-column>
+            <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+            <el-table-column prop="address" label="地址"></el-table-column>
+          </el-table>
+        </el-area-loading>
+        <el-button @click="loading8 = !loading8" style="margin-top: 10px;">
+          切换加载状态
+        </el-button>
+      </el-col>
+    </el-row>
+
+    <hr style="margin: 40px 0;">
 
     <!-- Form Label 两端对齐测试 -->
     <h3>Form Label 两端对齐测试</h3>
@@ -372,6 +493,16 @@
 export default {
   data() {
     return {
+      // Area Loading 测试数据
+      loading1: false,
+      loading2: false,
+      loading3: false,
+      loading4: false,
+      loading5: false,
+      loading6: false,
+      loading7: false,
+      loading8: false,
+      
       form: {
         xxx: "",
         yyy: "",

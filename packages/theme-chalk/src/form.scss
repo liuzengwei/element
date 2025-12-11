@@ -16,6 +16,23 @@
       padding: 0 0 10px 0;
     }
   }
+  @include m(label-justify) {
+    /* 默认情况下不应用两端对齐，等待JavaScript检测 */
+    & .el-form-item__label.is-single-line {
+      text-align: justify;
+      text-justify: inter-ideograph;
+      
+      /* 使用伪元素实现两端对齐效果 */
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+      }
+    }
+  }
   @include m(inline) {
     & .el-form-item {
       display: inline-block;

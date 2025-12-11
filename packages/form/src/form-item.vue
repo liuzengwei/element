@@ -12,7 +12,7 @@
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
-      <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
+      <label :for="labelFor" class="el-form-item__label" :class="{ 'is-single-line': isLabelSingleLine }" :style="labelStyle" v-if="label || $slots.label" ref="label">
         <slot name="label">{{label + form.labelSuffix}}</slot>
       </label>
     </label-wrap>
@@ -187,7 +187,8 @@
         validateDisabled: false,
         validator: {},
         isNested: false,
-        computedLabelWidth: ''
+        computedLabelWidth: '',
+        isLabelSingleLine: false
       };
     },
     methods: {
@@ -300,6 +301,33 @@
       },
       removeValidateEvents() {
         this.$off();
+      },
+      checkLabelSingleLine() {
+        // 只有在表单开启了labelJustify时才检测
+        if (!this.form.labelJustify) {
+          this.isLabelSingleLine = false;
+          return;
+        }
+        
+        this.$nextTick(() => {
+          if (this.$refs.label) {
+            // 创建一个临时元素来测量文本宽度
+            const tempElement = document.createElement('span');
+            tempElement.style.visibility = 'hidden';
+            tempElement.style.position = 'absolute';
+            tempElement.style.whiteSpace = 'nowrap';
+            tempElement.textContent = this.$refs.label.textContent;
+            document.body.appendChild(tempElement);
+            
+            const textWidth = tempElement.offsetWidth;
+            const labelWidth = this.$refs.label.offsetWidth;
+            
+            // 如果文本宽度小于等于标签宽度，则为单行
+            this.isLabelSingleLine = textWidth <= labelWidth;
+            
+            document.body.removeChild(tempElement);
+          }
+        });
       }
     },
     mounted() {
@@ -316,6 +344,13 @@
 
         this.addValidateEvents();
       }
+      
+      // 检测label是否为单行
+      this.checkLabelSingleLine();
+    },
+    updated() {
+      // 在组件更新时重新检测label是否为单行
+      this.checkLabelSingleLine();
     },
     beforeDestroy() {
       this.dispatch('ElForm', 'el.form.removeField', [this]);

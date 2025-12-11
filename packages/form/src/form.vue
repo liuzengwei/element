@@ -1,7 +1,8 @@
 <template>
   <form class="el-form" :class="[
     labelPosition ? 'el-form--label-' + labelPosition : '',
-    { 'el-form--inline': inline }
+    { 'el-form--inline': inline },
+    { 'el-form--label-justify': labelJustify }
   ]">
     <slot></slot>
   </form>
@@ -43,6 +44,10 @@
         default: true
       },
       hideRequiredAsterisk: {
+        type: Boolean,
+        default: false
+      },
+      labelJustify: {
         type: Boolean,
         default: false
       }

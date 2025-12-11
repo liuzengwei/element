@@ -180,6 +180,95 @@ npm install @liuzengwei/element-ui@latest
 
 ---
 
+## � NPM 双因素认证 (2FA) 配置
+
+### 问题：403 Forbidden - 需要双因素认证
+
+如果遇到以下错误：
+```
+npm ERR! 403 403 Forbidden - Two-factor authentication or granular access token with bypass 2fa enabled is required to publish packages.
+```
+
+这是因为 npm 要求启用双因素认证来发布包。
+
+### 解决方案 1：启用 2FA 并使用 OTP（推荐）
+
+#### 1. 启用双因素认证
+1. 访问 npm 账号设置: https://www.npmjs.com/settings/YOUR_USERNAME/twofa
+2. 点击 "Enable Two-Factor Authentication"
+3. 选择 "Authorization and Publishing"（发布时需要验证）
+4. 使用 Authenticator 应用（如 Google Authenticator）扫描二维码
+5. 输入验证码完成设置
+
+#### 2. 发布时使用 OTP
+```bash
+# 设置 OTP 环境变量（从 Authenticator 应用获取）
+export NPM_OTP=123456
+
+# 运行发布脚本
+npm run pub
+```
+
+或手动发布：
+```bash
+npm publish --otp=123456 --access public
+```
+
+**注意**: OTP 代码每 30 秒更新一次，需要使用最新的代码。
+
+### 解决方案 2：使用 Automation Token（适合 CI/CD）
+
+#### 1. 创建 Automation Token
+1. 访问: https://www.npmjs.com/settings/YOUR_USERNAME/tokens
+2. 点击 "Generate New Token"
+3. 选择 "Automation" 类型（可绕过 2FA）
+4. 复制生成的 token
+
+#### 2. 配置 Token
+
+**方式 A: 直接配置**
+```bash
+npm config set //registry.npmjs.org/:_authToken YOUR_TOKEN
+```
+
+**方式 B: 使用环境变量（推荐）**
+
+创建或编辑 `.npmrc` 文件：
+```
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+```
+
+然后设置环境变量：
+```bash
+# Linux/Mac
+export NPM_TOKEN=your_automation_token
+
+# Windows PowerShell
+$env:NPM_TOKEN="your_automation_token"
+
+# Windows CMD
+set NPM_TOKEN=your_automation_token
+```
+
+#### 3. 发布
+```bash
+npm run pub
+```
+
+### 快速发布命令（带 2FA）
+
+```bash
+# 方式 1: 使用 OTP
+export NPM_OTP=123456 && npm run pub
+
+# 方式 2: 手动发布（每一步）
+npm run dist
+npm publish --otp=123456 --access public
+git push origin master --tags
+```
+
+---
+
 ## 🔧 快捷发布脚本（可选）
 
 可以在 `package.json` 中添加 PowerShell 友好的发布脚本：
@@ -198,7 +287,7 @@ npm install @liuzengwei/element-ui@latest
 npm run version:patch    # 升级版本
 npm run dist             # 构建
 git push origin master --tags  # 推送代码和标签
-npm run publish:npm      # 发布
+npm run publish:npm      # 发布（需要 OTP 时会提示）
 ```
 
 ---

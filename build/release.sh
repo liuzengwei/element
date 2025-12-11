@@ -48,10 +48,20 @@ then
   git push origin dev
 
   # publish to npm with public access (for scoped packages)
+  # If you have 2FA enabled, you can pass OTP code:
+  # export NPM_OTP=123456 before running this script
   if [[ $VERSION =~ "beta" ]]
   then
-    npm publish --tag beta --access public
+    if [ -n "$NPM_OTP" ]; then
+      npm publish --tag beta --access public --otp=$NPM_OTP
+    else
+      npm publish --tag beta --access public
+    fi
   else
-    npm publish --access public
+    if [ -n "$NPM_OTP" ]; then
+      npm publish --access public --otp=$NPM_OTP
+    else
+      npm publish --access public
+    fi
   fi
 fi

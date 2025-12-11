@@ -22,7 +22,7 @@ git commit -m "Deploy to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
 
 # 推送到 GitHub Pages
 echo "Deploying to GitHub Pages..."
-git push -f git@github.com:liuzengwei/element.git gh-pages
+git push -f https://github.com/liuzengwei/element.git gh-pages
 
 echo "Deployment completed!"
 echo "Your site will be available at: https://liuzengwei.github.io/element/"

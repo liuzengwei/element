@@ -434,6 +434,16 @@
       </el-radio-button>
     </el-radio-group>
 
+    <el-radio-group v-model="value" size="normal" @change="">
+      <el-radio
+        v-for="item in items"
+        :key="item.key"
+        :label="item.label"
+      >
+        {{ item.title }}
+      </el-radio>
+    </el-radio-group>
+
     <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
       <el-checkbox
         v-for="item in items"

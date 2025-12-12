@@ -210,7 +210,7 @@
   @include e(inner) {
     display: inline-block;
     position: relative;
-    border: $--checkbox-input-border;
+    border: $--checkbox-input-border-bold;
     border-radius: $--checkbox-border-radius;
     box-sizing: border-box;
     width: $--checkbox-input-width;

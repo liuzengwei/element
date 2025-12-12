@@ -1,5 +1,15 @@
 <template>
   <div style="margin: 20px">
+
+
+    <el-card shadow="never">
+      <div slot="header">
+        <span>card title</span>
+      </div>
+      card body
+    </el-card>
+    
+
     <!-- Area Loading 组件测试 -->
     <h3>Area Loading 区域加载组件</h3>
     

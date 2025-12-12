@@ -38,6 +38,8 @@ $--color-warning: #E6A23C !default;
 $--color-danger: #F56C6C !default;
 /// color|1|Functional Color|1
 $--color-info: #909399 !default;
+/// color|1|Base Color|5
+$--color-base: #202131 !default;
 
 // Background
 /// color|1|Background Color|4
@@ -90,7 +92,7 @@ $--border-width-base-bold: 2px !default;
 $--border-style-base: solid !default;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
-$--border-base-bold: $--border-width-base-bold $--border-style-base $--border-color-base-bold !default;
+$--border-base-bold: $--border-width-base $--border-style-base $--border-color-base-bold !default;
 /// borderRadius|1|Radius|0
 $--border-radius-base: 2px !default;
 /// borderRadius|1|Radius|0
@@ -172,7 +174,8 @@ $--checkbox-input-width: 14px !default;
 $--checkbox-border-radius: $--border-radius-zero !default;
 /// color||Color|0
 $--checkbox-background-color: $--color-white !default;
-$--checkbox-input-border: $--border-base-bold !default;
+$--checkbox-input-border: $--border-base !default;
+$--checkbox-input-border-bold: $--border-base-bold !default;
 
 /// color||Color|0
 $--checkbox-disabled-border-color: $--border-color-base !default;
@@ -194,9 +197,9 @@ $--checkbox-input-border-color-hover: $--color-primary !default;
 /// height||Other|4
 $--checkbox-bordered-height: 40px !default;
 /// padding||Spacing|3
-$--checkbox-bordered-padding: 7px 20px 9px 10px !default;
+$--checkbox-bordered-padding: 8px 20px 9px 10px !default;
 /// padding||Spacing|3
-$--checkbox-bordered-medium-padding: 7px 20px 7px 10px !default;
+$--checkbox-bordered-medium-padding: 8px 20px 8px 10px !default;
 /// padding||Spacing|3
 $--checkbox-bordered-small-padding: 5px 15px 5px 10px !default;
 /// padding||Spacing|3

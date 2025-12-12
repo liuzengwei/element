@@ -444,7 +444,7 @@
       </el-radio>
     </el-radio-group>
 
-    <el-checkbox-group v-model="valueCheckbox" size="normal" @change="">
+    <el-checkbox-group v-model="valueCheckbox" size="small" @change="">
       <el-checkbox
         v-for="item in items"
         border

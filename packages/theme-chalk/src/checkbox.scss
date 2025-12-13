@@ -12,6 +12,11 @@
   display: inline-block;
   white-space: nowrap;
   user-select: none;
+  margin-right: 10px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 
   @include when(bordered) {
     padding: $--checkbox-bordered-padding;
@@ -51,6 +56,7 @@
     & + .el-checkbox.is-bordered {
       margin-left: 10px;
     }
+
 
     &.el-checkbox--medium {
       padding: $--checkbox-bordered-medium-padding;

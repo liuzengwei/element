@@ -47,15 +47,17 @@
 
       .nav-item {
         a {
-          display: block;
+          display: flex;
+          align-items: center;
           height: 40px;
           color: #444;
-          line-height: 40px;
           font-size: 14px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           font-weight: normal;
+
+          .version-badge {
+            flex-shrink: 0;
+            margin-left: 0;
+          }
 
           &:hover,
           &.active {
@@ -165,8 +167,14 @@
                 <router-link
                   active-class="active"
                   :to="base + navItem.path"
-                  exact
-                  v-text="navItem.title"></router-link>
+                  exact>
+                  <span>{{ navItem.title }}</span>
+                  <version-badge 
+                    v-if="navItem.badge"
+                    :version="navItem.badge.version"
+                    :type="navItem.badge.type"
+                  />
+                </router-link>
               </li>
             </ul>
           </div>

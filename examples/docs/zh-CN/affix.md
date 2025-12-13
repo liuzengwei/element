@@ -1,4 +1,4 @@
-## Affix 固钉
+## Affix 固钉 <version-badge version="2.15.5-xn.29" type="new"/>
 
 将元素固定在特定可见区域。
 

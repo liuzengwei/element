@@ -237,7 +237,7 @@
 ```
 :::
 
-### 竖向排列
+### 竖向排列 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 多选框组可以竖向排列。
 
@@ -277,7 +277,7 @@
 ```
 :::
 
-### 文本溢出处理
+### 文本溢出处理 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 当多选框的文本过长时，可以使用省略号显示。
 
@@ -357,8 +357,8 @@
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
 | text-color  | 按钮形式的 Checkbox 激活时的文本颜色    | string   | — | #ffffff   |
 | fill  | 按钮形式的 Checkbox 激活时的填充色和边框色    | string   | — | #409EFF   |
-| direction  | 排列方向    | string   | horizontal / vertical | horizontal   |
-| overflow  | 文本溢出处理方式    | string   | wrap / ellipsis | wrap   |
+| direction <version-badge version="2.15.5-xn.30" type="feature"/>  | 排列方向    | string   | horizontal / vertical | horizontal   |
+| overflow <version-badge version="2.15.5-xn.30" type="feature"/>  | 文本溢出处理方式    | string   | wrap / ellipsis | wrap   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

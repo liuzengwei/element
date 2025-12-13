@@ -1859,7 +1859,7 @@
 | size | Table 的尺寸 | string | medium / small / mini | — |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | — | true |
-| header-affixed-top | 表头吸顶配置。设置为 `true` 时启用表头吸顶（默认距离页面顶部 0px）；设置为对象 `{ offsetTop: 60 }` 时可自定义吸顶时距离页面顶部的偏移量 | boolean / object | — | false |
+| header-affixed-top <version-badge version="2.15.5-xn.30" type="feature"/> | 表头吸顶配置。设置为 `true` 时启用表头吸顶（默认距离页面顶部 0px）；设置为对象 `{ offsetTop: 60 }` 时可自定义吸顶时距离页面顶部的偏移量 | boolean / object | — | false |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
 | highlight-selection-row | 是否要高亮复选框选中行（仅针对开启 `selection` 有效） | boolean | — | false |
 | current-row-key | 当前行的 key，只写属性 | String,Number | — | — |

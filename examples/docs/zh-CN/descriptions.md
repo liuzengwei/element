@@ -152,7 +152,7 @@
 ```
 :::
 
-### 加载状态
+### 加载状态 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 :::demo 通过设置 `loading` 属性，可以让内容显示为骨架屏。设置 `animated` 属性可以让骨架屏产生动画效果。
 
@@ -201,8 +201,8 @@
 | contentClassName | 自定义内容类名    | string |    —  | — |
 | labelStyle | 自定义标签样式 | object |    —  | — |
 | contentStyle | 自定义内容样式    | object |    —  | — |
-| loading | 是否显示加载状态（骨架屏）    | boolean |    —  | false |
-| animated | 骨架屏是否显示动画效果    | boolean |    —  | false |
+| loading <version-badge version="2.15.5-xn.30" type="feature"/> | 是否显示加载状态（骨架屏）    | boolean |    —  | false |
+| animated <version-badge version="2.15.5-xn.30" type="feature"/> | 骨架屏是否显示动画效果    | boolean |    —  | false |
 
 ### Descriptions Slots
 

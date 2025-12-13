@@ -1,4 +1,4 @@
-## AreaLoading 区域加载
+## AreaLoading 区域加载 <version-badge version="2.15.5-xn.28" type="new"/>
 
 区域加载组件，用于在特定区域显示加载状态，适用于局部内容加载场景。
 

@@ -1,4 +1,4 @@
-## Text 文本
+## Text 文本 <version-badge version="2.15.5-xn.29" type="new"/>
 
 用于文本展示。
 

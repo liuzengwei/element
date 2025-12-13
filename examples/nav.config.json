@@ -74,11 +74,19 @@
           "list": [
             {
               "path": "/radio",
-              "title": "Radio 单选框"
+              "title": "Radio 单选框",
+              "badge": {
+                "version": "2.15.5-xn.30",
+                "type": "update"
+              }
             },
             {
               "path": "/checkbox",
-              "title": "Checkbox 多选框"
+              "title": "Checkbox 多选框",
+              "badge": {
+                "version": "2.15.5-xn.30",
+                "type": "update"
+              }
             },
             {
               "path": "/input",
@@ -143,7 +151,11 @@
           "list": [
             {
               "path": "/table",
-              "title": "Table 表格"
+              "title": "Table 表格",
+              "badge": {
+                "version": "2.15.5-xn.30",
+                "type": "update"
+              }
             },
             {
               "path": "/tag",
@@ -179,7 +191,11 @@
             },
             {
               "path": "/descriptions",
-              "title": "Descriptions 描述列表"
+              "title": "Descriptions 描述列表",
+              "badge": {
+                "version": "2.15.5-xn.30",
+                "type": "update"
+              }
             },
             {
               "path": "/result",
@@ -306,15 +322,27 @@
             },
             {
               "path": "/text",
-              "title": "Text 文本"
+              "title": "Text 文本",
+              "badge": {
+                "version": "2.15.5-xn.29",
+                "type": "new"
+              }
             },
             {
               "path": "/affix",
-              "title": "Affix 固钉"
+              "title": "Affix 固钉",
+              "badge": {
+                "version": "2.15.5-xn.29",
+                "type": "new"
+              }
             },
             {
               "path": "/area-loading",
-              "title": "AreaLoading 区域加载"
+              "title": "AreaLoading 区域加载",
+              "badge": {
+                "version": "2.15.5-xn.28",
+                "type": "new"
+              }
             }
           ]
         }

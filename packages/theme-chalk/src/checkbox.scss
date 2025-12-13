@@ -379,4 +379,32 @@
 
 @include b(checkbox-group) {
   font-size: 0;
+
+  @include when(vertical) {
+    display: flex;
+    flex-direction: column;
+    
+    .el-checkbox {
+      margin-right: 0;
+      margin-bottom: 10px;
+      
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include when(ellipsis) {
+    .el-checkbox {
+      @include utils-ellipsis;
+      max-width: 100%;
+      
+      .el-checkbox__label {
+        @include utils-ellipsis;
+        display: inline-block;
+        max-width: calc(100% - 30px);
+        vertical-align: middle;
+      }
+    }
+  }
 }

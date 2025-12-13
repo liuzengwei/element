@@ -1,7 +1,11 @@
 <template>
   <component
     :is="_elTag"
-    class="el-radio-group"
+    :class="[
+      'el-radio-group',
+      direction === 'vertical' ? 'is-vertical' : '',
+      overflow === 'ellipsis' ? 'is-ellipsis' : ''
+    ]"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -35,7 +39,23 @@
       size: String,
       fill: String,
       textColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      // 排列方向：horizontal 横向，vertical 竖向
+      direction: {
+        type: String,
+        default: 'horizontal',
+        validator(value) {
+          return ['horizontal', 'vertical'].indexOf(value) !== -1;
+        }
+      },
+      // 超出宽度处理：wrap 换行，ellipsis 省略号
+      overflow: {
+        type: String,
+        default: 'wrap',
+        validator(value) {
+          return ['wrap', 'ellipsis'].indexOf(value) !== -1;
+        }
+      }
     },
 
     computed: {

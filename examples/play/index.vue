@@ -1,6 +1,141 @@
 <template>
   <div style="margin: 20px">
 
+    <!-- Radio 和 Checkbox 竖向排列及溢出测试 -->
+    <h2>Radio 和 Checkbox 新功能测试</h2>
+    
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>Radio - 竖向排列测试</span>
+      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <h4>横向排列（默认）</h4>
+          <el-radio-group v-model="radio1">
+            <el-radio :label="1">选项一</el-radio>
+            <el-radio :label="2">选项二</el-radio>
+            <el-radio :label="3">选项三</el-radio>
+            <el-radio :label="4">选项四</el-radio>
+          </el-radio-group>
+        </el-col>
+        <el-col :span="12">
+          <h4>竖向排列</h4>
+          <el-radio-group v-model="radio2" direction="vertical">
+            <el-radio :label="1">选项一</el-radio>
+            <el-radio :label="2">选项二</el-radio>
+            <el-radio :label="3">选项三</el-radio>
+            <el-radio :label="4">选项四</el-radio>
+          </el-radio-group>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>Radio - 文本溢出处理测试</span>
+      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <h4>自动换行（默认）</h4>
+          <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+            <el-radio-group v-model="radio3">
+              <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+              <el-radio :label="2">短文本</el-radio>
+            </el-radio-group>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <h4>显示省略号</h4>
+          <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+            <el-radio-group v-model="radio4" overflow="ellipsis">
+              <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+              <el-radio :label="2">短文本</el-radio>
+            </el-radio-group>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>Checkbox - 竖向排列测试</span>
+      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <h4>横向排列（默认）</h4>
+          <el-checkbox-group v-model="checkList1">
+            <el-checkbox label="选项一"></el-checkbox>
+            <el-checkbox label="选项二"></el-checkbox>
+            <el-checkbox label="选项三"></el-checkbox>
+            <el-checkbox label="选项四"></el-checkbox>
+          </el-checkbox-group>
+        </el-col>
+        <el-col :span="12">
+          <h4>竖向排列</h4>
+          <el-checkbox-group v-model="checkList2" direction="vertical">
+            <el-checkbox label="选项一"></el-checkbox>
+            <el-checkbox label="选项二"></el-checkbox>
+            <el-checkbox label="选项三"></el-checkbox>
+            <el-checkbox label="选项四"></el-checkbox>
+          </el-checkbox-group>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>Checkbox - 文本溢出处理测试</span>
+      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <h4>自动换行（默认）</h4>
+          <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+            <el-checkbox-group v-model="checkList3">
+              <el-checkbox label="这是一个非常非常非常长的多选框文本内容"></el-checkbox>
+              <el-checkbox label="短文本"></el-checkbox>
+            </el-checkbox-group>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <h4>显示省略号</h4>
+          <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+            <el-checkbox-group v-model="checkList4" overflow="ellipsis">
+              <el-checkbox label="这是一个非常非常非常长的多选框文本内容"></el-checkbox>
+              <el-checkbox label="短文本"></el-checkbox>
+            </el-checkbox-group>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>组合测试 - 竖向 + 省略号</span>
+      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <h4>Radio 竖向 + 省略号</h4>
+          <div style="width: 200px; border: 1px solid #ddd; padding: 10px;">
+            <el-radio-group v-model="radio5" direction="vertical" overflow="ellipsis">
+              <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+              <el-radio :label="2">短文本</el-radio>
+              <el-radio :label="3">另一个很长很长很长的文本内容</el-radio>
+            </el-radio-group>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <h4>Checkbox 竖向 + 省略号</h4>
+          <div style="width: 200px; border: 1px solid #ddd; padding: 10px;">
+            <el-checkbox-group v-model="checkList5" direction="vertical" overflow="ellipsis">
+              <el-checkbox label="这是一个非常非常非常长的多选框文本内容"></el-checkbox>
+              <el-checkbox label="短文本"></el-checkbox>
+              <el-checkbox label="另一个很长很长很长的文本内容"></el-checkbox>
+            </el-checkbox-group>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
+
     <el-descriptions>
       <el-descriptions-item label="用户名">kooriookami</el-descriptions-item>
       <el-descriptions-item label="手机号">18100000000</el-descriptions-item>
@@ -522,6 +657,18 @@
 export default {
   data() {
     return {
+      // Radio 和 Checkbox 测试数据
+      radio1: 1,
+      radio2: 1,
+      radio3: 1,
+      radio4: 1,
+      radio5: 1,
+      checkList1: ['选项一'],
+      checkList2: ['选项一'],
+      checkList3: [],
+      checkList4: [],
+      checkList5: [],
+      
       // Area Loading 测试数据
       loading1: false,
       loading2: false,

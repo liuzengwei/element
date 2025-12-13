@@ -198,3 +198,38 @@
     padding-left: 10px;
   }
 }
+
+@include b(radio-group) {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  font-size: 0;
+
+  @include when(vertical) {
+    display: flex;
+    flex-direction: column;
+    
+    .el-radio {
+      margin-right: 0;
+      margin-bottom: 10px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include when(ellipsis) {
+    .el-radio {
+      @include utils-ellipsis;
+      max-width: 100%;
+      
+      .el-radio__label {
+        @include utils-ellipsis;
+        display: inline-block;
+        max-width: calc(100% - 30px);
+        vertical-align: middle;
+      }
+    }
+  }
+}

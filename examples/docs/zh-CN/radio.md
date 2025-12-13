@@ -174,6 +174,97 @@
 ```
 :::
 
+### 竖向排列
+
+单选框组可以竖向排列。
+
+:::demo 设置`direction`属性为`vertical`可以使单选框组竖向排列。
+```html
+<template>
+  <div>
+    <p>横向排列（默认）：</p>
+    <el-radio-group v-model="radio1">
+      <el-radio :label="1">上海</el-radio>
+      <el-radio :label="2">北京</el-radio>
+      <el-radio :label="3">广州</el-radio>
+      <el-radio :label="4">深圳</el-radio>
+    </el-radio-group>
+  </div>
+  <div style="margin-top: 20px">
+    <p>竖向排列：</p>
+    <el-radio-group v-model="radio2" direction="vertical">
+      <el-radio :label="1">上海</el-radio>
+      <el-radio :label="2">北京</el-radio>
+      <el-radio :label="3">广州</el-radio>
+      <el-radio :label="4">深圳</el-radio>
+    </el-radio-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio1: 1,
+        radio2: 1
+      };
+    }
+  }
+</script>
+```
+:::
+
+### 文本溢出处理
+
+当单选框的文本过长时，可以使用省略号显示。
+
+:::demo 设置`overflow`属性为`ellipsis`可以使超出宽度的文本显示省略号，默认为`wrap`自动换行。
+```html
+<template>
+  <div>
+    <p>自动换行（默认）：</p>
+    <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+      <el-radio-group v-model="radio1">
+        <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+        <el-radio :label="2">短文本</el-radio>
+      </el-radio-group>
+    </div>
+  </div>
+  <div style="margin-top: 20px">
+    <p>显示省略号：</p>
+    <div style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+      <el-radio-group v-model="radio2" overflow="ellipsis">
+        <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+        <el-radio :label="2">短文本</el-radio>
+      </el-radio-group>
+    </div>
+  </div>
+  <div style="margin-top: 20px">
+    <p>竖向排列 + 省略号：</p>
+    <div style="width: 200px; border: 1px solid #ddd; padding: 10px;">
+      <el-radio-group v-model="radio3" direction="vertical" overflow="ellipsis">
+        <el-radio :label="1">这是一个非常非常非常长的单选框文本内容</el-radio>
+        <el-radio :label="2">短文本</el-radio>
+        <el-radio :label="3">另一个很长很长很长的文本内容</el-radio>
+      </el-radio-group>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio1: 1,
+        radio2: 1,
+        radio3: 1
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### Radio Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -197,6 +288,8 @@
 | disabled  | 是否禁用    | boolean   | — | false   |
 | text-color  | 按钮形式的 Radio 激活时的文本颜色    | string   | — | #ffffff   |
 | fill  | 按钮形式的 Radio 激活时的填充色和边框色    | string   | — | #409EFF   |
+| direction  | 排列方向    | string   | horizontal / vertical | horizontal   |
+| overflow  | 文本溢出处理方式    | string   | wrap / ellipsis | wrap   |
 
 ### Radio-group Events
 | 事件名称 | 说明 | 回调参数 |

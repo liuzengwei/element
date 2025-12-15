@@ -142,7 +142,11 @@
             },
             {
               "path": "/form",
-              "title": "Form 表单"
+              "title": "Form 表单",
+              "badge": {
+                "version": "2.15.5-xn.31",
+                "type": "update"
+              }
             }
           ]
         },
@@ -492,11 +496,7 @@
             },
             {
               "path": "/form",
-              "title": "Form",
-              "badge": {
-                "version": "2.15.5-xn.31",
-                "type": "update"
-              }
+              "title": "Form"
             }
           ]
         },

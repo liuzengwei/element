@@ -322,6 +322,9 @@
         <h4>整个表单标签位置设置为顶部，某些表单项自定义标签位置</h4>
         
         <el-form-item label="默认标签位置（顶部）" prop="name">
+          <div slot="label">
+            2222222
+          </div>
           <el-input v-model="formLabelPosition2.name" placeholder="使用表单的默认标签位置"></el-input>
         </el-form-item>
         

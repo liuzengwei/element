@@ -90,14 +90,16 @@
       
       > .el-form-item__label {
         float: none !important;
-        display: block !important;
+        display: inline-flex !important;
+        align-items: center !important;
         text-align: left !important;
         padding: 0 0 10px 0 !important;
       }
     }
     & > .el-form-item__label {
       float: none !important;
-      display: block !important;
+      display: inline-flex !important;
+      align-items: center !important;
       text-align: left !important;
       padding: 0 0 10px 0 !important;
     }

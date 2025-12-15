@@ -492,7 +492,11 @@
             },
             {
               "path": "/form",
-              "title": "Form"
+              "title": "Form",
+              "badge": {
+                "version": "2.15.5-xn.31",
+                "type": "update"
+              }
             }
           ]
         },

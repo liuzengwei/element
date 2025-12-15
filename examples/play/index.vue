@@ -277,6 +277,109 @@
 
     <hr style="margin: 40px 0;">
 
+    <!-- FormItem label-position 测试 -->
+    <h3>FormItem label-position 标签位置测试</h3>
+    
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>表单标签位置自定义测试</span>
+      </div>
+      
+      <el-form :model="formLabelPosition" label-width="120px" label-position="right">
+        <h4>整个表单标签位置设置为右对齐（label-position="right"）</h4>
+        <p>某些表单项可以自定义标签位置，覆盖表单的默认设置</p>
+        
+        <el-form-item label="默认标签位置（右对齐）" prop="name">
+          <el-input v-model="formLabelPosition.name" placeholder="使用表单的默认标签位置"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="左对齐标签" label-position="left" prop="region">
+          <el-select v-model="formLabelPosition.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        
+        <el-form-item label="顶部标签" label-position="top" prop="desc">
+          <el-input type="textarea" v-model="formLabelPosition.desc" placeholder="标签位于顶部"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="右对齐标签（显式设置）" label-position="right" prop="type">
+          <el-radio-group v-model="formLabelPosition.type">
+            <el-radio label="online">线上品牌商</el-radio>
+            <el-radio label="offline">线下实体店</el-radio>
+          </el-radio-group>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>表单标签位置设置为顶部（label-position="top"）</span>
+      </div>
+      
+      <el-form :model="formLabelPosition2" label-width="120px" label-position="top">
+        <h4>整个表单标签位置设置为顶部，某些表单项自定义标签位置</h4>
+        
+        <el-form-item label="默认标签位置（顶部）" prop="name">
+          <el-input v-model="formLabelPosition2.name" placeholder="使用表单的默认标签位置"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="右对齐标签" label-position="right" prop="region">
+          <el-select v-model="formLabelPosition2.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        
+        <el-form-item label="左对齐标签" label-position="left" prop="desc">
+          <el-input type="textarea" v-model="formLabelPosition2.desc" placeholder="标签左对齐"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="顶部标签（显式设置）" label-position="top" prop="type">
+          <el-checkbox-group v-model="formLabelPosition2.type">
+            <el-checkbox label="美食/餐厅线上活动"></el-checkbox>
+            <el-checkbox label="地推活动"></el-checkbox>
+            <el-checkbox label="线下主题活动"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
+    <el-card style="margin-bottom: 20px;">
+      <div slot="header">
+        <span>嵌套表单测试</span>
+      </div>
+      
+      <el-form :model="nestedForm" label-width="120px" label-position="right">
+        <h4>外层表单（标签右对齐）</h4>
+        
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="nestedForm.username"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="地址信息" label-position="top">
+          <el-card shadow="never">
+            <el-form :model="nestedForm.address" label-width="100px" label-position="left">
+              <h5>内层表单（标签左对齐）</h5>
+              
+              <el-form-item label="省份" prop="province">
+                <el-input v-model="nestedForm.address.province"></el-input>
+              </el-form-item>
+              
+              <el-form-item label="城市" label-position="top" prop="city">
+                <el-input v-model="nestedForm.address.city"></el-input>
+              </el-form-item>
+              
+              <el-form-item label="详细地址" label-position="right" prop="detail">
+                <el-input v-model="nestedForm.address.detail"></el-input>
+              </el-form-item>
+            </el-form>
+          </el-card>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
     <!-- Form Label 两端对齐测试 -->
     <h3>Form Label 两端对齐测试</h3>
     <p>当label-justify为true时，label文本会在单行情况下进行两端对齐</p>
@@ -691,6 +794,27 @@ export default {
         password2: "",
         email2: "",
         longLabel2: "",
+      },
+      // FormItem label-position 测试数据
+      formLabelPosition: {
+        name: '',
+        region: '',
+        desc: '',
+        type: 'online'
+      },
+      formLabelPosition2: {
+        name: '',
+        region: '',
+        desc: '',
+        type: []
+      },
+      nestedForm: {
+        username: '',
+        address: {
+          province: '',
+          city: '',
+          detail: ''
+        }
       },
       // Table 测试数据
       tableData: [

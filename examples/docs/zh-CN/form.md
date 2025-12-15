@@ -217,6 +217,81 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 ```
 :::
 
+### 表单项标签位置自定义
+
+除了在 Form 组件上统一设置标签位置外，还可以在单个 Form-Item 上设置 `label-position` 属性，覆盖 Form 组件的全局设置。这在嵌套表单或需要特殊布局的场景中非常有用。
+
+:::demo 通过设置 Form-Item 的 `label-position` 属性可以单独设置该表单项的标签位置，可选值为 `top`、`left`、`right`。如果设置了该属性，会覆盖 Form 组件的 `label-position` 设置。
+```html
+<el-form :model="form" label-width="120px" label-position="right">
+  <h4>整个表单标签位置设置为右对齐（label-position="right"）</h4>
+  <p>某些表单项可以自定义标签位置，覆盖表单的默认设置</p>
+  
+  <el-form-item label="默认标签位置（右对齐）" prop="name">
+    <el-input v-model="form.name" placeholder="使用表单的默认标签位置"></el-input>
+  </el-form-item>
+  
+  <el-form-item label="左对齐标签" label-position="left" prop="region">
+    <el-select v-model="form.region" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  
+  <el-form-item label="顶部标签" label-position="top" prop="desc">
+    <el-input type="textarea" v-model="form.desc" placeholder="标签位于顶部"></el-input>
+  </el-form-item>
+  
+  <el-form-item label="右对齐标签（显式设置）" label-position="right" prop="type">
+    <el-radio-group v-model="form.type">
+      <el-radio label="online">线上品牌商</el-radio>
+      <el-radio label="offline">线下实体店</el-radio>
+    </el-radio-group>
+  </el-form-item>
+</el-form>
+
+<el-form :model="form2" label-width="120px" label-position="top" style="margin-top: 30px;">
+  <h4>整个表单标签位置设置为顶部（label-position="top"）</h4>
+  <p>某些表单项自定义标签位置</p>
+  
+  <el-form-item label="默认标签位置（顶部）" prop="name">
+    <el-input v-model="form2.name" placeholder="使用表单的默认标签位置"></el-input>
+  </el-form-item>
+  
+  <el-form-item label="右对齐标签" label-position="right" prop="region">
+    <el-select v-model="form2.region" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  
+  <el-form-item label="左对齐标签" label-position="left" prop="desc">
+    <el-input type="textarea" v-model="form2.desc" placeholder="标签左对齐"></el-input>
+  </el-form-item>
+</el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        form: {
+          name: '',
+          region: '',
+          desc: '',
+          type: 'online'
+        },
+        form2: {
+          name: '',
+          region: '',
+          desc: ''
+        }
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### 表单验证
 
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。
@@ -672,6 +747,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | prop    | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | string    | 传入 Form 组件的 `model` 中的字段 | — |
 | label | 标签文本 | string | — | — |
 | label-width | 表单域标签的的宽度，例如 '50px'。支持 `auto`。 | string |       —       | — |
+| label-position | 表单域标签的位置，如果设置了该属性，会覆盖 Form 组件的 label-position 设置 | string |  right/left/top            | 继承 Form 组件的设置 |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | — | false |
 | rules    | 表单验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |

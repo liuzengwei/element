@@ -64,6 +64,61 @@
     display: none;
   }
 
+  // FormItem level label position styles
+  // 使用更高的优先级确保可以覆盖 Form 的样式
+  @include m(label-left) {
+    & > .el-form-item__label-wrap {
+      float: left !important;
+      
+      > .el-form-item__label {
+        float: none !important;
+        display: inline-block !important;
+        text-align: left !important;
+        padding: 0 12px 0 0 !important;
+      }
+    }
+    & > .el-form-item__label {
+      float: left !important;
+      text-align: left !important;
+      padding: 0 12px 0 0 !important;
+    }
+  }
+  @include m(label-top) {
+    & > .el-form-item__label-wrap {
+      float: none !important;
+      
+      > .el-form-item__label {
+        float: none !important;
+        display: inline-block !important;
+        text-align: left !important;
+        padding: 0 0 10px 0 !important;
+      }
+    }
+    & > .el-form-item__label {
+      float: none !important;
+      display: inline-block !important;
+      text-align: left !important;
+      padding: 0 0 10px 0 !important;
+    }
+  }
+  @include m(label-right) {
+    & > .el-form-item__label-wrap {
+      float: left !important;
+      
+      > .el-form-item__label {
+        float: none !important;
+        display: inline-block !important;
+        text-align: right !important;
+        padding: 0 12px 0 0 !important;
+      }
+    }
+    & > .el-form-item__label {
+      float: left !important;
+      text-align: right !important;
+      padding: 0 12px 0 0 !important;
+    }
+  }
+
   @include m(medium) {
     .el-form-item__label {
       line-height: 36px;

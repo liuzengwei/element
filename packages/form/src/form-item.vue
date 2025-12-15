@@ -7,7 +7,8 @@
       'is-required': isRequired || required,
       'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
-    sizeClass ? 'el-form-item--' + sizeClass : ''
+    sizeClass ? 'el-form-item--' + sizeClass : '',
+    computedLabelPosition ? 'el-form-item--label-' + computedLabelPosition : ''
   ]">
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
@@ -62,6 +63,7 @@
     props: {
       label: String,
       labelWidth: String,
+      labelPosition: String,
       prop: String,
       required: {
         type: Boolean,
@@ -106,9 +108,14 @@
       labelFor() {
         return this.for || this.prop;
       },
+      computedLabelPosition() {
+        // 如果FormItem设置了labelPosition，优先使用FormItem的设置
+        // 否则使用Form的设置
+        return this.labelPosition || (this.form && this.form.labelPosition);
+      },
       labelStyle() {
         const ret = {};
-        if (this.form.labelPosition === 'top') return ret;
+        if (this.computedLabelPosition === 'top') return ret;
         const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
@@ -118,7 +125,7 @@
       contentStyle() {
         const ret = {};
         const label = this.label;
-        if (this.form.labelPosition === 'top' || this.form.inline) return ret;
+        if (this.computedLabelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
         const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth === 'auto') {

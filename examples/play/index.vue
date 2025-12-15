@@ -318,7 +318,7 @@
         <span>表单标签位置设置为顶部（label-position="top"）</span>
       </div>
       
-      <el-form :model="formLabelPosition2" label-width="120px" label-position="top">
+      <el-form :model="formLabelPosition2" label-width="120px" label-position="top" :rules="rules">
         <h4>整个表单标签位置设置为顶部，某些表单项自定义标签位置</h4>
         
         <el-form-item label="默认标签位置（顶部）" prop="name">
@@ -884,6 +884,22 @@ export default {
         { key: 4, label: "选项4", title: "龙须糖" },
         { key: 5, label: "选项5", title: "北京烤鸭" },
       ],
+      rules: {
+        name: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { min: 2, max: 30, message: "长度在 2 到 30 个字符", trigger: "blur" },
+        ],
+        region: [
+          { required: true, message: "请选择活动区域", trigger: "change" },
+        ],
+        desc: [
+          { required: true, message: "请输入活动形式", trigger: "blur" },
+          { min: 5, max: 100, message: "长度在 5 到 100 个字符", trigger: "blur" },
+        ],
+        type: [
+          { type: "array", required: true, message: "请至少选择一个活动类型", trigger: "change" },
+        ],
+      },
     };
   },
   methods: {

@@ -79,6 +79,7 @@
     }
     & > .el-form-item__label {
       float: left !important;
+      display: block !important;
       text-align: left !important;
       padding: 0 12px 0 0 !important;
     }
@@ -89,14 +90,14 @@
       
       > .el-form-item__label {
         float: none !important;
-        display: inline-block !important;
+        display: block !important;
         text-align: left !important;
         padding: 0 0 10px 0 !important;
       }
     }
     & > .el-form-item__label {
       float: none !important;
-      display: inline-block !important;
+      display: block !important;
       text-align: left !important;
       padding: 0 0 10px 0 !important;
     }
@@ -114,6 +115,7 @@
     }
     & > .el-form-item__label {
       float: left !important;
+      display: block !important;
       text-align: right !important;
       padding: 0 12px 0 0 !important;
     }

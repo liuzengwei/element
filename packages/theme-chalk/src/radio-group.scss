@@ -10,6 +10,6 @@
   // 只在包含 radio-button 时应用背景色和内边距
   &:has(.el-radio-button) {
     padding: 1.5px;
-    background-color: $--background-color-placeholder;
+    background-color: $--background-color-input-base;
   }
 }

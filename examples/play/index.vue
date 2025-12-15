@@ -1,6 +1,24 @@
 <template>
   <div style="margin: 20px">
-
+    <el-button type="primary" size="default" @click="onOpen">打开弹窗</el-button>
+    <el-cascader :options="options" v-model="form.xxx" clearable filterable :show-all-levels="false"
+      :props="{ expandTrigger: 'hover', multiple: true, checkStrictly: true }" @change="">
+    </el-cascader>
+    
+    <el-dialog
+      center
+      title="弹窗"
+      :visible.sync="show"
+      width="30%"
+      @close="">
+      <span></span>
+      <span slot="footer">
+        <el-button @click="show = false">Cancel</el-button>
+        <el-button type="primary" @click="">OK</el-button>
+      </span>
+    </el-dialog>
+    
+    
     <!-- Radio 和 Checkbox 竖向排列及溢出测试 -->
     <h2>Radio 和 Checkbox 新功能测试</h2>
     
@@ -763,6 +781,7 @@
 export default {
   data() {
     return {
+      show: false,
       // Radio 和 Checkbox 测试数据
       radio1: 1,
       radio2: 1,
@@ -944,6 +963,9 @@ export default {
           }
         }, 1500);
       });
+    },
+    onOpen() {
+      this.show = true;
     },
   },
 };

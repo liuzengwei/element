@@ -44,7 +44,7 @@ $--color-base: #202131 !default;
 // Background
 /// color|1|Background Color|4
 $--background-color-base: #F5F7FA !default;
-$--background-color-placeholder: #F7F8FA !default;
+$--background-color-input-base: #F7F8FA !default;
 $--background-color-table-header: #F7F8FA !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
@@ -65,7 +65,7 @@ $--color-text-secondary: #909399 !default;
 /// color|1|Font Color|2
 $--color-text-placeholder: #86909C !default;
 /// color|1|Border Color|3
-$--border-color-base: $--background-color-placeholder !default;
+$--border-color-base: $--background-color-input-base !default;
 
 $--border-color-base-bold: #E5E6EB !default;
 
@@ -447,7 +447,7 @@ $--input-border-color: $--border-color-base !default;
 $--input-border-radius: $--border-radius-zero !default;
 $--input-border-color-hover: $--border-color-hover !default;
 /// color||Color|0
-$--input-background-color: $--background-color-placeholder !default;
+$--input-background-color: $--background-color-input-base !default;
 $--input-fill-disabled: $--disabled-fill-base !default;
 $--input-color-disabled: $--font-color-disabled-base !default;
 /// color||Color|0
@@ -495,6 +495,7 @@ $--cascader-node-background-hover: $--background-color-base !default;
 $--cascader-node-color-disabled:$--color-text-placeholder !default;
 $--cascader-color-empty:$--color-text-placeholder !default;
 $--cascader-tag-background: #f0f2f5;
+$--cascader-input-background: $--background-color-input-base !default;
 
 /* Group
 -------------------------- */
@@ -558,7 +559,7 @@ $--button-mini-padding-horizontal: 15px !default;
 /// color||Color|0
 $--button-default-font-color: $--color-text-regular !default;
 /// color||Color|0
-$--button-default-background-color: $--background-color-placeholder !default;
+$--button-default-background-color: $--background-color-input-base !default;
 /// color||Color|0
 $--button-default-border-color: $--border-color-base !default;
 
@@ -598,7 +599,7 @@ $--button-info-border-color: $--color-info !default;
 /// color||Color|0
 $--button-info-font-color: $--color-text-placeholder !default;
 /// color||Color|0
-$--button-info-background-color: $--background-color-placeholder !default;
+$--button-info-background-color: $--background-color-input-base !default;
 
 $--button-hover-tint-percent: 20% !default;
 $--button-active-shade-percent: 10% !default;

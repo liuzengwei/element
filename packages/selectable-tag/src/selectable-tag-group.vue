@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import Emitter from "element-ui/src/mixins/emitter";
+import Emitter from 'element-ui/src/mixins/emitter';
 
 export default {
-  name: "ElSelectableTagGroup",
+  name: 'ElSelectableTagGroup',
 
-  componentName: "ElSelectableTagGroup",
+  componentName: 'ElSelectableTagGroup',
 
   mixins: [Emitter],
 
   inject: {
     elFormItem: {
-      default: "",
-    },
+      default: ''
+    }
   },
 
   props: {
@@ -31,18 +31,18 @@ export default {
     disabled: Boolean,
     multiple: {
       type: Boolean,
-      default: true,
+      default: true
     },
     min: Number,
     max: Number,
     size: String,
     effect: {
       type: String,
-      default: "dark",
+      default: 'dark',
       validator(val) {
-        return ["dark", "light", "plain"].indexOf(val) !== -1;
-      },
-    },
+        return ['dark', 'light', 'plain'].indexOf(val) !== -1;
+      }
+    }
   },
 
   computed: {
@@ -51,19 +51,19 @@ export default {
     },
     selectableTagGroupSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-    },
+    }
   },
 
   watch: {
     value(value) {
-      this.dispatch("ElFormItem", "el.form.change", [value]);
-    },
+      this.dispatch('ElFormItem', 'el.form.change', [value]);
+    }
   },
 
   provide() {
     return {
-      selectableTagGroup: this,
+      selectableTagGroup: this
     };
-  },
+  }
 };
 </script>

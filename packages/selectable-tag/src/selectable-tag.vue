@@ -61,7 +61,7 @@ export default {
       type: String,
       default: 'dark',
       validator(val) {
-        return ['dark', 'light', 'plain'].indexOf(val) !== -1
+        return ['dark', 'light', 'plain'].indexOf(val) !== -1;
       }
     }
   },
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       isLimitExceeded: false
-    }
+    };
   },
 
   computed: {
@@ -103,17 +103,17 @@ export default {
       return this.size ||
              (this.selectableTagGroup && this.selectableTagGroup.selectableTagGroupSize) ||
              this._elFormItemSize ||
-             (this.$ELEMENT || {}).size
+             (this.$ELEMENT || {}).size;
     },
 
     isDisabled() {
       return this.disabled ||
              (this.selectableTagGroup && this.selectableTagGroup.disabled) ||
-             (this.elForm || {}).disabled
+             (this.elForm || {}).disabled;
     },
 
     currentEffect() {
-      return (this.selectableTagGroup && this.selectableTagGroup.effect) || this.effect || 'dark'
+      return (this.selectableTagGroup && this.selectableTagGroup.effect) || this.effect || 'dark';
     }
   },
 

@@ -90,5 +90,7 @@
   "result": "./packages/result/index.js",
   "text": "./packages/text/index.js",
   "affix": "./packages/affix/index.js",
-  "area-loading": "./packages/area-loading/index.js"
+  "area-loading": "./packages/area-loading/index.js",
+  "selectable-tag": "./packages/selectable-tag/index.js",
+  "selectable-tag-group": "./packages/selectable-tag-group/index.js"
 }

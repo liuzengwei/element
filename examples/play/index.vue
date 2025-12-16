@@ -774,6 +774,100 @@
       </template>
       可关闭的带图标标签
     </el-tag>
+
+    <!-- SelectableTag 示例 -->
+    <h2>SelectableTag 可选择标签</h2>
+    
+    <h3>基础用法</h3>
+    <p>多选模式，支持不同类型和效果</p>
+    <el-selectable-tag-group v-model="selectableValue" :multiple="true" style="margin-bottom: 16px;">
+      <el-selectable-tag label="标签一">标签一</el-selectable-tag>
+      <el-selectable-tag label="标签二" type="success">标签二</el-selectable-tag>
+      <el-selectable-tag label="标签三" type="warning">标签三</el-selectable-tag>
+      <el-selectable-tag label="标签四" type="danger">标签四</el-selectable-tag>
+      <el-selectable-tag label="标签五" type="info">标签五</el-selectable-tag>
+      <el-selectable-tag label="禁用" disabled>禁用</el-selectable-tag>
+    </el-selectable-tag-group>
+    <div>当前选中：{{ selectableValue }}</div>
+
+    <h3>单选模式</h3>
+    <p>设置 multiple 为 false 实现单选</p>
+    <el-selectable-tag-group v-model="selectableRadio" :multiple="false" style="margin-bottom: 16px;">
+      <el-selectable-tag label="A">A</el-selectable-tag>
+      <el-selectable-tag label="B">B</el-selectable-tag>
+      <el-selectable-tag label="C">C</el-selectable-tag>
+    </el-selectable-tag-group>
+    <div>单选模式：{{ selectableRadio }}</div>
+
+    <h3>不同效果</h3>
+    <p>支持 light、dark、plain 三种效果</p>
+    <div style="margin-bottom: 16px;">
+      <h4>Light 效果（默认）</h4>
+      <el-selectable-tag-group v-model="selectableLight" effect="light" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="选项1">选项1</el-selectable-tag>
+        <el-selectable-tag label="选项2">选项2</el-selectable-tag>
+        <el-selectable-tag label="选项3">选项3</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectableLight }}</div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4>Dark 效果</h4>
+      <el-selectable-tag-group v-model="selectableDark" effect="dark" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="选项1">选项1</el-selectable-tag>
+        <el-selectable-tag label="选项2">选项2</el-selectable-tag>
+        <el-selectable-tag label="选项3">选项3</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectableDark }}</div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4>Plain 效果</h4>
+      <el-selectable-tag-group v-model="selectablePlain" effect="plain" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="选项1">选项1</el-selectable-tag>
+        <el-selectable-tag label="选项2">选项2</el-selectable-tag>
+        <el-selectable-tag label="选项3">选项3</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectablePlain }}</div>
+    </div>
+
+    <h3>不同尺寸</h3>
+    <p>支持 mini、small、medium、large 四种尺寸</p>
+    <div style="margin-bottom: 16px;">
+      <h4>Mini</h4>
+      <el-selectable-tag-group v-model="selectableMini" size="mini" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="迷你">迷你</el-selectable-tag>
+        <el-selectable-tag label="小型">小型</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectableMini }}</div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4>Small</h4>
+      <el-selectable-tag-group v-model="selectableSmall" size="small" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="小型">小型</el-selectable-tag>
+        <el-selectable-tag label="中型">中型</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectableSmall }}</div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4>Medium</h4>
+      <el-selectable-tag-group v-model="selectableMedium" size="medium" :multiple="true" style="margin-bottom: 8px;">
+        <el-selectable-tag label="中型">中型</el-selectable-tag>
+        <el-selectable-tag label="大型">大型</el-selectable-tag>
+      </el-selectable-tag-group>
+      <div>当前选中：{{ selectableMedium }}</div>
+    </div>
+
+    <h3>带图标</h3>
+    <p>支持自定义图标</p>
+    <el-selectable-tag-group v-model="selectableIcon" :multiple="true" style="margin-bottom: 16px;">
+      <el-selectable-tag label="收藏" icon="el-icon-star-off">收藏</el-selectable-tag>
+      <el-selectable-tag label="点赞" icon="el-icon-thumb">点赞</el-selectable-tag>
+      <el-selectable-tag label="分享" icon="el-icon-share">分享</el-selectable-tag>
+    </el-selectable-tag-group>
+    <div>当前选中：{{ selectableIcon }}</div>
   </div>
 </template>
 
@@ -781,6 +875,7 @@
 export default {
   data() {
     return {
+      options:[],
       show: false,
       // Radio 和 Checkbox 测试数据
       radio1: 1,
@@ -922,6 +1017,15 @@ export default {
           { type: "array", required: true, message: "请至少选择一个活动类型", trigger: "change" },
         ],
       },
+      selectableValue: ['标签一', '标签三'],
+      selectableRadio: 'A',
+      selectableLight: ['选项1'],
+      selectableDark: [],
+      selectablePlain: [],
+      selectableMini: [],
+      selectableSmall: [],
+      selectableMedium: [],
+      selectableIcon: [],
     };
   },
   methods: {

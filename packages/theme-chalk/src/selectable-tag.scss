@@ -1,0 +1,221 @@
+@import "common/var";
+@import "mixins/mixins";
+@import "mixins/button";
+
+@include b(selectable-tag) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  height: $--selectable-tag-height;
+  white-space: nowrap;
+  cursor: pointer;
+  background: $--button-default-background-color;
+  border: $--border-base;
+  border-color: $--button-default-border-color;
+  color: $--button-default-font-color;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: .1s;
+  font-weight: $--button-font-weight;
+  user-select: none;
+  padding: $--selectable-tag-padding-vertical $--selectable-tag-padding-horizontal;
+  font-size: $--selectable-tag-font-size;
+  border-radius: $--selectable-tag-border-radius;
+
+  & + & {
+    margin-left: 10px;
+  }
+
+  &:hover {
+    color: $--color-primary;
+    border-color: $--color-primary-light-7;
+    background-color: $--color-primary-light-9;
+  }
+
+  &:focus {
+    outline: none;
+    color: $--color-primary;
+    border-color: $--color-primary;
+  }
+
+  @include m(primary) {
+    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
+  }
+  @include m(success) {
+    @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-border-color);
+  }
+  @include m(warning) {
+    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
+  }
+  @include m(danger) {
+    @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-border-color);
+  }
+  @include m(info) {
+    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+  }
+
+  @include m(medium) {
+    padding: $--selectable-tag-padding-vertical-medium $--selectable-tag-padding-horizontal;
+    font-size: $--selectable-tag-font-size;
+    border-radius: $--selectable-tag-border-radius;
+    height: $--selectable-tag-height-medium;
+  }
+  @include m(small) {
+    padding: $--selectable-tag-padding-vertical-small $--selectable-tag-padding-horizontal-small;
+    font-size: $--selectable-tag-font-size-small;
+    border-radius: $--selectable-tag-border-radius-small;
+    height: $--selectable-tag-height-small;
+  }
+  @include m(mini) {
+    padding: $--selectable-tag-padding-vertical-mini $--selectable-tag-padding-horizontal-mini;
+    font-size: $--selectable-tag-font-size-mini;
+    border-radius: $--selectable-tag-border-radius-small;
+    height: $--selectable-tag-height-mini;
+  }
+
+  @include m(light) {
+    &.is-checked {
+      color: $--color-primary;
+      border-color: $--color-primary;
+      background-color: mix($--color-white, $--color-primary, 90%);
+      z-index: 1;
+
+      &.el-selectable-tag--primary {
+        color: $--color-primary;
+        border-color: $--color-primary;
+        background-color: mix($--color-white, $--color-primary, 90%);
+      }
+
+      &.el-selectable-tag--success {
+        color: $--color-success;
+        border-color: $--color-success;
+        background-color: mix($--color-white, $--color-success, 90%);
+      }
+
+      &.el-selectable-tag--warning {
+        color: $--color-warning;
+        border-color: $--color-warning;
+        background-color: mix($--color-white, $--color-warning, 90%);
+      }
+
+      &.el-selectable-tag--danger {
+        color: $--color-danger;
+        border-color: $--color-danger;
+        background-color: mix($--color-white, $--color-danger, 90%);
+      }
+
+      &.el-selectable-tag--info {
+        color: $--color-info;
+        border-color: $--color-info;
+        background-color: mix($--color-white, $--color-info, 90%);
+      }
+    }
+  }
+
+  @include m(dark) {
+    &.is-checked {
+      color: $--color-white;
+      background-color: $--color-primary;
+      border-color: $--color-primary;
+      z-index: 1;
+
+      &.el-selectable-tag--primary {
+        background-color: $--color-primary;
+        border-color: $--color-primary;
+      }
+
+      &.el-selectable-tag--success {
+        background-color: $--color-success;
+        border-color: $--color-success;
+      }
+
+      &.el-selectable-tag--warning {
+        background-color: $--color-warning;
+        border-color: $--color-warning;
+      }
+
+      &.el-selectable-tag--danger {
+        background-color: $--color-danger;
+        border-color: $--color-danger;
+      }
+
+      &.el-selectable-tag--info {
+        background-color: $--color-info;
+        border-color: $--color-info;
+      }
+    }
+  }
+
+  @include m(plain) {
+    &.is-checked {
+      background: $--color-white;
+      border-color: $--color-primary;
+      color: $--color-primary;
+
+      &.el-selectable-tag--primary {
+        background: mix($--color-white, $--color-primary, 90%);
+        border-color: mix($--color-white, $--color-primary, 60%);
+        color: $--color-primary;
+      }
+
+      &.el-selectable-tag--success {
+        background: mix($--color-white, $--color-success, 90%);
+        border-color: mix($--color-white, $--color-success, 60%);
+        color: $--color-success;
+      }
+
+      &.el-selectable-tag--warning {
+        background: mix($--color-white, $--color-warning, 90%);
+        border-color: mix($--color-white, $--color-warning, 60%);
+        color: $--color-warning;
+      }
+
+      &.el-selectable-tag--danger {
+        background: mix($--color-white, $--color-danger, 90%);
+        border-color: mix($--color-white, $--color-danger, 60%);
+        color: $--color-danger;
+      }
+
+      &.el-selectable-tag--info {
+        background: mix($--color-white, $--color-info, 90%);
+        border-color: mix($--color-white, $--color-info, 60%);
+        color: $--color-info;
+      }
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+    
+    &:hover {
+      color: $--button-default-font-color;
+      border-color: $--button-default-border-color;
+      background-color: $--button-default-background-color;
+    }
+  }
+
+  @include e(inner) {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    [class*="el-icon-"] {
+      line-height: 0.9;
+
+      & + span {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+@include b(selectable-tag-group) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: $--selectable-tag-gap;
+}

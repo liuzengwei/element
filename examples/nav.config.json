@@ -347,6 +347,14 @@
                 "version": "2.15.5-xn.28",
                 "type": "new"
               }
+            },
+            {
+              "path": "/selectable-tag",
+              "title": "SelectableTag 可选择标签",
+              "badge": {
+                "version": "2.15.5-xn.37",
+                "type": "new"
+              }
             }
           ]
         }
@@ -677,6 +685,10 @@
             {
               "path": "/area-loading",
               "title": "AreaLoading"
+            },
+            {
+              "path": "/selectable-tag",
+              "title": "SelectableTag"
             }
           ]
         }
@@ -1007,6 +1019,10 @@
             {
               "path": "/area-loading",
               "title": "AreaLoading"
+            },
+            {
+              "path": "/selectable-tag",
+              "title": "SelectableTag"
             }
           ]
         }
@@ -1337,6 +1353,10 @@
             {
               "path": "/area-loading",
               "title": "AreaLoading"
+            },
+            {
+              "path": "/selectable-tag",
+              "title": "SelectableTag"
             }
           ]
         }

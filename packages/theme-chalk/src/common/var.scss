@@ -741,6 +741,33 @@ $--tag-round-border-radius-small: 10px !default;
 $--tag-round-border-radius-mini: 8px !default;
 $--tag-padding: 0 10px !default;
 
+/* SelectableTag
+-------------------------- */
+/// fontSize||Font|1
+$--selectable-tag-font-size: $--font-size-base !default;
+/// fontSize||Font|1
+$--selectable-tag-font-size-small: 12px !default;
+/// fontSize||Font|1
+$--selectable-tag-font-size-mini: 12px !default;
+$--selectable-tag-border-radius: $--border-radius-base !default;
+$--selectable-tag-border-radius-small: $--border-radius-small !default;
+$--selectable-tag-padding-horizontal: 15px !default;
+$--selectable-tag-padding-horizontal-small: 15px !default;
+$--selectable-tag-padding-horizontal-mini: 15px !default;
+$--selectable-tag-padding-vertical: 9px !default;
+$--selectable-tag-padding-vertical-medium: 10px !default;
+$--selectable-tag-padding-vertical-small: 9px !default;
+$--selectable-tag-padding-vertical-mini: 7px !default;
+/// height||Other|4
+$--selectable-tag-height: 32px !default;
+/// height||Other|4
+$--selectable-tag-height-medium: 36px !default;
+/// height||Other|4
+$--selectable-tag-height-small: 32px !default;
+/// height||Other|4
+$--selectable-tag-height-mini: 28px !default;
+$--selectable-tag-gap: 10px !default;
+
 /* Tree
 -------------------------- */
 /// color||Color|0

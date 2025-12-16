@@ -92,6 +92,8 @@ import Result from '../packages/result/index.js';
 import Text from '../packages/text/index.js';
 import Affix from '../packages/affix/index.js';
 import AreaLoading from '../packages/area-loading/index.js';
+import SelectableTag from '../packages/selectable-tag/index.js';
+import SelectableTagGroup from '../packages/selectable-tag-group/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -183,6 +185,8 @@ const components = [
   Text,
   Affix,
   AreaLoading,
+  SelectableTag,
+  SelectableTagGroup,
   CollapseTransition
 ];
 
@@ -314,5 +318,7 @@ export default {
   Result,
   Text,
   Affix,
-  AreaLoading
+  AreaLoading,
+  SelectableTag,
+  SelectableTagGroup
 };

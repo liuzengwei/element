@@ -1069,7 +1069,12 @@ export default {
       });
     },
     onOpen() {
-      this.show = true;
+      // this.show = true;
+      this.$msgbox({
+        title: '标题',
+        message: '这是一段信息',
+        showClose: true,
+      });
     },
   },
 };

@@ -58,5 +58,11 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether to destroy elements in Dialog when closed */
   destroyOnClose: boolean
 
+  /** Background color of the Dialog */
+  backgroundColor: string
+
+  /** Background color of the Dialog header */
+  headerBackgroundColor: string
+
   $slots: DialogSlots
 }

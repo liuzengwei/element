@@ -316,4 +316,27 @@ describe('Dialog', () => {
     await waitImmediate();
     expect(dialog.$el.querySelector('input').value).to.be.equal('');
   });
+
+  it('custom background color', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible="visible" background-color="#f0f9ff" header-background-color="#e0f2fe"></el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    setTimeout(() => {
+      expect(dialog.$el.style.backgroundColor).to.equal('rgb(240, 249, 255)');
+      expect(dialog.$el.querySelector('.el-dialog__header').style.backgroundColor).to.equal('rgb(224, 242, 254)');
+      done();
+    }, 10);
+  });
 });

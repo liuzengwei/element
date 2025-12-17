@@ -20,7 +20,7 @@ describe('AreaLoading', () => {
     vm = createTest(AreaLoading, {
       loading: false
     }, true);
-    
+
     vm.loading = true;
     vm.$nextTick(() => {
       expect(vm.$el.classList.contains('is-loading')).to.be.true;
@@ -74,7 +74,7 @@ describe('AreaLoading', () => {
       loading: false
     }, true);
     expect(vm.$el.classList.contains('is-loading')).to.be.false;
-    
+
     vm.show();
     vm.$nextTick(() => {
       expect(vm.$el.classList.contains('is-loading')).to.be.true;
@@ -87,7 +87,7 @@ describe('AreaLoading', () => {
       loading: true
     }, true);
     expect(vm.$el.classList.contains('is-loading')).to.be.true;
-    
+
     vm.hide();
     vm.$nextTick(() => {
       expect(vm.$el.classList.contains('is-loading')).to.be.false;
@@ -100,7 +100,7 @@ describe('AreaLoading', () => {
       loading: false
     }, true);
     expect(vm.$el.classList.contains('is-loading')).to.be.false;
-    
+
     vm.toggle();
     vm.$nextTick(() => {
       expect(vm.$el.classList.contains('is-loading')).to.be.true;
@@ -116,7 +116,7 @@ describe('AreaLoading', () => {
     vm = createTest(AreaLoading, {
       loading: false
     }, true);
-    
+
     vm.setLoading(true);
     vm.$nextTick(() => {
       expect(vm.$el.classList.contains('is-loading')).to.be.true;

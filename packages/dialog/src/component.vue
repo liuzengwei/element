@@ -14,8 +14,8 @@
         :aria-label="title || 'dialog'"
         :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
-        :style="style">
-        <div class="el-dialog__header">
+        :style="[style, dialogStyle]">
+        <div class="el-dialog__header" :style="headerStyle">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
@@ -107,7 +107,17 @@
         default: false
       },
 
-      destroyOnClose: Boolean
+      destroyOnClose: Boolean,
+
+      backgroundColor: {
+        type: String,
+        default: ''
+      },
+
+      headerBackgroundColor: {
+        type: String,
+        default: ''
+      }
     },
 
     data() {
@@ -151,6 +161,12 @@
           }
         }
         return style;
+      },
+      dialogStyle() {
+        return this.backgroundColor ? { backgroundColor: this.backgroundColor } : {};
+      },
+      headerStyle() {
+        return this.headerBackgroundColor ? { backgroundColor: this.headerBackgroundColor } : {};
       }
     },
 

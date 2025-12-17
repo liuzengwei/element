@@ -16,6 +16,22 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
   width="30%"
   :before-close="handleClose">
   <span>这是一段信息</span>
+  <el-table :data="tableData" border>
+     <el-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址">
+      </el-table-column>
+  </el-table>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -26,7 +42,24 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
   export default {
     data() {
       return {
-        dialogVisible: false
+        dialogVisible: false,
+        tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }]
       };
     },
     methods: {
@@ -193,6 +226,40 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+### 自定义背景色
+
+可以通过 `background-color` 和 `header-background-color` 属性来自定义 Dialog 的背景色。
+
+:::demo 使用 `background-color` 属性可以自定义 Dialog 的整体背景色，使用 `header-background-color` 属性可以自定义 Dialog 头部的背景色。
+
+```html
+<el-button type="text" @click="customBgDialogVisible = true">点击打开自定义背景色的 Dialog</el-button>
+
+<el-dialog
+  title="自定义背景色"
+  :visible.sync="customBgDialogVisible"
+  width="30%"
+  background-color="#f0f9ff"
+  header-background-color="#e0f2fe">
+  <span>这是一个自定义背景色的对话框</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="customBgDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="customBgDialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        customBgDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
 :::
@@ -220,6 +287,8 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
 | center | 是否对头部和底部采用居中布局 | boolean | — | false |
 | destroy-on-close | 关闭时销毁 Dialog 中的元素 | boolean | — | false |
+| background-color | Dialog 的背景色 | string | — | — |
+| header-background-color | Dialog 头部的背景色 | string | — | — |
 
 ### Slot
 | name | 说明 |

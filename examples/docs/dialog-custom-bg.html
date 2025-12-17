@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialog 自定义背景色示例</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .demo-section {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="demo-section">
+      <h2>Dialog 自定义背景色示例</h2>
+      
+      <el-button type="primary" @click="defaultDialogVisible = true">默认背景色</el-button>
+      
+      <el-button type="success" @click="customBgDialogVisible = true">自定义整体背景色</el-button>
+      
+      <el-button type="warning" @click="customHeaderBgDialogVisible = true">自定义头部背景色</el-button>
+      
+      <el-button type="danger" @click="customBothBgDialogVisible = true">自定义整体和头部背景色</el-button>
+    </div>
+
+    <!-- 默认背景色 -->
+    <el-dialog
+      title="默认背景色"
+      :visible.sync="defaultDialogVisible"
+      width="30%">
+      <span>这是使用默认背景色的对话框</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="defaultDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="defaultDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 自定义整体背景色 -->
+    <el-dialog
+      title="自定义整体背景色"
+      :visible.sync="customBgDialogVisible"
+      width="30%"
+      background-color="#f0f9ff">
+      <span>这是自定义整体背景色的对话框，背景色为浅蓝色</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="customBgDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="customBgDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 自定义头部背景色 -->
+    <el-dialog
+      title="自定义头部背景色"
+      :visible.sync="customHeaderBgDialogVisible"
+      width="30%"
+      header-background-color="#e0f2fe">
+      <span>这是自定义头部背景色的对话框，头部背景色为浅蓝色</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="customHeaderBgDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="customHeaderBgDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 自定义整体和头部背景色 -->
+    <el-dialog
+      title="自定义整体和头部背景色"
+      :visible.sync="customBothBgDialogVisible"
+      width="30%"
+      background-color="#fef2f2"
+      header-background-color="#fee2e2">
+      <span>这是自定义整体和头部背景色的对话框，整体背景色为浅红色，头部背景色为深一点的红色</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="customBothBgDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="customBothBgDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
+
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          defaultDialogVisible: false,
+          customBgDialogVisible: false,
+          customHeaderBgDialogVisible: false,
+          customBothBgDialogVisible: false
+        };
+      }
+    });
+  </script>
+</body>
+</html>

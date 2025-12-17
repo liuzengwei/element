@@ -181,6 +181,52 @@ export default {
 };
 </script>
 ```
+
+### City Information Event
+
+:::demo The `on-city` event can be used to get detailed information about the selected city, including complete path, code and name.
+```html
+<template>
+  <div>
+    <el-area-picker 
+      v-model="cityValue" 
+      placeholder="Please select city"
+      @on-city="handleCityChange">
+    </el-area-picker>
+    
+    <div class="city-info" v-if="cityInfo.city.length > 0">
+      <h4>City Information:</h4>
+      <p>Complete Path: {{ cityInfo.cityName.join(' / ') }}</p>
+      <p>Code Array: {{ cityInfo.cityCode.join(', ') }}</p>
+      <p>Last Level Code: {{ cityInfo.cityCodeLast }}</p>
+      <p>Last Level Name: {{ cityInfo.cityNameLast }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      cityValue: '',
+      cityInfo: {
+        city: [],
+        cityCode: [],
+        cityName: [],
+        cityCodeLast: '',
+        cityNameLast: ''
+      }
+    };
+  },
+  methods: {
+    handleCityChange(info) {
+      this.cityInfo = info;
+      console.log('City Information:', info);
+    }
+  }
+};
+</script>
+```
 :::
 
 ### Attributes
@@ -209,6 +255,7 @@ export default {
 | Event Name      | Description    | Parameters      |
 |---------- |-------- |---------- |
 | change | triggers when the selected value changes | selected value |
+| on-city | triggers when the selected value changes, returns detailed city information | city information object |
 | expand-change | triggers when expand option changes | an array of the values of parent options |
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when a tag is removed in multiple selection mode | the value of the tag removed |
@@ -219,6 +266,7 @@ export default {
 | getCheckedNodes | Get selected nodes | — |
 | clear | Clear selected options | — |
 | toggleDropDownVisible | Toggle the visibility of the dropdown | visible |
+| str2Code | Parse address string and display city information | addressStr: address string |
 
 ### Slots
 | Name | Description |

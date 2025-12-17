@@ -181,6 +181,133 @@ export default {
 };
 </script>
 ```
+
+### 城市信息事件
+
+:::demo 通过 `on-city` 事件可以获取选中城市的详细信息，包括完整路径、代码和名称。
+```html
+<template>
+  <div>
+    <el-area-picker 
+      v-model="cityValue" 
+      placeholder="请选择城市"
+      @on-city="handleCityChange">
+    </el-area-picker>
+    
+    <div class="city-info" v-if="cityInfo.city.length > 0">
+      <h4>城市信息：</h4>
+      <p>完整路径：{{ cityInfo.cityName.join(' / ') }}</p>
+      <p>代码数组：{{ cityInfo.cityCode.join(', ') }}</p>
+      <p>最后一级代码：{{ cityInfo.cityCodeLast }}</p>
+      <p>最后一级名称：{{ cityInfo.cityNameLast }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      cityValue: '',
+      cityInfo: {
+        city: [],
+        cityCode: [],
+        cityName: [],
+        cityCodeLast: '',
+        cityNameLast: ''
+      }
+    };
+  },
+  methods: {
+    handleCityChange(info) {
+      this.cityInfo = info;
+      console.log('城市信息：', info);
+    }
+  }
+};
+</script>
+```
+:::
+
+### 地址字符串解析
+
+:::demo 通过 `str2Code` 方法可以根据地址字符串自动解析并回显城市信息，支持多种地址格式。
+```html
+<template>
+  <div>
+    <el-input 
+      v-model="addressInput" 
+      placeholder="请输入地址"
+      style="margin-bottom: 20px;">
+      <el-button 
+        slot="append" 
+        @click="parseAddress">
+        解析地址
+      </el-button>
+    </el-input>
+    
+    <el-area-picker 
+      ref="areaPicker"
+      v-model="parsedValue" 
+      placeholder="解析结果将显示在这里"
+      @on-city="handleParsedCity">
+    </el-area-picker>
+    
+    <div class="address-result" v-if="parsedInfo">
+      <h4>解析结果：</h4>
+      <p>省份：{{ parsedInfo.province }}</p>
+      <p>城市：{{ parsedInfo.city }}</p>
+      <p>区县：{{ parsedInfo.district }}</p>
+      <p>完整路径：{{ parsedInfo.names.join(' / ') }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      addressInput: '北京市北京市大兴区富源里4-1-201',
+      parsedValue: '',
+      parsedInfo: null
+    };
+  },
+  methods: {
+    parseAddress() {
+      if (this.$refs.areaPicker) {
+        const result = this.$refs.areaPicker.str2Code(this.addressInput);
+        if (result) {
+          this.parsedInfo = result;
+          this.$message.success('地址解析成功！');
+        } else {
+          this.$message.error('地址解析失败，请检查地址格式');
+        }
+      }
+    },
+    handleParsedCity(info) {
+      console.log('解析后的城市信息：', info);
+    }
+  }
+};
+</script>
+
+<style>
+.address-result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0f9ff;
+  border-radius: 4px;
+  border: 1px solid #409EFF;
+}
+.address-result h4 {
+  margin-top: 0;
+  color: #409EFF;
+}
+.address-result p {
+  margin: 8px 0;
+}
+</style>
+```
 :::
 
 ### Attributes
@@ -209,6 +336,7 @@ export default {
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change | 当选中值变化时触发 | 选中的值 |
+| on-city | 当选中值变化时触发，返回城市详细信息 | 城市信息对象 |
 | expand-change | 当展开节点发生变化时触发 | 各父级选项值组成的数组 |
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 在多选模式下，移除Tag时触发 | 移除的Tag对应的节点的值 |
@@ -219,6 +347,7 @@ export default {
 | getCheckedNodes | 获取选中的节点 | — |
 | clear | 清空已选项 | — |
 | toggleDropDownVisible | 切换下拉菜单的显示/隐藏 | visible |
+| str2Code | 根据地址字符串解析并回显城市信息 | addressStr: 地址字符串 |
 
 ### Slots
 | 名称 | 说明 |

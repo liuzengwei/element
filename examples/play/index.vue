@@ -6,7 +6,7 @@
       <el-col :span="12">
         <div class="demo-block">
           <h3>基础用法</h3>
-          <el-area-picker v-model="value1" placeholder="请选择省/市/区"></el-area-picker>
+          <el-area-picker v-model="value1" placeholder="请选择省/市/区" @on-city="onCity"></el-area-picker>
           <p>选中的值: {{ value1 }}</p>
         </div>
       </el-col>
@@ -68,6 +68,61 @@
             placeholder="自定义字段名">
           </el-area-picker>
           <p>选中的值: {{ value7 }}</p>
+        </div>
+      </el-col>
+    </el-row>
+    
+    <el-divider content-position="left">地址字符串解析测试</el-divider>
+    
+    <el-row :gutter="20">
+      <el-col :span="24">
+        <div class="demo-block">
+          <h3>str2Code 方法 - 地址字符串解析</h3>
+          <p style="color: #909399; margin-bottom: 10px;">输入地址字符串，自动解析并回显城市信息</p>
+          
+          <div style="margin-bottom: 15px;">
+            <el-button-group>
+              <el-button size="small" @click="testAddress = '北京市北京市大兴区富源里4-1-201'">标准地址</el-button>
+              <el-button size="small" @click="testAddress = '天津市河东区某某街道123号'">省略市级</el-button>
+              <el-button size="small" @click="testAddress = '广东省广州市天河区珠江新城花城大道'">完整地址</el-button>
+              <el-button size="small" @click="testAddress = '浙江杭州西湖文一西路'">省略后缀</el-button>
+              <el-button size="small" @click="testAddress = '江苏南京玄武中山东路'">简化地址</el-button>
+            </el-button-group>
+          </div>
+          
+          <el-input 
+            v-model="testAddress" 
+            placeholder="请输入地址，如：北京市北京市大兴区富源里4-1-201"
+            clearable
+            style="margin-bottom: 15px;">
+            <el-button 
+              slot="append" 
+              icon="el-icon-search"
+              @click="parseAddressStr">
+              解析地址
+            </el-button>
+          </el-input>
+          
+          <el-area-picker 
+            ref="areaPickerStr2Code"
+            v-model="value8" 
+            placeholder="解析结果将自动回显在这里"
+            @on-city="handleStrCity">
+          </el-area-picker>
+          
+          <div v-if="parseResult" style="margin-top: 15px; padding: 15px; background-color: #f0f9ff; border-radius: 4px; border: 1px solid #409EFF;">
+            <h4 style="margin-top: 0; color: #409EFF;">解析成功！</h4>
+            <p><strong>省份：</strong>{{ parseResult.province || '-' }}</p>
+            <p><strong>城市：</strong>{{ parseResult.city || '-' }}</p>
+            <p><strong>区县：</strong>{{ parseResult.district || '-' }}</p>
+            <p><strong>完整路径：</strong>{{ parseResult.names.join(' / ') }}</p>
+            <p><strong>代码数组：</strong>{{ parseResult.codes.join(', ') }}</p>
+          </div>
+          
+          <div v-if="strCityInfo" style="margin-top: 15px; padding: 15px; background-color: #f5f7fa; border-radius: 4px;">
+            <h4 style="margin-top: 0;">on-city 事件返回数据：</h4>
+            <pre style="background-color: #fff; padding: 10px; border-radius: 4px; overflow-x: auto;">{{ JSON.stringify(strCityInfo, null, 2) }}</pre>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -1108,6 +1163,11 @@ export default {
       value5: [],
       value6: '',
       value7: '',
+      value8: '',
+      // str2Code 测试数据
+      testAddress: '天津市河东区某某街道123号',
+      parseResult: null,
+      strCityInfo: null,
     };
   },
   methods: {
@@ -1155,9 +1215,38 @@ export default {
       this.$msgbox({
         title: '标题',
         message: '这是一段信息',
-        showClose: true,
-      });
+      })
     },
+    // 解析地址字符串
+    parseAddressStr() {
+      if (!this.testAddress) {
+        this.$message.warning('请输入地址');
+        return;
+      }
+      
+      this.parseResult = null;
+      this.strCityInfo = null;
+      
+      if (this.$refs.areaPickerStr2Code && this.$refs.areaPickerStr2Code.str2Code) {
+        const result = this.$refs.areaPickerStr2Code.str2Code(this.testAddress);
+        
+        if (result) {
+          this.parseResult = result;
+          this.$message.success('地址解析成功！');
+          console.log('解析结果：', result);
+        } else {
+          this.$message.error('地址解析失败，请检查地址格式');
+        }
+      }
+    },
+    // 处理城市信息回调
+    handleStrCity(info) {
+      this.strCityInfo = info;
+      console.log('on-city 事件返回：', info);
+    },
+    onCity(val){
+      console.log("🚀 ~ val:", val)
+    }
   },
 };
 </script>

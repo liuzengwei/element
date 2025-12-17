@@ -5,7 +5,7 @@
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave">
       <div
-        v-show="visible"
+        v-show="!disabled && showPopper"
         ref="popper"
         :class="['el-trigger__popup', contentClass]"
         :style="[popupStyleComputed, contentStyle]"
@@ -34,8 +34,11 @@ export default {
   mixins: [Popper],
 
   props: {
-    // v-model 绑定
-    popupVisible: Boolean,
+    // 弹出框是否可见 (受控模式，可使用 .sync 修饰符)
+    popupVisible: {
+      type: Boolean,
+      default: undefined
+    },
     // 默认是否可见（非受控）
     defaultPopupVisible: {
       type: Boolean,
@@ -185,42 +188,49 @@ export default {
 
   data() {
     return {
-      visible: this.popupVisible !== undefined ? this.popupVisible : this.defaultPopupVisible,
       enterTimer: null,
       leaveTimer: null,
       scrollParent: null,
-      initialScrollTop: 0
+      initialScrollTop: 0,
+      // 内部属性，映射到 mixin 期望的值
+      currentPlacement: '',
+      internalAppendToBody: true,
+      internalOffset: 0,
+      internalVisibleArrow: false
     };
   },
 
+  created() {
+    // 映射 position 到 popper placement
+    const positionMap = {
+      'top': 'top',
+      'tl': 'top-start',
+      'tr': 'top-end',
+      'bottom': 'bottom',
+      'bl': 'bottom-start',
+      'br': 'bottom-end',
+      'left': 'left',
+      'lt': 'left-start',
+      'lb': 'left-end',
+      'right': 'right',
+      'rt': 'right-start',
+      'rb': 'right-end'
+    };
+    this.currentPlacement = positionMap[this.position] || 'bottom';
+    this.internalAppendToBody = this.renderToBody;
+    this.internalOffset = this.popupOffset;
+    this.internalVisibleArrow = this.showArrow;
+
+    // 初始化 showPopper
+    if (this.value === undefined) {
+      const initialValue = this.popupVisible !== undefined ? this.popupVisible : this.defaultPopupVisible;
+      this.$nextTick(() => {
+        this.showPopper = initialValue;
+      });
+    }
+  },
+
   computed: {
-    // 映射 position 到 popper 的 placement
-    placement() {
-      const positionMap = {
-        'top': 'top',
-        'tl': 'top-start',
-        'tr': 'top-end',
-        'bottom': 'bottom',
-        'bl': 'bottom-start',
-        'br': 'bottom-end',
-        'left': 'left',
-        'lt': 'left-start',
-        'lb': 'left-end',
-        'right': 'right',
-        'rt': 'right-start',
-        'rb': 'right-end'
-      };
-      return positionMap[this.position] || 'bottom';
-    },
-
-    appendToBody() {
-      return this.renderToBody;
-    },
-
-    offset() {
-      return this.popupOffset;
-    },
-
     popupStyleComputed() {
       const style = { ...this.popupStyle };
 
@@ -245,14 +255,17 @@ export default {
   },
 
   watch: {
+    // popupVisible prop 改变时同步到 showPopper
     popupVisible(val) {
       if (val !== undefined) {
-        this.visible = val;
+        this.showPopper = val;
       }
     },
 
-    visible(val) {
-      this.showPopper = val;
+    // showPopper 改变时发出事件 (value 的 watch 由 mixin 处理)
+    showPopper(val) {
+      // 注意：不要在这里检查 disabled，因为需要emit事件同步状态
+      // mixin 已经 emit 'input'，这里只需要 emit 其他事件
       this.$emit('update:popupVisible', val);
       this.$emit('popup-visible-change', val);
 
@@ -273,7 +286,7 @@ export default {
 
   mounted() {
     const reference = this.referenceElm = this.$refs.reference.children[0] || this.$refs.reference;
-    const popper = this.popper = this.$refs.popper;
+    const popper = this.popperElm = this.$refs.popper;
 
     if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
@@ -308,7 +321,7 @@ export default {
 
   beforeDestroy() {
     const reference = this.referenceElm;
-    const popper = this.popper;
+    const popper = this.popperElm;
 
     off(reference, 'mouseenter', this.handleMouseEnter);
     off(reference, 'mouseleave', this.handleMouseLeave);
@@ -330,16 +343,64 @@ export default {
   },
 
   methods: {
+    // 覆盖 mixin 的 createPopper，使用我们的内部属性
+    createPopper() {
+      if (this.$isServer) return;
+      this.currentPlacement = this.currentPlacement || this.placement;
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
+        return;
+      }
+
+      const options = this.popperOptions;
+      const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
+      let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
+
+      if (!reference &&
+        this.$slots.reference &&
+        this.$slots.reference[0]) {
+        reference = this.referenceElm = this.$slots.reference[0].elm;
+      }
+
+      if (!popper || !reference) return;
+
+      // 使用我们的内部属性而不是 props
+      if (this.internalVisibleArrow) this.appendArrow(popper);
+      if (this.internalAppendToBody) document.body.appendChild(this.popperElm);
+
+      if (this.popperJS && this.popperJS.destroy) {
+        this.popperJS.destroy();
+      }
+
+      options.placement = this.currentPlacement;
+      options.offset = this.internalOffset;
+      options.arrowOffset = this.arrowOffset;
+
+      const PopperJS = require('element-ui/src/utils/popper');
+      const PopupManager = require('element-ui/src/utils/popup').PopupManager;
+
+      this.popperJS = new PopperJS(reference, popper, options);
+      this.popperJS.onCreate(_ => {
+        this.$emit('created', this);
+        this.resetTransformOrigin();
+        this.$nextTick(this.updatePopper);
+      });
+      if (typeof options.onUpdate === 'function') {
+        this.popperJS.onUpdate(options.onUpdate);
+      }
+      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      this.popperElm.addEventListener('click', e => e.stopPropagation());
+    },
+
     show() {
       if (this.disabled) return;
       this.clearTimer();
-      this.visible = true;
+      this.showPopper = true;
     },
 
     hide() {
       if (this.disabled) return;
       this.clearTimer();
-      this.visible = false;
+      this.showPopper = false;
     },
 
     handleMouseEnter() {
@@ -374,7 +435,7 @@ export default {
 
     handleClick() {
       if (this.disabled) return;
-      if (this.visible && this.clickToClose) {
+      if (this.showPopper && this.clickToClose) {
         this.hide();
       } else {
         this.show();
@@ -423,7 +484,7 @@ export default {
     },
 
     handleDocumentClick(e) {
-      if (!this.visible) return;
+      if (!this.showPopper) return;
       const reference = this.referenceElm;
       const popper = this.popper;
       if (!reference || !popper) return;

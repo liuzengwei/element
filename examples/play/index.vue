@@ -3,6 +3,25 @@
     <h2>Trigger 触发器测试</h2>
     
     <div style="margin: 20px 0;">
+      <h3>受控模式测试 (v-model)</h3>
+      <p>当前 controlledVisible: {{ controlledVisible }}</p>
+      <el-button @click="controlledVisible = !controlledVisible" style="margin-bottom: 10px;">
+        {{ controlledVisible ? '关闭' : '打开' }} Trigger
+      </el-button>
+      <br>
+      <el-trigger v-model="controlledVisible" trigger="click" :show-arrow="true" @popup-visible-change="onVisibleChange">
+        <el-button type="primary">受控 Trigger</el-button>
+        <template slot="content">
+          <div style="padding: 12px;">
+            <p>这是受控模式 (值: {{ controlledVisible }})</p>
+            <p>通过外部按钮控制显示/隐藏</p>
+            <el-button size="small" @click="controlledVisible = false">内部关闭按钮</el-button>
+          </div>
+        </template>
+      </el-trigger>
+    </div>
+
+    <div style="margin: 20px 0;">
       <h3>基础用法 - Hover</h3>
       <el-trigger trigger="hover" :show-arrow="true">
         <el-button>Hover 触发</el-button>
@@ -114,8 +133,14 @@
 export default {
   data() {
     return {
+      controlledVisible: false,
       visible: false
     };
+  },
+  methods: {
+    onVisibleChange(val) {
+      console.log('popup-visible-change:', val);
+    }
   }
 };
 </script>

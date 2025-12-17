@@ -27,6 +27,10 @@
 <script>
 import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
+import Vue from 'vue';
+
+const PopperJS = Vue.prototype.$isServer ? function() {} : require('element-ui/src/utils/popper');
+const stop = e => e.stopPropagation();
 
 export default {
   name: 'ElTrigger',
@@ -153,7 +157,7 @@ export default {
       default: true
     },
     // 弹出框容器
-    popupContainer: [String, HTMLElement],
+    popupContainer: [String, Object],
     // 滚动时更新位置
     updateAtScroll: {
       type: Boolean,
@@ -375,9 +379,6 @@ export default {
       options.offset = this.internalOffset;
       options.arrowOffset = this.arrowOffset;
 
-      const PopperJS = require('element-ui/src/utils/popper');
-      const PopupManager = require('element-ui/src/utils/popup').PopupManager;
-
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
@@ -387,8 +388,14 @@ export default {
       if (typeof options.onUpdate === 'function') {
         this.popperJS.onUpdate(options.onUpdate);
       }
-      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-      this.popperElm.addEventListener('click', e => e.stopPropagation());
+      
+      // 动态导入 PopupManager 避免 SSR 问题
+      if (!Vue.prototype.$isServer) {
+        const { PopupManager } = require('element-ui/src/utils/popup');
+        this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      }
+      
+      this.popperElm.addEventListener('click', stop);
     },
 
     show() {

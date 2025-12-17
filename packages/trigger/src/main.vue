@@ -388,13 +388,13 @@ export default {
       if (typeof options.onUpdate === 'function') {
         this.popperJS.onUpdate(options.onUpdate);
       }
-      
+
       // 动态导入 PopupManager 避免 SSR 问题
       if (!Vue.prototype.$isServer) {
         const { PopupManager } = require('element-ui/src/utils/popup');
         this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
       }
-      
+
       this.popperElm.addEventListener('click', stop);
     },
 

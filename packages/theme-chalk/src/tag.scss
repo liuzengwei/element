@@ -154,6 +154,10 @@
     border-width: $--border-width-base;
   }
 
+  @include when(border) {
+    border-width: $--border-width-base;
+  }
+
   @include m(medium) {
     height: 28px;
     line-height: 26px;

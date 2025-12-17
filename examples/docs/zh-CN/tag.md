@@ -191,44 +191,44 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ```html
 <div>
   <h4>基础状态标签</h4>
-  <el-tag status="success"></el-tag>
-  <el-tag status="warning"></el-tag>
-  <el-tag status="danger"></el-tag>
+  <el-tag status="success">tag</el-tag>
+  <el-tag status="pending">tag</el-tag>
+  <el-tag status="error">tag</el-tag>
 </div>
 
 <div style="margin-top: 20px;">
   <h4>自定义文本的状态标签</h4>
   <el-tag status="success" round size="small">订单已完成</el-tag>
-  <el-tag status="warning" round size="small">等待审核</el-tag>
-  <el-tag status="danger" round size="small">订单已取消</el-tag>
+  <el-tag status="pending" round size="small">等待审核</el-tag>
+  <el-tag status="error" round size="small">订单已取消</el-tag>
 </div>
 
 <div style="margin-top: 20px;">
   <h4>不同尺寸</h4>
-  <el-tag status="success" size="medium"></el-tag>
-  <el-tag status="warning" size="mini"></el-tag>
-  <el-tag status="danger" size="mini"></el-tag>
+  <el-tag status="success" size="medium">tag</el-tag>
+  <el-tag status="pending" size="mini">tag</el-tag>
+  <el-tag status="pending" size="mini">tag</el-tag>
 </div>
 
 <div style="margin-top: 20px;">
   <h4>不同主题效果</h4>
   <div style="margin-bottom: 10px;">
     <span>Light: </span>
-    <el-tag status="success" effect="light"></el-tag>
-    <el-tag status="warning" effect="light"></el-tag>
-    <el-tag status="danger" effect="light"></el-tag>
+    <el-tag status="success" effect="light">tag</el-tag>
+    <el-tag status="pending" effect="light">tag</el-tag>
+    <el-tag status="error" effect="light">tag</el-tag>
   </div>
   <div style="margin-bottom: 10px;">
     <span>Dark: </span>
-    <el-tag status="success" effect="dark"></el-tag>
-    <el-tag status="warning" effect="dark"></el-tag>
-    <el-tag status="danger" effect="dark"></el-tag>
+    <el-tag status="success" effect="dark">tag</el-tag>
+    <el-tag status="pending" effect="dark">tag</el-tag>
+    <el-tag status="error" effect="dark">tag</el-tag>
   </div>
   <div>
     <span>Plain: </span>
-    <el-tag status="success" effect="plain"></el-tag>
-    <el-tag status="warning" effect="plain"></el-tag>
-    <el-tag status="danger" effect="plain"></el-tag>
+    <el-tag status="success" effect="plain">tag</el-tag>
+    <el-tag status="pending" effect="plain">tag</el-tag>
+    <el-tag status="error" effect="plain">tag</el-tag>
   </div>
 </div>
 ```
@@ -274,6 +274,40 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ```
 :::
 
+### 边框样式
+
+:::demo Plain 模式默认显示边框，其他模式可通过 `border` 属性控制是否显示边框。
+
+```html
+<div>
+  <h4>Plain 模式（默认有边框）</h4>
+  <el-tag effect="plain">标签一</el-tag>
+  <el-tag type="success" effect="plain">标签二</el-tag>
+  <el-tag type="info" effect="plain">标签三</el-tag>
+  <el-tag type="warning" effect="plain">标签四</el-tag>
+  <el-tag type="danger" effect="plain">标签五</el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>Light 模式（添加 border 属性后显示边框）</h4>
+  <el-tag border>标签一</el-tag>
+  <el-tag type="success" border>标签二</el-tag>
+  <el-tag type="info" border>标签三</el-tag>
+  <el-tag type="warning" border>标签四</el-tag>
+  <el-tag type="danger" border>标签五</el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>Dark 模式（添加 border 属性后显示边框）</h4>
+  <el-tag effect="dark" border>标签一</el-tag>
+  <el-tag type="success" effect="dark" border>标签二</el-tag>
+  <el-tag type="info" effect="dark" border>标签三</el-tag>
+  <el-tag type="warning" effect="dark" border>标签四</el-tag>
+  <el-tag type="danger" effect="dark" border>标签五</el-tag>
+</div>
+```
+:::
+
 ### 圆形标签
 
 :::demo 通过设置 `round` 属性可以将标签设置为圆形样式。
@@ -305,7 +339,8 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | effect | 主题 | string | dark / light / plain | light |
 | round | 是否为圆形 | boolean | — | false |
 | icon | 图标类名 | string | — | — |
-| status | 内置状态类型 | string | success / pending / cancel | — |
+| status | 内置状态类型 | string | success / pending / error | — |
+| border | 是否显示边框（plain 模式默认显示，其他模式可通过此属性控制） | boolean | — | false |
 
 
 ### Slots

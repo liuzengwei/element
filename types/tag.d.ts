@@ -25,4 +25,7 @@ export declare class ElTag extends ElementUIComponent {
 
   /** Tag theme */
   effect: TagTheme
+
+  /** Whether Tag has a border */
+  border: boolean
 }

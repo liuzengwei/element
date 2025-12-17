@@ -12,6 +12,7 @@
       icon: String, // 图标类名
       round: Boolean,
       status: String, // 状态类型：success/pending/cancel
+      border: Boolean, // 是否显示边框
       effect: {
         type: String,
         default: 'light',
@@ -27,17 +28,14 @@
           success: {
             type: 'success',
             icon: 'el-icon-check',
-            text: '已处理'
           },
-          warning: {
+          pending: {
             type: 'warning',
             icon: 'el-icon-point',
-            text: '待处理'
           },
-          danger: {
+          error: {
             type: 'danger',
             icon: 'el-icon-status-error',
-            text: '已取消'
           }
         }
       };
@@ -72,18 +70,19 @@
         if (this.$slots.default) {
           return null; // 如果有插槽内容，优先使用插槽
         }
-        return this.currentStatus ? this.currentStatus.text : this.text;
+        return this.text;
       }
     },
     render(h) {
-      const { finalType, tagSize, hit, effect, round, finalIcon } = this;
+      const { finalType, tagSize, hit, effect, round, finalIcon, border } = this;
       const classes = [
         'el-tag',
         finalType ? `el-tag--${finalType}` : '',
         tagSize ? `el-tag--${tagSize}` : '',
         effect ? `el-tag--${effect}` : '',
         round && 'is-round',
-        hit && 'is-hit'
+        hit && 'is-hit',
+        border && 'is-border'
       ];
   
       // 构建图标元素

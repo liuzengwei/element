@@ -355,6 +355,14 @@
                 "version": "2.15.5-xn.37",
                 "type": "new"
               }
+            },
+            {
+              "path": "/area-picker",
+              "title": "AreaPicker 城市选择器",
+              "badge": {
+                "version": "2.15.5-xn.38",
+                "type": "new"
+              }
             }
           ]
         }
@@ -689,6 +697,10 @@
             {
               "path": "/selectable-tag",
               "title": "SelectableTag"
+            },
+            {
+              "path": "/area-picker",
+              "title": "AreaPicker"
             }
           ]
         }
@@ -1023,6 +1035,10 @@
             {
               "path": "/selectable-tag",
               "title": "SelectableTag"
+            },
+            {
+              "path": "/area-picker",
+              "title": "AreaPicker"
             }
           ]
         }
@@ -1357,6 +1373,10 @@
             {
               "path": "/selectable-tag",
               "title": "SelectableTag"
+            },
+            {
+              "path": "/area-picker",
+              "title": "AreaPicker"
             }
           ]
         }

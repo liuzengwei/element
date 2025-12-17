@@ -1,5 +1,79 @@
 <template>
   <div style="margin: 20px">
+    <h2>城市选择器测试</h2>
+    
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>基础用法</h3>
+          <el-area-picker v-model="value1" placeholder="请选择省/市/区"></el-area-picker>
+          <p>选中的值: {{ value1 }}</p>
+        </div>
+      </el-col>
+      
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>只选择省份</h3>
+          <el-area-picker v-model="value2" :level="1" placeholder="请选择省份"></el-area-picker>
+          <p>选中的值: {{ value2 }}</p>
+        </div>
+      </el-col>
+    </el-row>
+    
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>选择省市</h3>
+          <el-area-picker v-model="value3" :level="2" placeholder="请选择省市"></el-area-picker>
+          <p>选中的值: {{ value3 }}</p>
+        </div>
+      </el-col>
+      
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>可选择任意级别</h3>
+          <el-area-picker v-model="value4" :props="{ checkStrictly: true }" placeholder="请选择"></el-area-picker>
+          <p>选中的值: {{ value4 }}</p>
+        </div>
+      </el-col>
+    </el-row>
+    
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>多选</h3>
+          <el-area-picker v-model="value5" :props="{ multiple: true, checkStrictly: true  }" placeholder="请选择多个城市"></el-area-picker>
+          <p>选中的值: {{ value5 }}</p>
+        </div>
+      </el-col>
+      
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>可搜索</h3>
+          <el-area-picker v-model="value6" filterable clearable placeholder="可搜索"></el-area-picker>
+          <p>选中的值: {{ value6 }}</p>
+        </div>
+      </el-col>
+    </el-row>
+    
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="demo-block">
+          <h3>自定义字段名</h3>
+          <el-area-picker 
+            v-model="value7" 
+            :value-key="'id'"
+            :label-key="'name'"
+            :children-key="'items'"
+            placeholder="自定义字段名">
+          </el-area-picker>
+          <p>选中的值: {{ value7 }}</p>
+        </div>
+      </el-col>
+    </el-row>
+    
+    <el-divider></el-divider>
+    
     <el-button type="primary" size="default" @click="onOpen">打开弹窗</el-button>
     <el-cascader :options="options" v-model="form.xxx" clearable filterable :show-all-levels="false"
       :props="{ expandTrigger: 'hover', multiple: true, checkStrictly: true }" @change="">
@@ -1026,6 +1100,14 @@ export default {
       selectableSmall: [],
       selectableMedium: [],
       selectableIcon: [],
+      // 城市选择器测试数据
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: '',
+      value5: [],
+      value6: '',
+      value7: '',
     };
   },
   methods: {
@@ -1079,3 +1161,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.demo-block {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+}
+
+.demo-block h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.demo-block p {
+  margin-top: 10px;
+  color: #666;
+}
+</style>

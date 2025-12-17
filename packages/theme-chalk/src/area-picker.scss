@@ -1,0 +1,14 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(area-picker) {
+  // 继承cascader的样式，可以在这里添加特定样式
+  .el-cascader {
+    width: 100%;
+  }
+  
+  // 可以在这里添加自定义样式
+  .el-cascader__dropdown {
+    max-height: 300px;
+  }
+}

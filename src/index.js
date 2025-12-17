@@ -94,6 +94,7 @@ import Affix from '../packages/affix/index.js';
 import AreaLoading from '../packages/area-loading/index.js';
 import SelectableTag from '../packages/selectable-tag/index.js';
 import SelectableTagGroup from '../packages/selectable-tag-group/index.js';
+import AreaPicker from '../packages/area-picker/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -187,6 +188,7 @@ const components = [
   AreaLoading,
   SelectableTag,
   SelectableTagGroup,
+  AreaPicker,
   CollapseTransition
 ];
 
@@ -320,5 +322,6 @@ export default {
   Affix,
   AreaLoading,
   SelectableTag,
-  SelectableTagGroup
+  SelectableTagGroup,
+  AreaPicker
 };

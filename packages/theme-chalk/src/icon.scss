@@ -9,9 +9,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'element-icons-extend';
+  src: url('#{$--font-path}/iconfont.woff') format('woff'),
+       url('#{$--font-path}/iconfont.ttf') format('truetype');
+  font-weight: normal;
+  font-display: $--font-display;
+  font-style: normal;
+}
+
 [class^="el-icon-"], [class*=" el-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'element-icons' !important;
+  font-family: 'element-icons', 'element-icons-extend' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -1006,6 +1015,10 @@
   content: "\e6db";
 }
 
+.el-icon-status-error:before {
+  content: "\e6db";
+}
+
 .el-icon-check:before {
   content: "\e6da";
 }
@@ -1164,4 +1177,7 @@
   100% {
     transform: rotateZ(360deg);
   }
+}
+.el-icon-point:before {
+  content: "\e654";
 }

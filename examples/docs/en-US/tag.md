@@ -185,6 +185,65 @@ Tag provide three different themes: `dark`、`light` and `plain`
 ```
 :::
 
+### Tag with Icon
+
+:::demo You can set icon class name using the `icon` attribute, or customize the icon using the `icon` slot.
+
+```html
+<div>
+  <h4>Using icon attribute</h4>
+  <el-tag icon="el-icon-check">Completed</el-tag>
+  <el-tag type="success" icon="el-icon-star-off">Favorite</el-tag>
+  <el-tag type="info" icon="el-icon-message">Message</el-tag>
+  <el-tag type="warning" icon="el-icon-warning">Warning</el-tag>
+  <el-tag type="danger" icon="el-icon-delete">Delete</el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>Using icon slot</h4>
+  <el-tag type="primary">
+    <template slot="icon">
+      <i class="el-icon-check"></i>
+    </template>
+    Custom Icon
+  </el-tag>
+  
+  <el-tag type="success" round closable>
+    <template slot="icon">
+      <i class="el-icon-star-off"></i>
+    </template>
+    Round with Icon
+  </el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>Different sizes with icon</h4>
+  <el-tag icon="el-icon-check" size="medium">Medium</el-tag>
+  <el-tag icon="el-icon-check" size="small">Small</el-tag>
+  <el-tag icon="el-icon-check" size="mini">Mini</el-tag>
+</div>
+```
+:::
+
+### Round Tag
+
+:::demo Use the `round` attribute to create round-shaped tags.
+
+```html
+<el-tag type="primary" round>Primary</el-tag>
+<el-tag type="success" round>Success</el-tag>
+<el-tag type="info" round>Info</el-tag>
+<el-tag type="warning" round>Warning</el-tag>
+<el-tag type="danger" round>Danger</el-tag>
+
+<div style="margin-top: 20px;">
+  <el-tag type="success" size="medium" round>Medium</el-tag>
+  <el-tag type="warning" size="small" round>Small</el-tag>
+  <el-tag type="info" size="mini" round>Mini</el-tag>
+</div>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -195,6 +254,15 @@ Tag provide three different themes: `dark`、`light` and `plain`
 | color | background color of the Tag | string | — | — |
 | size | tag size | string | medium / small / mini | — |
 | effect | component theme | string | dark / light / plain | light |
+| round | whether Tag is round shaped | boolean | — | false |
+| icon | icon class name | string | — | — |
+
+
+### Slots
+| name | Description |
+|------|--------|
+| — | customize default content |
+| icon | customize icon content |
 
 
 ### Events

@@ -184,6 +184,115 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ```
 :::
 
+### 状态标签
+
+:::demo 通过 `status` 属性可以快速使用内置的状态标签，包括 `success`（已处理）、`warning`（待处理）、`danger`（已取消）三种状态。
+
+```html
+<div>
+  <h4>基础状态标签</h4>
+  <el-tag status="success"></el-tag>
+  <el-tag status="warning"></el-tag>
+  <el-tag status="danger"></el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>自定义文本的状态标签</h4>
+  <el-tag status="success" round size="small">订单已完成</el-tag>
+  <el-tag status="warning" round size="small">等待审核</el-tag>
+  <el-tag status="danger" round size="small">订单已取消</el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>不同尺寸</h4>
+  <el-tag status="success" size="medium"></el-tag>
+  <el-tag status="warning" size="mini"></el-tag>
+  <el-tag status="danger" size="mini"></el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>不同主题效果</h4>
+  <div style="margin-bottom: 10px;">
+    <span>Light: </span>
+    <el-tag status="success" effect="light"></el-tag>
+    <el-tag status="warning" effect="light"></el-tag>
+    <el-tag status="danger" effect="light"></el-tag>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <span>Dark: </span>
+    <el-tag status="success" effect="dark"></el-tag>
+    <el-tag status="warning" effect="dark"></el-tag>
+    <el-tag status="danger" effect="dark"></el-tag>
+  </div>
+  <div>
+    <span>Plain: </span>
+    <el-tag status="success" effect="plain"></el-tag>
+    <el-tag status="warning" effect="plain"></el-tag>
+    <el-tag status="danger" effect="plain"></el-tag>
+  </div>
+</div>
+```
+:::
+
+### 带图标的标签
+
+:::demo 可以通过 `icon` 属性设置图标类名，或使用 `icon` 插槽自定义图标内容。
+
+```html
+<div>
+  <h4>使用 icon 属性</h4>
+  <el-tag icon="el-icon-check" round size="small">已完成</el-tag>
+  <el-tag type="success" icon="el-icon-check" round size="small">收藏</el-tag>
+  <el-tag type="info" icon="el-icon-message" round size="small">消息</el-tag>
+  <el-tag type="warning" icon="el-icon-warning" round size="small">警告</el-tag>
+  <el-tag type="danger" icon="el-icon-close" round size="small">删除</el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>使用 icon 插槽</h4>
+  <el-tag type="primary">
+    <template slot="icon">
+      <i class="el-icon-check"></i>
+    </template>
+    自定义图标
+  </el-tag>
+  
+  <el-tag type="success" round closable>
+    <template slot="icon">
+      <i class="el-icon-star-off"></i>
+    </template>
+    圆形带图标
+  </el-tag>
+</div>
+
+<div style="margin-top: 20px;">
+  <h4>不同尺寸的图标标签</h4>
+  <el-tag icon="el-icon-check" size="medium">中等</el-tag>
+  <el-tag icon="el-icon-check" size="small">小型</el-tag>
+  <el-tag icon="el-icon-check" size="mini">迷你</el-tag>
+</div>
+```
+:::
+
+### 圆形标签
+
+:::demo 通过设置 `round` 属性可以将标签设置为圆形样式。
+
+```html
+<el-tag type="primary" round>主要标签</el-tag>
+<el-tag type="success" round>成功标签</el-tag>
+<el-tag type="info" round>信息标签</el-tag>
+<el-tag type="warning" round>警告标签</el-tag>
+<el-tag type="danger" round>危险标签</el-tag>
+
+<div style="margin-top: 20px;">
+  <el-tag type="success" size="medium" round>中等标签</el-tag>
+  <el-tag type="warning" size="small" round>小型标签</el-tag>
+  <el-tag type="info" size="mini" round>迷你标签</el-tag>
+</div>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -194,6 +303,16 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | color | 背景色 | string | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
 | effect | 主题 | string | dark / light / plain | light |
+| round | 是否为圆形 | boolean | — | false |
+| icon | 图标类名 | string | — | — |
+| status | 内置状态类型 | string | success / pending / cancel | — |
+
+
+### Slots
+| name | 说明 |
+|------|--------|
+| — | 自定义默认内容 |
+| icon | 自定义图标 |
 
 
 ### Events

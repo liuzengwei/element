@@ -168,7 +168,7 @@ export default {
 
       // 获取选中节点的路径
       const pathNodes = nodes[0].pathNodes || [];
-      
+
       // 构建城市信息数组
       const city = pathNodes.map(node => {
         // 尝试多种方式获取标签
@@ -186,7 +186,7 @@ export default {
         } else if (node.data && node.data.label) {
           label = node.data.label;
         }
-        
+
         return {
           code: node[this.valueKey] || node.value || node.code || '',
           label: label
@@ -248,29 +248,29 @@ export default {
 
       // 清理地址字符串，移除空格
       const cleanAddress = addressStr.trim();
-      
+
       // 尝试匹配省市区
       const result = this.parseAddress(cleanAddress);
-      
+
       if (result && result.codes.length > 0) {
         // 根据 level 确定应该设置的代码
         const targetCodes = result.codes.slice(0, this.level);
         const lastCode = targetCodes[targetCodes.length - 1];
-        
+
         // 设置选中值
         this.selectedValue = lastCode;
         this.$emit('input', lastCode);
-        
+
         // 触发 change 事件
         this.$nextTick(() => {
           const cityInfo = this.getCityInfo(lastCode);
           this.$emit('change', lastCode, this.getCheckedNodes());
           this.$emit('on-city', cityInfo);
         });
-        
+
         return result;
       }
-      
+
       console.warn('str2Code: 未能解析出有效的城市信息');
       return null;
     },
@@ -294,18 +294,18 @@ export default {
           const option = options[i];
           const name = option[this.labelKey] || option.text || option.label || '';
           const code = option[this.valueKey] || option.value || option.code || '';
-          
+
           if (!name) continue;
-          
+
           // 创建多个匹配模式
           const matchPatterns = [
             name,
-            name.replace(/(市|省|自治区|特别行政区|壮族|回族|维吾尔|苗族|彝族|土家族|藏族|区|县|旗)$/g, ''),
+            name.replace(/(市|省|自治区|特别行政区|壮族|回族|维吾尔|苗族|彝族|土家族|藏族|区|县|旗)$/g, '')
           ];
-          
+
           let matchIndex = -1;
           let matchedPattern = '';
-          
+
           // 尝试匹配
           for (const pattern of matchPatterns) {
             if (pattern && pattern.length >= 2) {
@@ -317,25 +317,25 @@ export default {
               }
             }
           }
-          
+
           if (matchIndex !== -1) {
             const currentCodes = [...parentCodes, code];
             const currentNames = [...parentNames, name];
             const depth = currentCodes.length;
-            
+
             // 保存当前匹配
             const currentMatch = {
               codes: currentCodes,
               names: currentNames,
               depth: depth
             };
-            
+
             // 如果当前匹配深度更深，更新最佳匹配
             if (depth > bestMatchDepth) {
               bestMatch = currentMatch;
               bestMatchDepth = depth;
             }
-            
+
             // 继续在子级中搜索
             const children = option[this.childrenKey] || option.children || [];
             if (children && children.length > 0 && level < 3) {
@@ -344,7 +344,7 @@ export default {
               if (remainingText.trim()) {
                 searchAllPaths(remainingText, children, level + 1, currentCodes, currentNames);
               }
-              
+
               // 重要：也在原始文本中搜索子级，支持跳过中间层级
               // 例如："天津市河东区" 可以跳过中间的"天津市"（市级）
               searchAllPaths(text, children, level + 1, currentCodes, currentNames);
@@ -355,18 +355,18 @@ export default {
 
       // 从省级开始搜索
       searchAllPaths(addressStr, this.areaOptions, 1);
-      
+
       if (bestMatch) {
         // 根据匹配的层级填充结果
         if (bestMatch.names.length >= 1) result.province = bestMatch.names[0];
         if (bestMatch.names.length >= 2) result.city = bestMatch.names[1];
         if (bestMatch.names.length >= 3) result.district = bestMatch.names[2];
-        
+
         result.codes = bestMatch.codes;
         result.names = bestMatch.names;
         return result;
       }
-      
+
       return null;
     }
   }

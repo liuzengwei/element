@@ -285,6 +285,14 @@
               "title": "Popconfirm 气泡确认框"
             },
             {
+              "path": "/trigger",
+              "title": "Trigger 触发器",
+              "badge": {
+                "version": "2.15.5-xn.41",
+                "type": "new"
+              }
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },
@@ -639,6 +647,10 @@
               "title": "Popconfirm"
             },
             {
+              "path": "/trigger",
+              "title": "Trigger"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -977,6 +989,10 @@
               "title": "Popconfirm"
             },
             {
+              "path": "/trigger",
+              "title": "Trigger"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -1313,6 +1329,10 @@
             {
               "path": "/popconfirm",
               "title": "Popconfirm"
+            },
+            {
+              "path": "/trigger",
+              "title": "Trigger"
             },
             {
               "path": "/card",

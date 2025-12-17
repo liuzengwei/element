@@ -1,0 +1,143 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(trigger) {
+  display: inline-block;
+  position: relative;
+
+  @include e(reference) {
+    display: inline-block;
+  }
+
+  @include e(popup) {
+    position: absolute;
+    z-index: 2000;
+    background: $--color-white;
+    border: 1px solid $--border-color-lighter;
+    border-radius: $--border-radius-base;
+    box-shadow: $--box-shadow-light;
+    box-sizing: border-box;
+    word-wrap: break-word;
+
+    &.fade-in-linear-enter-active,
+    &.fade-in-linear-leave-active {
+      transition: opacity 200ms linear;
+    }
+
+    &.fade-in-linear-enter,
+    &.fade-in-linear-leave-active {
+      opacity: 0;
+    }
+
+    &.el-zoom-in-top-enter-active,
+    &.el-zoom-in-top-leave-active {
+      opacity: 1;
+      transform: scaleY(1);
+      transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform-origin: center bottom;
+    }
+
+    &.el-zoom-in-top-enter,
+    &.el-zoom-in-top-leave-active {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    &.el-zoom-in-bottom-enter-active,
+    &.el-zoom-in-bottom-leave-active {
+      opacity: 1;
+      transform: scaleY(1);
+      transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform-origin: center top;
+    }
+
+    &.el-zoom-in-bottom-enter,
+    &.el-zoom-in-bottom-leave-active {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 6px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 6px;
+    }
+  }
+
+  &[x-placement^="top"] {
+    .el-trigger__arrow {
+      bottom: -6px;
+      border-top-color: $--border-color-lighter;
+      border-bottom-width: 0;
+
+      &::after {
+        bottom: 1px;
+        margin-left: -6px;
+        border-top-color: $--color-white;
+        border-bottom-width: 0;
+      }
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    .el-trigger__arrow {
+      top: -6px;
+      border-top-width: 0;
+      border-bottom-color: $--border-color-lighter;
+
+      &::after {
+        top: 1px;
+        margin-left: -6px;
+        border-top-width: 0;
+        border-bottom-color: $--color-white;
+      }
+    }
+  }
+
+  &[x-placement^="left"] {
+    .el-trigger__arrow {
+      right: -6px;
+      border-right-width: 0;
+      border-left-color: $--border-color-lighter;
+
+      &::after {
+        right: 1px;
+        bottom: -6px;
+        margin-left: -6px;
+        border-right-width: 0;
+        border-left-color: $--color-white;
+      }
+    }
+  }
+
+  &[x-placement^="right"] {
+    .el-trigger__arrow {
+      left: -6px;
+      border-right-color: $--border-color-lighter;
+      border-left-width: 0;
+
+      &::after {
+        bottom: -6px;
+        left: 1px;
+        border-right-color: $--color-white;
+        border-left-width: 0;
+      }
+    }
+  }
+}
+

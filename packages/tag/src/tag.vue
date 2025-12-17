@@ -27,15 +27,15 @@
         statusConfig: {
           success: {
             type: 'success',
-            icon: 'el-icon-check',
+            icon: 'el-icon-check'
           },
           pending: {
             type: 'warning',
-            icon: 'el-icon-point',
+            icon: 'el-icon-point'
           },
           error: {
             type: 'danger',
-            icon: 'el-icon-status-error',
+            icon: 'el-icon-status-error'
           }
         }
       };

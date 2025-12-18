@@ -1,0 +1,33 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(lazy-load) {
+  display: block;
+
+  @include e(placeholder) {
+    display: block;
+    min-height: 100px;
+  }
+
+  @include e(skeleton) {
+    background: linear-gradient(
+      90deg,
+      $--color-info-lighter 25%,
+      lighten($--color-info-lighter, 5%) 37%,
+      $--color-info-lighter 63%
+    );
+    background-size: 400% 100%;
+    animation: el-skeleton-loading 1.4s ease infinite;
+    min-height: 100px;
+    border-radius: $--border-radius-base;
+  }
+}
+
+@keyframes el-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

@@ -371,6 +371,14 @@
                 "version": "2.15.5-xn.38",
                 "type": "new"
               }
+            },
+            {
+              "path": "/lazy-load",
+              "title": "LazyLoad 懒加载",
+              "badge": {
+                "version": "2.15.5-xn.42",
+                "type": "new"
+              }
             }
           ]
         }
@@ -713,6 +721,10 @@
             {
               "path": "/area-picker",
               "title": "AreaPicker"
+            },
+            {
+              "path": "/lazy-load",
+              "title": "LazyLoad"
             }
           ]
         }
@@ -1055,6 +1067,10 @@
             {
               "path": "/area-picker",
               "title": "AreaPicker"
+            },
+            {
+              "path": "/lazy-load",
+              "title": "LazyLoad"
             }
           ]
         }
@@ -1397,6 +1413,10 @@
             {
               "path": "/area-picker",
               "title": "AreaPicker"
+            },
+            {
+              "path": "/lazy-load",
+              "title": "LazyLoad"
             }
           ]
         }

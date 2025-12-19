@@ -76,7 +76,7 @@
   margin: 5px 0;
   background-color: $--color-white;
   border: 1px solid $--border-color-lighter;
-  border-radius: $--border-radius-base;
+  border-radius: $--border-radius-zero;
   box-shadow: $--dropdown-menu-box-shadow;
 
   @include e(item) {

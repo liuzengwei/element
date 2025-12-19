@@ -403,14 +403,14 @@ $--message-danger-font-color: $--color-danger !default;
 $--notification-width: 330px !default;
 /// padding||Spacing|3
 $--notification-padding: 14px 26px 14px 13px !default;
-$--notification-radius: 8px !default;
+$--notification-radius: $--border-radius-zero !default;
 $--notification-shadow: $--box-shadow-light !default;
 /// color||Color|0
 $--notification-border-color: $--border-color-lighter !default;
 $--notification-icon-size: 24px !default;
 $--notification-close-font-size: $--message-close-size !default;
 $--notification-group-margin-left: 13px !default;
-$--notification-group-margin-right: 8px !default;
+$--notification-group-margin-right: $--border-radius-zero !default;
 /// fontSize||Font|1
 $--notification-content-font-size: $--font-size-base !default;
 /// color||Color|0

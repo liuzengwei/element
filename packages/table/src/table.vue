@@ -454,6 +454,32 @@
         this.store.clearSelection();
       },
 
+      getSelectionRows() {
+        return this.store.states.selection;
+      },
+
+      getSelectionNodes() {
+        const { selection, treeData, rowKey } = this.store.states;
+  
+        // 如果不是树形表格，返回简单的行数据
+        if (!rowKey || !Object.keys(treeData).length) {
+          return selection.map(row => ({ row }));
+        }
+  
+        // 树形表格，返回完整节点信息
+        const getRowIdentity = require('./util').getRowIdentity;
+  
+        return selection.map(row => {
+          const rowId = getRowIdentity(row, rowKey);
+          const nodeData = treeData[rowId] || {};
+  
+          return {
+            row,
+            ...nodeData
+          };
+        });
+      },
+
       clearFilter(columnKeys) {
         this.store.clearFilter(columnKeys);
       },

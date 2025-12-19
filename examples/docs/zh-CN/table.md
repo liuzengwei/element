@@ -921,6 +921,100 @@
 ```
 :::
 
+### 获取选中数据 <version-badge version="2.15.5-xn.43" type="feature"/>
+
+可以通过 `getSelectionRows` 和 `getSelectionNodes` 方法获取当前选中的数据。
+
+:::demo `getSelectionRows()` 返回选中的行数据数组；`getSelectionNodes()` 返回选中的节点信息，对于树形表格会包含节点的层级、展开状态等信息。
+```html
+<template>
+  <div>
+    <el-table
+      ref="multipleTable"
+      :data="tableData"
+      tooltip-effect="dark"
+      style="width: 100%"
+      @selection-change="handleSelectionChange">
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
+      <el-table-column
+        label="日期"
+        width="120">
+        <template slot-scope="scope">{{ scope.row.date }}</template>
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址"
+        show-overflow-tooltip>
+      </el-table-column>
+    </el-table>
+    <div style="margin-top: 20px">
+      <el-button @click="getSelectionRows" type="primary">获取选中行数据</el-button>
+      <el-button @click="getSelectionNodes" type="success">获取选中节点信息</el-button>
+      <el-button @click="clearSelection">清空选择</el-button>
+    </div>
+    <div v-if="selectionInfo" style="margin-top: 20px">
+      <el-alert :title="selectionInfo" type="info" :closable="false"></el-alert>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+        selectionInfo: ''
+      }
+    },
+
+    methods: {
+      handleSelectionChange(val) {
+        console.log('当前选中:', val);
+      },
+      getSelectionRows() {
+        const rows = this.$refs.multipleTable.getSelectionRows();
+        this.selectionInfo = `选中了 ${rows.length} 行数据: ${JSON.stringify(rows)}`;
+        console.log('选中的行数据:', rows);
+      },
+      getSelectionNodes() {
+        const nodes = this.$refs.multipleTable.getSelectionNodes();
+        this.selectionInfo = `选中了 ${nodes.length} 个节点: ${JSON.stringify(nodes)}`;
+        console.log('选中的节点信息:', nodes);
+      },
+      clearSelection() {
+        this.$refs.multipleTable.clearSelection();
+        this.selectionInfo = '';
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 排序
 
 对表格进行排序，可快速查找或对比数据。
@@ -1411,6 +1505,123 @@
         }, 1000)
       }
     },
+  }
+</script>
+```
+:::
+
+### 树形表格的选中数据 <version-badge version="2.15.5-xn.43" type="feature"/>
+
+对于树形表格，可以通过 `getSelectionNodes` 方法获取选中节点的详细信息，包括节点层级、展开状态等。
+
+:::demo 树形表格结合多选功能，使用 `getSelectionNodes()` 可以获取选中节点的完整信息，包括 `level`（层级）、`expanded`（展开状态）、`children`（子节点列表）等。
+```html
+<template>
+  <div>
+    <el-table
+      ref="treeTable"
+      :data="tableData"
+      style="width: 100%"
+      row-key="id"
+      border
+      default-expand-all
+      :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      @selection-change="handleSelectionChange">
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
+      <el-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址">
+      </el-table-column>
+    </el-table>
+    <div style="margin-top: 20px">
+      <el-button @click="getSelectionRows" type="primary">获取选中行数据</el-button>
+      <el-button @click="getSelectionNodes" type="success">获取选中节点信息</el-button>
+      <el-button @click="clearSelection">清空选择</el-button>
+    </div>
+    <div v-if="selectionInfo" style="margin-top: 20px">
+      <el-alert :title="selectionInfo" type="info" :closable="false">
+        <pre style="margin-top: 10px; white-space: pre-wrap;">{{ selectionDetail }}</pre>
+      </el-alert>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          children: [{
+            id: 11,
+            date: '2016-05-01',
+            name: '王小虎-子节点1',
+            address: '上海市普陀区金沙江路 1518 弄-1'
+          }, {
+            id: 12,
+            date: '2016-05-01',
+            name: '王小虎-子节点2',
+            address: '上海市普陀区金沙江路 1518 弄-2'
+          }]
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          children: [{
+            id: 31,
+            date: '2016-05-03',
+            name: '王小虎-子节点3',
+            address: '上海市普陀区金沙江路 1519 弄-1'
+          }]
+        }],
+        selectionInfo: '',
+        selectionDetail: ''
+      }
+    },
+    methods: {
+      handleSelectionChange(val) {
+        console.log('当前选中:', val);
+      },
+      getSelectionRows() {
+        const rows = this.$refs.treeTable.getSelectionRows();
+        this.selectionInfo = `选中了 ${rows.length} 行数据`;
+        this.selectionDetail = JSON.stringify(rows, null, 2);
+        console.log('选中的行数据:', rows);
+      },
+      getSelectionNodes() {
+        const nodes = this.$refs.treeTable.getSelectionNodes();
+        this.selectionInfo = `选中了 ${nodes.length} 个节点（包含层级信息）`;
+        this.selectionDetail = JSON.stringify(nodes, null, 2);
+        console.log('选中的节点信息:', nodes);
+      },
+      clearSelection() {
+        this.$refs.treeTable.clearSelection();
+        this.selectionInfo = '';
+        this.selectionDetail = '';
+      }
+    }
   }
 </script>
 ```
@@ -1920,6 +2131,8 @@
 | clearFilter | 不传入参数时用于清空所有过滤条件，数据会恢复成未过滤的状态，也可传入由columnKey组成的数组以清除指定列的过滤条件 | columnKey |
 | doLayout | 对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法 | — |
 | sort | 手动对 Table 进行排序。参数`prop`属性指定排序列，`order`指定排序顺序。 | prop: string, order: string |
+| getSelectionRows <version-badge version="2.15.5-xn.43" type="feature"/> | 用于多选表格，返回当前选中的行数据数组 | — |
+| getSelectionNodes <version-badge version="2.15.5-xn.43" type="feature"/> | 用于多选表格，返回当前选中的节点信息。普通表格返回 `{ row }` 格式，树形表格返回 `{ row, level, expanded, children, lazy, loaded }` 格式 | — |
 
 ### Table Slot
 | name | 说明 |

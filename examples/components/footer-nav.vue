@@ -94,19 +94,19 @@
           this.nav = [];
           return;
         }
-        
+
         this.nav = [];
-        
+
         // 添加更新日志 (索引0)
         if (nav[0]) {
           this.nav.push(nav[0]);
         }
-        
+
         // 添加开发指南的children (索引1)
         if (nav[1] && nav[1].children) {
           this.nav = this.nav.concat(nav[1].children);
         }
-        
+
         // 添加组件的groups中的所有list (索引2)
         if (nav[2] && nav[2].groups) {
           nav[2].groups.forEach(group => {

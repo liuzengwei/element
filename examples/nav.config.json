@@ -382,7 +382,11 @@
             },
             {
               "path": "/segmented",
-              "title": "Segmented 分段控制器"
+              "title": "Segmented 分段控制器",
+              "badge": {
+                "version": "2.15.5-xn.48",
+                "type": "new"
+              }
             }
           ]
         }

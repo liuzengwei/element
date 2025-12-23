@@ -100,6 +100,7 @@
     .nav-logo,
     .nav-logo-small {
       vertical-align: sub;
+      max-width: 80px;
     }
 
     .nav-logo-small {

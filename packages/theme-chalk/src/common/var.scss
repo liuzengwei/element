@@ -44,6 +44,7 @@ $--color-base: #202131 !default;
 // Background
 /// color|1|Background Color|4
 $--background-color-base: #F5F7FA !default;
+$--background-color-base-well: #FAFCFE !default;
 $--background-color-input-base: #F7F8FA !default;
 $--background-color-table-header: #F7F8FA !default;
 
@@ -197,13 +198,13 @@ $--checkbox-input-border-color-hover: $--color-primary !default;
 /// height||Other|4
 $--checkbox-bordered-height: 40px !default;
 /// padding||Spacing|3
-$--checkbox-bordered-padding: 8px 20px 9px 10px !default;
+$--checkbox-bordered-padding: 9px 20px 9px 10px !default;
 /// padding||Spacing|3
 $--checkbox-bordered-medium-padding: 8px 20px 8px 10px !default;
 /// padding||Spacing|3
-$--checkbox-bordered-small-padding: 5px 15px 5px 10px !default;
+$--checkbox-bordered-small-padding: 6px 15px 6px 10px !default;
 /// padding||Spacing|3
-$--checkbox-bordered-mini-padding: 3px 15px 3px 10px !default;
+$--checkbox-bordered-mini-padding: 4px 15px 4px 10px !default;
 $--checkbox-bordered-medium-input-height: 14px !default;
 $--checkbox-bordered-medium-input-width: 14px !default;
 /// height||Other|4
@@ -267,9 +268,9 @@ $--radio-input-border-color-hover: $--color-primary !default;
 
 $--radio-bordered-height: 40px !default;
 $--radio-bordered-padding: 10px 20px 0 10px !default;
-$--radio-bordered-medium-padding: 10px 20px 0 10px !default;
-$--radio-bordered-small-padding: 8px 15px 0 10px !default;
-$--radio-bordered-mini-padding: 6px 15px 0 10px !default;
+$--radio-bordered-medium-padding: 8px 20px 0 10px !default;
+$--radio-bordered-small-padding: 6px 15px 0 10px !default;
+$--radio-bordered-mini-padding: 4px 15px 0 10px !default;
 $--radio-bordered-medium-input-height: 14px !default;
 $--radio-bordered-medium-input-width: 14px !default;
 $--radio-bordered-medium-height: 36px !default;
@@ -332,7 +333,7 @@ $--select-dropdown-border: solid 1px $--border-color-light !default;
 -------------------------- */
 $--alert-padding: 8px 16px !default;
 /// borderRadius||Border|2
-$--alert-border-radius: $--border-radius-base !default;
+$--alert-border-radius: $--border-radius-zero !default;
 /// fontSize||Font|1
 $--alert-title-font-size: 13px !default;
 /// fontSize||Font|1

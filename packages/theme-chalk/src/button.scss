@@ -135,6 +135,48 @@
   }
   @include m(info) {
     @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+    
+    &.is-plain {
+      color: $--color-text-placeholder;
+      background: $--color-white;
+      border-color: $--color-text-placeholder;
+
+      &:hover,
+      &:focus {
+        background: $--color-text-placeholder;
+        border-color: $--color-text-placeholder;
+        color: $--color-white;
+      }
+
+      &:active {
+        background: mix($--color-black, $--color-text-placeholder, $--button-active-shade-percent);
+        border-color: mix($--color-black, $--color-text-placeholder, $--button-active-shade-percent);
+        color: $--color-white;
+        outline: none;
+      }
+
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          color: mix($--color-white, $--color-text-placeholder, 40%);
+          background-color: $--color-white;
+          border-color: mix($--color-white, $--color-text-placeholder, 80%);
+        }
+      }
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: $--color-text-placeholder;
+        background-color: $--disabled-fill-base;
+        border-color: $--color-text-placeholder;
+      }
+    }
   }
   @include m(medium) {
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);

@@ -95,5 +95,6 @@
   "selectable-tag-group": "./packages/selectable-tag-group/index.js",
   "area-picker": "./packages/area-picker/index.js",
   "trigger": "./packages/trigger/index.js",
-  "lazy-load": "./packages/lazy-load/index.js"
+  "lazy-load": "./packages/lazy-load/index.js",
+  "segmented": "./packages/segmented/index.js"
 }

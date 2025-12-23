@@ -97,6 +97,7 @@ import SelectableTagGroup from '../packages/selectable-tag-group/index.js';
 import AreaPicker from '../packages/area-picker/index.js';
 import Trigger from '../packages/trigger/index.js';
 import LazyLoad from '../packages/lazy-load/index.js';
+import Segmented from '../packages/segmented/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -193,6 +194,7 @@ const components = [
   AreaPicker,
   Trigger,
   LazyLoad,
+  Segmented,
   CollapseTransition
 ];
 
@@ -329,5 +331,6 @@ export default {
   SelectableTagGroup,
   AreaPicker,
   Trigger,
-  LazyLoad
+  LazyLoad,
+  Segmented
 };

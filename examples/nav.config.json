@@ -379,6 +379,10 @@
                 "version": "2.15.5-xn.42",
                 "type": "new"
               }
+            },
+            {
+              "path": "/segmented",
+              "title": "Segmented 分段控制器"
             }
           ]
         }
@@ -725,6 +729,10 @@
             {
               "path": "/lazy-load",
               "title": "LazyLoad"
+            },
+            {
+              "path": "/segmented",
+              "title": "Segmented"
             }
           ]
         }
@@ -1071,6 +1079,10 @@
             {
               "path": "/lazy-load",
               "title": "LazyLoad"
+            },
+            {
+              "path": "/segmented",
+              "title": "Segmented"
             }
           ]
         }
@@ -1417,6 +1429,10 @@
             {
               "path": "/lazy-load",
               "title": "LazyLoad"
+            },
+            {
+              "path": "/segmented",
+              "title": "Segmented"
             }
           ]
         }

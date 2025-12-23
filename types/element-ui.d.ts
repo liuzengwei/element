@@ -3,6 +3,7 @@
 import { ElAreaPicker } from './area-picker'
 import { ElTrigger } from './trigger'
 import { ElLazyLoad } from './lazy-load'
+import { ElSegmented } from './segmented'
 
 export class SelectableTag extends ElSelectableTag {}
 
@@ -14,3 +15,6 @@ export class Trigger extends ElTrigger {}
 
 /** LazyLoad Component */
 export class LazyLoad extends ElLazyLoad {}
+
+/** Segmented Component */
+export class Segmented extends ElSegmented {}

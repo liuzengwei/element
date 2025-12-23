@@ -1,0 +1,165 @@
+@charset "UTF-8";
+@import "common/var";
+@import "mixins/mixins";
+@import "mixins/utils";
+
+@include b(segmented) {
+  display: inline-flex;
+  padding: 0;
+  background-color: transparent;
+  border-radius: $--border-radius-base;
+  position: relative;
+
+  @include when(disabled) {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  @include m(block) {
+    width: 100%;
+  }
+
+  @include m(vertical) {
+    flex-direction: column;
+    width: auto;
+  }
+
+  @include m(large) {
+    @include e(item) {
+      padding: 12px 15px;
+      font-size: $--font-size-base;
+    }
+  }
+
+  @include m(small) {
+    @include e(item) {
+      padding: 8px 12px;
+      font-size: $--font-size-small;
+    }
+  }
+
+  @include e(item) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-size: 14px;
+    line-height: 20px;
+    color: #86909C;
+    position: relative;
+    background-color: $--color-white;
+    border: 1px solid #F2F2F2;
+
+    &:not(:first-child) {
+      border-left: none;
+    }
+
+    &:first-child {
+      border-radius: 2px 0 0 2px;
+    }
+
+    &:last-child {
+      border-radius: 0 2px 2px 0;
+    }
+
+    &:first-child:last-child {
+      border-radius: 2px;
+    }
+
+    &:hover {
+      background-color: rgba($--color-primary, 0.1);
+    }
+
+    @include when(selected) {
+      background-color: $--color-primary;
+      color: $--color-white;
+      border-color: $--color-primary;
+      z-index: 1;
+
+      &:hover {
+        background-color: $--color-primary;
+      }
+    }
+
+    @include when(disabled) {
+      cursor: not-allowed;
+      color: $--color-text-placeholder;
+      background-color: $--disabled-fill-base;
+
+      &:hover {
+        background-color: $--disabled-fill-base;
+      }
+
+      @include when(selected) {
+        background-color: $--disabled-fill-base;
+        color: $--color-text-placeholder;
+        border-color: #F2F2F2;
+      }
+    }
+  }
+
+  @include e(item-input) {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @include e(item-label) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  // Block modifier
+  &.el-segmented--block {
+    .el-segmented__item {
+      min-width: 0;
+    }
+  }
+
+  // Stretch modifier
+  &.el-segmented--stretch {
+    width: 100%;
+    background-color: $--color-white;
+    border: 1px solid #F2F2F2;
+    border-radius: 2px;
+    
+    .el-segmented__item {
+      flex: none;
+      border: none;
+      border-right: 1px solid #F2F2F2;
+    }
+  }
+
+  // Vertical modifier
+  &.el-segmented--vertical {
+    width: auto;
+    
+    .el-segmented__item {
+      justify-content: flex-start;
+      width: 100%;
+
+      &:not(:first-child) {
+        border-top: none;
+        border-left: 1px solid #F2F2F2;
+      }
+
+      &:first-child {
+        border-radius: 2px 2px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 2px 2px;
+      }
+
+      &:first-child:last-child {
+        border-radius: 2px;
+      }
+    }
+  }
+}

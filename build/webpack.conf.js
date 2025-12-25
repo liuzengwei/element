@@ -61,6 +61,14 @@ module.exports = {
             preserveWhitespace: false
           }
         }
+      },
+      {
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: path.posix.join('static', '[name].[hash:7].[ext]')
+        }
       }
     ]
   },

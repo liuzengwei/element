@@ -1,0 +1,138 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(file-preview) {
+  @include e(list) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -4px;
+  }
+
+  @include e(item) {
+    width: 80px;
+    height: 80px;
+    margin: 4px;
+    border-radius: $--border-radius-base;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+
+    @include m(image) {
+      .el-image {
+        width: 100%;
+        height: 100%;
+        border-radius: $--border-radius-base;
+      }
+    }
+
+    @include m(video) {
+      .el-image {
+        width: 100%;
+        height: 100%;
+        border-radius: $--border-radius-base;
+      }
+    }
+
+    @include m(file) {
+      border: 1px solid $--border-color-base;
+      box-sizing: border-box;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: $--color-text-secondary;
+      transition: all 0.3s;
+
+      &:hover {
+        border-color: $--color-primary;
+        box-shadow: 0 2px 8px rgba($--color-primary, 0.2);
+      }
+    }
+  }
+
+  @include e(image) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(error) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: $--background-color-base;
+    color: $--color-text-placeholder;
+    font-size: 24px;
+  }
+
+  @include e(play-icon) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    pointer-events: none;
+    transition: all 0.3s;
+
+    .el-file-preview__item:hover & {
+      background-color: rgba(0, 0, 0, 0.7);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  @include e(icon) {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  @include e(name) {
+    width: 100%;
+    margin: 6px 0 0;
+    padding: 0;
+    font-size: $--font-size-extra-small;
+    line-height: 1.4;
+    word-break: break-all;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    color: inherit;
+}
+
+@include e(name-main) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+
+  @include e(name-ext) {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  @include e(video-wrapper) {
+    width: 100%;
+  }
+
+  @include e(video) {
+    width: 100%;
+    max-height: 480px;
+    background-color: #000;
+  }
+}
+

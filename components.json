@@ -96,5 +96,6 @@
   "area-picker": "./packages/area-picker/index.js",
   "trigger": "./packages/trigger/index.js",
   "lazy-load": "./packages/lazy-load/index.js",
-  "segmented": "./packages/segmented/index.js"
+  "segmented": "./packages/segmented/index.js",
+  "file-preview": "./packages/file-preview/index.js"
 }

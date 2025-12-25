@@ -98,6 +98,7 @@ import AreaPicker from '../packages/area-picker/index.js';
 import Trigger from '../packages/trigger/index.js';
 import LazyLoad from '../packages/lazy-load/index.js';
 import Segmented from '../packages/segmented/index.js';
+import FilePreview from '../packages/file-preview/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -195,6 +196,7 @@ const components = [
   Trigger,
   LazyLoad,
   Segmented,
+  FilePreview,
   CollapseTransition
 ];
 
@@ -332,5 +334,6 @@ export default {
   AreaPicker,
   Trigger,
   LazyLoad,
-  Segmented
+  Segmented,
+  FilePreview
 };

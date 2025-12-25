@@ -387,6 +387,14 @@
                 "version": "2.15.5-xn.48",
                 "type": "new"
               }
+            },
+            {
+              "path": "/file-preview",
+              "title": "FilePreview 文件预览",
+              "badge": {
+                "version": "2.15.5-xn.51",
+                "type": "new"
+              }
             }
           ]
         }
@@ -737,6 +745,10 @@
             {
               "path": "/segmented",
               "title": "Segmented"
+            },
+            {
+              "path": "/file-preview",
+              "title": "FilePreview"
             }
           ]
         }
@@ -1087,6 +1099,10 @@
             {
               "path": "/segmented",
               "title": "Segmented"
+            },
+            {
+              "path": "/file-preview",
+              "title": "FilePreview"
             }
           ]
         }
@@ -1437,6 +1453,10 @@
             {
               "path": "/segmented",
               "title": "Segmented"
+            },
+            {
+              "path": "/file-preview",
+              "title": "FilePreview"
             }
           ]
         }

@@ -4,6 +4,7 @@
 import { ElTrigger } from './trigger'
 import { ElLazyLoad } from './lazy-load'
 import { ElSegmented } from './segmented'
+import { ElFilePreview } from './file-preview'
 
 export class SelectableTag extends ElSelectableTag {}
 
@@ -18,3 +19,6 @@ export class LazyLoad extends ElLazyLoad {}
 
 /** Segmented Component */
 export class Segmented extends ElSegmented {}
+
+/** FilePreview Component */
+export class FilePreview extends ElFilePreview {}

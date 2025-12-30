@@ -136,6 +136,16 @@ $directions: rtl, ltr, ttb, btt;
     margin: 0;
   }
 
+  &__wrapper-reference {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
   &__header {
     align-items: center;
     color: rgb(114, 118, 123);
@@ -198,6 +208,18 @@ $directions: rtl, ltr, ttb, btt;
   &.btt {
     bottom: 0;
   }
+
+  &.is-reference {
+    position: absolute;
+    &.ltr, &.rtl, &.ttb, &.btt {
+      height: auto;
+      width: auto;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+    }
+  }
 }
 
 .el-drawer__container {
@@ -208,6 +230,15 @@ $directions: rtl, ltr, ttb, btt;
   bottom: 0;
   height: 100%;
   width: 100%;
+
+  &.el-drawer__reference-mode {
+    position: absolute;
+    background-color: transparent;
+    pointer-events: none;
+    .el-drawer {
+      pointer-events: auto;
+    }
+  }
 }
 
 .el-drawer-fade-enter-active {

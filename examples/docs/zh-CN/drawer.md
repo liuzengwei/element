@@ -247,6 +247,136 @@ export default {
 ```
 :::
 
+### 基于节点弹出
+
+通过 `reference` 属性可以指定一个参考元素，抽屉将在该元素**内部**弹出，遮罩层也只覆盖参考元素范围。
+
+:::demo 设置 `reference` 属性为目标元素的选择器或 DOM 元素，使用 `placement` 属性指定弹出方向（top、bottom、left、right），`offset` 属性可设置距离参考元素边缘的偏移量。注意：参考元素会自动设置为 `position: relative`（如果是 static）。
+
+```html
+<div class="demo-drawer-container" ref="drawerContainer">
+  <div style="padding: 20px;">
+    <p>这是一个容器，点击按钮后抽屉会在容器内部右侧弹出</p>
+    <el-button @click="referenceDrawer = true" type="primary">
+      点击打开容器内的抽屉
+    </el-button>
+  </div>
+  
+  <el-drawer
+    title="容器内的抽屉"
+    :visible.sync="referenceDrawer"
+    :reference="$refs.drawerContainer"
+    placement="right"
+    :offset="0"
+    size="250px">
+    <div style="padding: 20px;">
+      <p>这是在容器内部弹出的抽屉</p>
+      <p>遮罩层也只覆盖容器范围</p>
+      <el-button @click="referenceDrawer = false">关闭</el-button>
+    </div>
+  </el-drawer>
+</div>
+
+<style>
+.demo-drawer-container {
+  width: 600px;
+  height: 400px;
+  border: 2px dashed #409eff;
+  background-color: #f0f9ff;
+  position: relative;
+}
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        referenceDrawer: false
+      };
+    }
+  };
+</script>
+```
+:::
+
+### 多方向节点弹出
+
+基于节点的抽屉支持四个方向的弹出：上、下、左、右。抽屉会在参考容器内部对应方向弹出。
+
+:::demo 通过 `placement` 属性控制弹出方向，可选值为 `top`、`bottom`、`left`、`right`。
+
+```html
+<div class="demo-drawer-placements" ref="centerBox">
+  <div style="padding: 30px; text-align: center;">
+    <p style="margin-bottom: 10px;">容器 - 点击按钮在不同方向弹出抽屉</p>
+    <el-button @click="topDrawer = true" size="small">上</el-button>
+    <el-button @click="bottomDrawer = true" size="small">下</el-button>
+    <el-button @click="leftDrawer = true" size="small">左</el-button>
+    <el-button @click="rightDrawer = true" size="small">右</el-button>
+  </div>
+  
+  <el-drawer
+    title="顶部抽屉"
+    :visible.sync="topDrawer"
+    :reference="$refs.centerBox"
+    placement="top"
+    size="120px">
+    <p style="padding: 20px;">从容器顶部弹出</p>
+  </el-drawer>
+  
+  <el-drawer
+    title="底部抽屉"
+    :visible.sync="bottomDrawer"
+    :reference="$refs.centerBox"
+    placement="bottom"
+    size="120px">
+    <p style="padding: 20px;">从容器底部弹出</p>
+  </el-drawer>
+  
+  <el-drawer
+    title="左侧抽屉"
+    :visible.sync="leftDrawer"
+    :reference="$refs.centerBox"
+    placement="left"
+    size="200px">
+    <p style="padding: 20px;">从容器左侧弹出</p>
+  </el-drawer>
+  
+  <el-drawer
+    title="右侧抽屉"
+    :visible.sync="rightDrawer"
+    :reference="$refs.centerBox"
+    placement="right"
+    size="200px">
+    <p style="padding: 20px;">从容器右侧弹出</p>
+  </el-drawer>
+</div>
+
+<style>
+.demo-drawer-placements {
+  width: 500px;
+  height: 400px;
+  background: #f5f7fa;
+  border: 2px solid #409eff;
+  position: relative;
+}
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        topDrawer: false,
+        bottomDrawer: false,
+        leftDrawer: false,
+        rightDrawer: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 
 Drawer 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
@@ -283,6 +413,9 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | visible   | 是否显示 Drawer，支持 .sync 修饰符 | boolean | — | false |
 | wrapperClosable | 点击遮罩层是否可以关闭 Drawer | boolean | - | true |
 | withHeader | 控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效 | boolean | - | true |
+| reference | 参考元素，可以是 CSS 选择器字符串、DOM 元素或 Vue 组件实例。设置后抽屉将在该元素内部弹出，遮罩层也只覆盖该元素范围 | string / HTMLElement / Component | — | null |
+| placement | 相对于参考元素的弹出位置，仅在设置了 reference 时生效 | string | top / bottom / left / right | right |
+| offset | 距离参考元素边缘的偏移量（像素），仅在设置了 reference 时生效 | number | — | 0 |
 
 ### Drawer Slot
 

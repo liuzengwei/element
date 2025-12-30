@@ -9,6 +9,13 @@ declare enum Direction {
     BTT = 'btt' // bottom to top
 }
 
+declare enum Placement {
+    TOP = 'top',
+    BOTTOM = 'bottom',
+    LEFT = 'left',
+    RIGHT = 'right'
+}
+
 interface DrawerSlots {
     /* Main Content Slots */
     default: VNode[];
@@ -58,6 +65,15 @@ export declare class ElDrawer extends ElementUIComponent {
 
     /* Flag attribute whi */
     wrapperClosable: boolean
+
+    /* Reference element for positioning, can be a CSS selector string or an HTMLElement or Vue component instance */
+    reference: string | HTMLElement | ElementUIComponent
+
+    /* Placement of the drawer relative to the reference element */
+    placement: Placement
+
+    /* Offset distance from the reference element in pixels */
+    offset: number
 
     $slots: DrawerSlots
 }

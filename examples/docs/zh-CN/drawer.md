@@ -590,7 +590,7 @@ export default {
 | visible   | 是否显示 Drawer，支持 .sync 修饰符 | boolean | — | false |
 | wrapperClosable | 点击遮罩层是否可以关闭 Drawer | boolean | - | true |
 | withHeader | 控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效 | boolean | - | true |
-| reference | 参考元素，设置后抽屉将在该元素内部弹出，遮罩层也只覆盖该元素范围。可以是 CSS 选择器字符串、DOM 元素或 Vue 组件实例 | string / HTMLElement / Component | — | null |
+| reference <version-badge version="2.15.5-xn.53" type="feature"/> | 参考元素，设置后抽屉将在该元素内部弹出，遮罩层也只覆盖该元素范围。可以是 CSS 选择器字符串、DOM 元素或 Vue 组件实例 | string / HTMLElement / Component | — | null |
 | placement | 相对于参考元素的弹出位置，仅在设置了 reference 时生效。会自动映射到对应的动画方向 | string | top / bottom / left / right | right |
 | offset | 距离参考元素边缘的偏移量（像素），仅在设置了 reference 时生效 | number | — | 0 |
 

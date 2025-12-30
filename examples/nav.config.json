@@ -330,7 +330,11 @@
             },
             {
               "path": "/drawer",
-              "title": "Drawer 抽屉"
+              "title": "Drawer 抽屉",
+              "badge": {
+                "version": "2.15.5-xn.53",
+                "type": "update"
+              }
             },
             {
               "path": "/text",

@@ -232,7 +232,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.15.5-xn.53',
+  version: '2.15.5-xn.54',
   locale: locale.use,
   i18n: locale.i18n,
   install,

@@ -163,10 +163,10 @@
         return style;
       },
       dialogStyle() {
-        return this.backgroundColor ? { backgroundColor: this.backgroundColor } : {};
+        return this.backgroundColor ? { background: this.backgroundColor } : {};
       },
       headerStyle() {
-        return this.headerBackgroundColor ? { backgroundColor: this.headerBackgroundColor } : {};
+        return this.headerBackgroundColor ? { background: this.headerBackgroundColor } : {};
       }
     },
 

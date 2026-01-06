@@ -40,7 +40,7 @@
     }
     
     .el-tag__icon {
-      background-color: mix($--tag-info-color, $--color-white, max($backgroundColorWeight, 35%));
+      background-color: mix($--tag-info-color, $--color-white, max($backgroundColorWeight, 25%));
     }
   }
 
@@ -62,7 +62,7 @@
     }
     
     .el-tag__icon {
-      background-color: mix($--tag-success-color, $--color-white, max($backgroundColorWeight, 35%));
+      background-color: mix($--tag-success-color, $--color-white, max($backgroundColorWeight, 25%));
     }
   }
 
@@ -84,7 +84,7 @@
     }
     
     .el-tag__icon {
-      background-color: mix($--tag-warning-color, $--color-white, max($backgroundColorWeight, 35%));
+      background-color: mix($--tag-warning-color, $--color-white, max($backgroundColorWeight, 25%));
     }
   }
 
@@ -106,7 +106,7 @@
     }
     
     .el-tag__icon {
-      background-color: mix($--tag-danger-color, $--color-white, max($backgroundColorWeight, 35%));
+      background-color: mix($--tag-danger-color, $--color-white, max($backgroundColorWeight, 25%));
     }
   }
 }

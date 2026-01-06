@@ -82,7 +82,7 @@ export default {
 :::demo 通过 `props.checkStrictly` 属性可以设置是否严格的遵守父子不互相关联，可以选择任意一级选项。
 ```html
 <template>
-  <el-area-picker v-model="strictValue" :props="{ checkStrictly: true }" placeholder="请选择"></el-area-picker>
+  <el-area-picker v-model="strictValue" :level="2" :props="{ multiple: true, checkStrictly: true }" placeholder="请选择"></el-area-picker>
 </template>
 
 <script>

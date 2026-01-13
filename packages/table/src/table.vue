@@ -596,51 +596,29 @@
       },
 
       getSelectionRows() {
-        const selection = this.store.states.selection || [];
-        const result = [];
+        return this.store.states.selection;
+      },
 
-        // 获取表格主体元素
-        const bodyWrapper = this.bodyWrapper;
-        if (!bodyWrapper) return result;
-
-        // 获取所有行元素
-        const rows = bodyWrapper.querySelectorAll('.el-table__row');
-
-        // 遍历选中行数据，找到对应的DOM节点
-        selection.forEach(rowData => {
-          // 通过row-key或者数据索引找到对应的行元素
-          let targetRow = null;
-          const rowKey = this.rowKey;
-
-          if (rowKey) {
-            // 如果有row-key，通过row-key查找
-            const rowId = this.getRowKey ? this.getRowKey(rowData) : rowData[rowKey];
-            rows.forEach(row => {
-              const rowKeyAttr = row.getAttribute('row-key');
-              if (rowKeyAttr === String(rowId)) {
-                targetRow = row;
-              }
-            });
-          } else {
-            // 如果没有row-key，通过数据索引查找
-            const dataIndex = this.store.states.data.indexOf(rowData);
-            if (dataIndex >= 0 && rows[dataIndex]) {
-              targetRow = rows[dataIndex];
-            }
-          }
-
-          // 如果找到了对应的行元素，添加到结果中
-          if (targetRow) {
-            result.push({
-              row: rowData,
-              index: this.store.states.data.indexOf(rowData),
-              $el: targetRow,
-              selected: true
-            });
-          }
+      getSelectionNodes() {
+        const { selection, treeData, rowKey } = this.store.states;
+  
+        // 如果不是树形表格，返回简单的行数据
+        if (!rowKey || !Object.keys(treeData).length) {
+          return selection.map(row => ({ row }));
+        }
+  
+        // 树形表格，返回完整节点信息
+        const getRowIdentity = require('./util').getRowIdentity;
+  
+        return selection.map(row => {
+          const rowId = getRowIdentity(row, rowKey);
+          const nodeData = treeData[rowId] || {};
+  
+          return {
+            row,
+            ...nodeData
+          };
         });
-
-        return result;
       },
 
       updateAffixHeader() {

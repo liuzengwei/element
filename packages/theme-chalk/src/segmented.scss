@@ -39,8 +39,8 @@
   }
 
   @include e(item) {
-    flex: 1;
-    display: flex;
+    flex: 0 1 auto;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
@@ -109,10 +109,10 @@
   }
 
   @include e(item-label) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    white-space: nowrap;
   }
 
   // Block modifier

@@ -320,10 +320,11 @@
           <li
             class="nav-item nav-item-theme"
           >
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/theme`">业务组件
-            </router-link>
+            <a
+              href="https://aliu79.github.io/xn-ui/"
+              target="_blank"
+              rel="noopener noreferrer">业务组件
+            </a>
           </li>
           <!-- <li class="nav-item">
             <router-link

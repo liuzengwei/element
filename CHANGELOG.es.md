@@ -1,5 +1,20 @@
 ## Changelog
 
+### 2.15.5-xn.58
+
+*2026-01-22*
+
+#### New Features
+- Amount
+  - Añadir componente Amount para mostrar valores monetarios
+  - Admite configuración de símbolo de moneda (predeterminado ¥)
+  - Admite conversión automática a unidades wan/yi
+  - Admite separadores de miles
+  - Admite diferenciación de color para valores positivos/negativos
+  - Admite personalización de estilo detallada
+  - Marcador de posición predeterminado muestra ¥-
+  - Admite animación de desplazamiento de números
+
 ### 2.15.14
 
 *2023-08-24*

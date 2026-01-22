@@ -1,5 +1,20 @@
 ## Changelog
 
+### 2.15.5-xn.58
+
+*2026-01-22*
+
+#### New Features
+- Amount
+  - Add Amount component for displaying monetary values
+  - Support currency symbol configuration (default ¥)
+  - Support automatic conversion to wan/yi units (10,000/100,000,000)
+  - Support thousand separators
+  - Support color differentiation for positive/negative values
+  - Support fine-grained style customization for prefix/suffix/currency/value/unit
+  - Default placeholder shows ¥-
+  - Support number scrolling animation
+
 ### 2.15.14
 
 *2023-08-24*

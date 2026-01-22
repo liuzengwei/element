@@ -399,6 +399,14 @@
                 "version": "2.15.5-xn.51",
                 "type": "new"
               }
+            },
+            {
+              "path": "/amount",
+              "title": "Amount 金额显示",
+              "badge": {
+                "version": "2.15.5-xn.58",
+                "type": "new"
+              }
             }
           ]
         }
@@ -753,6 +761,14 @@
             {
               "path": "/file-preview",
               "title": "FilePreview"
+            },
+            {
+              "path": "/amount",
+              "title": "Amount",
+              "badge": {
+                "version": "2.15.5-xn.58",
+                "type": "new"
+              }
             }
           ]
         }
@@ -1107,6 +1123,14 @@
             {
               "path": "/file-preview",
               "title": "FilePreview"
+            },
+            {
+              "path": "/amount",
+              "title": "Amount",
+              "badge": {
+                "version": "2.15.5-xn.58",
+                "type": "new"
+              }
             }
           ]
         }
@@ -1461,6 +1485,14 @@
             {
               "path": "/file-preview",
               "title": "FilePreview"
+            },
+            {
+              "path": "/amount",
+              "title": "Amount",
+              "badge": {
+                "version": "2.15.5-xn.58",
+                "type": "new"
+              }
             }
           ]
         }

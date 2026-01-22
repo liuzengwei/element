@@ -5,6 +5,7 @@ import { ElTrigger } from './trigger'
 import { ElLazyLoad } from './lazy-load'
 import { ElSegmented } from './segmented'
 import { ElFilePreview } from './file-preview'
+import { ElAmount } from './amount'
 
 export class SelectableTag extends ElSelectableTag {}
 
@@ -22,3 +23,6 @@ export class Segmented extends ElSegmented {}
 
 /** FilePreview Component */
 export class FilePreview extends ElFilePreview {}
+
+/** Amount Component */
+export class Amount extends ElAmount {}

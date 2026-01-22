@@ -322,16 +322,16 @@
           >
             <router-link
               active-class="active"
-              :to="`/${ lang }/theme`">{{ langConfig.theme }}
+              :to="`/${ lang }/theme`">业务组件
             </router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link
               active-class="active"
               :to="`/${ lang }/resource`"
               exact>{{ langConfig.resource }}
             </router-link>
-          </li>
+          </li> -->
 
           <!-- gap -->
           <li class="nav-item" v-show="isComponentPage">

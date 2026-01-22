@@ -99,6 +99,7 @@ import Trigger from '../packages/trigger/index.js';
 import LazyLoad from '../packages/lazy-load/index.js';
 import Segmented from '../packages/segmented/index.js';
 import FilePreview from '../packages/file-preview/index.js';
+import Amount from '../packages/amount/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -197,6 +198,7 @@ const components = [
   LazyLoad,
   Segmented,
   FilePreview,
+  Amount,
   CollapseTransition
 ];
 
@@ -335,5 +337,6 @@ export default {
   Trigger,
   LazyLoad,
   Segmented,
-  FilePreview
+  FilePreview,
+  Amount
 };

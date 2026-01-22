@@ -1,0 +1,66 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(amount) {
+  display: inline-block;
+  
+  @include e(title) {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: $--color-text-secondary;
+    line-height: 1.5;
+  }
+  
+  @include e(content) {
+    display: inline-flex;
+    align-items: baseline;
+    line-height: 1.5;
+  }
+  
+  @include e(prefix) {
+    margin-right: 4px;
+    color: $--color-text-regular;
+  }
+  
+  @include e(currency) {
+    margin-right: 2px;
+    font-weight: 500;
+  }
+  
+  @include e(sign) {
+    margin-right: 2px;
+  }
+  
+  @include e(value) {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: $--color-text-primary;
+    transition: color 0.3s;
+    
+    @include when(positive) {
+      color: $--color-success;
+    }
+    
+    @include when(negative) {
+      color: $--color-danger;
+    }
+    
+    @include when(zero) {
+      color: $--color-info;
+    }
+  }
+  
+  @include e(unit) {
+    margin-left: 2px;
+    font-weight: normal;
+  }
+  
+  @include e(suffix) {
+    margin-left: 4px;
+    color: $--color-text-regular;
+  }
+  
+  @include e(placeholder) {
+    // 与正常文本颜色一致
+  }
+}

@@ -1,4 +1,11 @@
 ## Changelog
+### 2.15.5-xn.60
+
+*2026-01-23*
+
+#### Optimization
+- feat(trigger): 增加 focus 和 contextMenu 触发方式的交互支持
+
 
 ### 2.15.5-xn.58
 

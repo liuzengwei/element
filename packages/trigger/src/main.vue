@@ -306,6 +306,10 @@ export default {
       if (reference.querySelector('input, textarea')) {
         on(reference, 'focusin', this.handleFocus);
         on(reference, 'focusout', this.handleBlur);
+        // focus 模式下，如果允许弹出框悬停，鼠标移入时清除关闭定时器
+        if (this.popupHoverStay) {
+          on(popper, 'mouseenter', this.handlePopperMouseEnter);
+        }
       } else {
         on(reference, 'mousedown', this.handleMouseDown);
         on(reference, 'mouseup', this.handleMouseUp);
@@ -451,6 +455,7 @@ export default {
 
     handleFocus() {
       if (this.disabled) return;
+      // 清除可能存在的关闭定时器
       this.clearTimer();
       if (this.focusDelay) {
         this.enterTimer = setTimeout(() => {
@@ -464,7 +469,16 @@ export default {
     handleBlur() {
       if (this.disabled) return;
       if (this.blurToClose) {
-        this.hide();
+        this.clearTimer();
+        // 如果允许弹出框悬停，延迟关闭以便用户可以点击弹出框
+        // 否则立即关闭
+        if (this.popupHoverStay) {
+          this.leaveTimer = setTimeout(() => {
+            this.hide();
+          }, 100);
+        } else {
+          this.hide();
+        }
       }
     },
 
@@ -487,16 +501,23 @@ export default {
     handleContextMenu(e) {
       if (this.disabled) return;
       e.preventDefault();
-      this.show();
+      // 如果已经显示，再次右键时关闭
+      if (this.showPopper && this.clickToClose) {
+        this.hide();
+      } else {
+        this.show();
+      }
     },
 
     handleDocumentClick(e) {
       if (!this.showPopper) return;
       const reference = this.referenceElm;
-      const popper = this.popper;
+      const popper = this.popperElm;
       if (!reference || !popper) return;
 
+      // 点击触发器或弹出框外部时关闭
       if (!reference.contains(e.target) && !popper.contains(e.target)) {
+        this.clearTimer();
         this.hide();
       }
     },

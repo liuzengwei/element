@@ -177,6 +177,92 @@ export default {
 ```
 :::
 
+### Focus 触发交互
+
+Focus 触发方式支持与弹出框内容交互，同时支持失焦或点击空白处关闭。
+
+:::demo 当 `trigger` 为 `focus` 且 `popup-hover-stay` 为 `true` 时，失焦后鼠标移入弹出框可以保持显示状态，方便用户与弹出内容交互。失焦后会延迟关闭，如果不需要交互可设置 `popup-hover-stay` 为 `false` 立即关闭。点击空白处可立即关闭弹出框。
+
+```html
+<div>
+  <el-trigger trigger="focus" :show-arrow="true" :popup-hover-stay="true">
+    <el-input placeholder="支持与弹出框交互" style="width: 200px;"></el-input>
+    <template slot="content">
+      <div style="padding: 12px; width: 200px;">
+        <p style="margin: 0 0 10px 0;">失焦后可点击按钮</p>
+        <el-button size="small" type="primary">点击我</el-button>
+        <p style="margin: 10px 0 0 0; font-size: 12px; color: #909399;">点击空白处关闭</p>
+      </div>
+    </template>
+  </el-trigger>
+
+  <el-trigger 
+    trigger="focus" 
+    :show-arrow="true" 
+    :popup-hover-stay="false"
+    style="margin-left: 10px;">
+    <el-input placeholder="失焦立即关闭" style="width: 200px;"></el-input>
+    <template slot="content">
+      <div style="padding: 12px; width: 200px;">
+        <p style="margin: 0;">失焦后立即关闭</p>
+      </div>
+    </template>
+  </el-trigger>
+</div>
+```
+:::
+
+### 右键菜单
+
+ContextMenu 触发方式支持再次右键关闭。
+
+:::demo 当 `trigger` 为 `contextMenu` 且 `click-to-close` 为 `true` 时，再次右键点击可以关闭弹出框。也支持点击外部关闭。
+
+```html
+<div>
+  <el-trigger trigger="contextMenu" :show-arrow="true" :click-to-close="true">
+    <el-button>右键打开菜单（再次右键可关闭）</el-button>
+    <template slot="content">
+      <div style="padding: 8px 0;">
+        <div style="padding: 8px 16px; cursor: pointer;" @click="handleMenuClick('copy')">
+          <i class="el-icon-document-copy"></i> 复制
+        </div>
+        <div style="padding: 8px 16px; cursor: pointer;" @click="handleMenuClick('paste')">
+          <i class="el-icon-document"></i> 粘贴
+        </div>
+        <div style="padding: 8px 16px; cursor: pointer;" @click="handleMenuClick('delete')">
+          <i class="el-icon-delete"></i> 删除
+        </div>
+      </div>
+    </template>
+  </el-trigger>
+
+  <el-trigger 
+    trigger="contextMenu" 
+    :show-arrow="true" 
+    :click-to-close="false"
+    style="margin-left: 10px;">
+    <el-button>右键打开（仅点击外部关闭）</el-button>
+    <template slot="content">
+      <div style="padding: 12px;">
+        <p style="margin: 0;">再次右键不会关闭</p>
+      </div>
+    </template>
+  </el-trigger>
+</div>
+
+<script>
+export default {
+  methods: {
+    handleMenuClick(action) {
+      this.$message.info(`点击了：${action}`);
+    }
+  }
+};
+</script>
+```
+:::
+
 ### 延时触发
 
 通过 `mouse-enter-delay` 和 `mouse-leave-delay` 设置延时。
@@ -326,9 +412,9 @@ export default {
 | popup-translate | 弹出框的移动距离 | Array / Object | — | — |
 | show-arrow | 弹出框是否显示箭头 | boolean | — | false |
 | align-point | 弹出框是否跟随鼠标 | boolean | — | false |
-| popup-hover-stay | 是否在移出触发器，并移入弹出框时保持弹出框显示 | boolean | — | true |
-| blur-to-close | 是否在触发器失去焦点时关闭弹出框 | boolean | — | true |
-| click-to-close | 是否在点击触发器时关闭弹出框 | boolean | — | true |
+| popup-hover-stay | 是否在移出触发器，并移入弹出框时保持弹出框显示（hover 和 focus 模式有效） | boolean | — | true |
+| blur-to-close | 是否在触发器失去焦点时关闭弹出框（focus 模式有效） | boolean | — | true |
+| click-to-close | 是否在点击/右键触发器时关闭弹出框（click 和 contextMenu 模式有效） | boolean | — | true |
 | click-outside-to-close | 是否在点击外部区域时关闭弹出框 | boolean | — | true |
 | unmount-on-close | 是否在关闭时卸载弹出框节点 | boolean | — | true |
 | content-class | 弹出框内容的类名 | string / array / object | — | — |

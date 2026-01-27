@@ -56,6 +56,13 @@ export default {
     animated: {
       type: Boolean,
       default: false
+    },
+    justify: {
+      type: String,
+      default: 'left',
+      validator: function(value) {
+        return ['left', 'center', 'right'].indexOf(value) !== -1;
+      }
     }
   },
   computed: {
@@ -157,11 +164,14 @@ export default {
     }
   },
   render() {
-    const { title, extra, border, descriptionsSize, $slots } = this;
+    const { title, extra, border, descriptionsSize, justify, $slots } = this;
     const rows = this.getRows();
 
     return (
-      <div class="el-descriptions">
+      <div class={[
+        'el-descriptions',
+        justify !== 'left' ? `is-justify-${justify}` : ''
+      ]}>
         {
           (title || extra || $slots.title || $slots.extra)
             ? <div class="el-descriptions__header">

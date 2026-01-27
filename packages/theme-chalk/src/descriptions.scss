@@ -7,6 +7,18 @@
   font-size: $--font-size-base;
   color: $--color-text-primary;
 
+  @include when(justify-right) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  @include when(justify-center) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   @include e(header) {
     display: flex;
     justify-content: space-between;
@@ -22,10 +34,11 @@
   @include e(body) {
     color: $--color-text-regular;
     background-color: $--color-white;
+    width: fit-content;
 
     .el-descriptions__table {
       border-collapse: collapse;
-      width: 100%;
+      width: auto;
       table-layout: fixed;
 
       .el-descriptions-item__cell {

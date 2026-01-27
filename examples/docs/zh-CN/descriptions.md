@@ -152,6 +152,61 @@
 ```
 :::
 
+### 对齐方式
+
+:::demo 通过设置 `justify` 属性，可以控制描述列表在容器中的对齐方式，支持 `left`（默认）、`center`、`right` 三种方式。常用于栅格布局中，让描述列表在指定列宽内居右或居中显示。
+
+```html
+<template>
+  <div>
+    <el-radio-group v-model="justify" style="margin-bottom: 20px;">
+      <el-radio label="left">左对齐</el-radio>
+      <el-radio label="center">居中</el-radio>
+      <el-radio label="right">右对齐</el-radio>
+    </el-radio-group>
+    
+    <el-descriptions title="基础示例" :column="2" :justify="justify" border>
+      <el-descriptions-item label="用户名">kooriookami</el-descriptions-item>
+      <el-descriptions-item label="手机号">18100000000</el-descriptions-item>
+      <el-descriptions-item label="居住地">苏州市</el-descriptions-item>
+      <el-descriptions-item label="备注">
+        <el-tag size="small">学校</el-tag>
+      </el-descriptions-item>
+    </el-descriptions>
+
+    <div class="margin-top" style="padding: 20px; background: #f5f7fa; border-radius: 4px;">
+      <h4 style="margin-top: 0;">栅格布局应用场景</h4>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div style="padding: 20px; background: white; border-radius: 4px; min-height: 200px;">
+            <h3 style="margin-top: 0;">其他内容</h3>
+            <p>这里是其他内容区域，占据 6 列宽度。</p>
+            <el-button type="primary" size="small">操作按钮</el-button>
+          </div>
+        </el-col>
+        <el-col :span="18">
+          <el-descriptions :column="2" justify="right">
+            <el-descriptions-item label="订单号">201607087777</el-descriptions-item>
+            <el-descriptions-item label="创建时间" labelStyle="margin-left: 20px ">2026-01-27 14:30</el-descriptions-item>
+          </el-descriptions>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        justify: 'left'
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### 加载状态 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 :::demo 通过设置 `loading` 属性，可以让内容显示为骨架屏。设置 `animated` 属性可以让骨架屏产生动画效果。
@@ -203,6 +258,7 @@
 | contentStyle | 自定义内容样式    | object |    —  | — |
 | loading <version-badge version="2.15.5-xn.30" type="feature"/> | 是否显示加载状态（骨架屏）    | boolean |    —  | false |
 | animated <version-badge version="2.15.5-xn.30" type="feature"/> | 骨架屏是否显示动画效果    | boolean |    —  | false |
+| justify | 组件整体对齐方式    | string |  left / center / right  | left |
 
 ### Descriptions Slots
 

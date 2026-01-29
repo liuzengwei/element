@@ -526,6 +526,125 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
 Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme identifiant unique.
 :::
 
+### Select composé
+
+Ajouter un élément avant ou après, généralement une étiquette ou un bouton
+
+:::demo Utilisez les slots pour distribuer des éléments qui s'ajoutent avant ou après Select.
+```html
+<div>
+  <el-select v-model="value1" placeholder="Sélectionnez">
+    <template slot="prepend">Type</template>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value2" placeholder="Sélectionnez">
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options2"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value3" placeholder="Sélectionnez">
+    <template slot="prepend">Http://</template>
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options3"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value4" placeholder="Sélectionnez une ville">
+    <template slot="append">
+      <el-button type="primary" @click="handleSearch">Rechercher</el-button>
+    </template>
+    <el-option
+      v-for="item in cities"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<script>
+export default {
+  data() {
+    return {
+      options: [{
+        value: 'option1',
+        label: 'Option1'
+      }, {
+        value: 'option2',
+        label: 'Option2'
+      }, {
+        value: 'option3',
+        label: 'Option3'
+      }],
+      options2: [{
+        value: 'google',
+        label: 'google'
+      }, {
+        value: 'baidu',
+        label: 'baidu'
+      }, {
+        value: 'github',
+        label: 'github'
+      }],
+      options3: [{
+        value: 'www',
+        label: 'www'
+      }, {
+        value: 'api',
+        label: 'api'
+      }, {
+        value: 'admin',
+        label: 'admin'
+      }],
+      cities: [{
+        value: 'beijing',
+        label: 'Beijing'
+      }, {
+        value: 'shanghai',
+        label: 'Shanghai'
+      }, {
+        value: 'guangzhou',
+        label: 'Guangzhou'
+      }, {
+        value: 'shenzhen',
+        label: 'Shenzhen'
+      }],
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: ''
+    }
+  },
+  methods: {
+    handleSearch() {
+      this.$message({
+        message: `Rechercher: ${this.value4}`,
+        type: 'success'
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Attributs de Select
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -575,6 +694,8 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 |    —    | Liste de options. |
 | prefix  | Contenu du préfixe du sélecteur. |
 | empty  | Contenu lorsqu'il n'y a aucune option. |
+| prepend | Contenu à ajouter avant le sélecteur. |
+| append  | Contenu à ajouter après le sélecteur. |
 
 ### Attributs du groupe d'options
 

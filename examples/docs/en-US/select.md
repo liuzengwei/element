@@ -524,6 +524,125 @@ Create and select new items that are not included in select options
 If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
 :::
 
+### Composite Select
+
+Prepend or append an element, generally a label or a button
+
+:::demo Use slot to distribute elements that prepend or append to Select.
+```html
+<div>
+  <el-select v-model="value1" placeholder="Select">
+    <template slot="prepend">Type</template>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value2" placeholder="Select">
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options2"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value3" placeholder="Select">
+    <template slot="prepend">Http://</template>
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options3"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value4" placeholder="Select city">
+    <template slot="append">
+      <el-button type="primary" @click="handleSearch">Search</el-button>
+    </template>
+    <el-option
+      v-for="item in cities"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<script>
+export default {
+  data() {
+    return {
+      options: [{
+        value: 'option1',
+        label: 'Option1'
+      }, {
+        value: 'option2',
+        label: 'Option2'
+      }, {
+        value: 'option3',
+        label: 'Option3'
+      }],
+      options2: [{
+        value: 'google',
+        label: 'google'
+      }, {
+        value: 'baidu',
+        label: 'baidu'
+      }, {
+        value: 'github',
+        label: 'github'
+      }],
+      options3: [{
+        value: 'www',
+        label: 'www'
+      }, {
+        value: 'api',
+        label: 'api'
+      }, {
+        value: 'admin',
+        label: 'admin'
+      }],
+      cities: [{
+        value: 'beijing',
+        label: 'Beijing'
+      }, {
+        value: 'shanghai',
+        label: 'Shanghai'
+      }, {
+        value: 'guangzhou',
+        label: 'Guangzhou'
+      }, {
+        value: 'shenzhen',
+        label: 'Shenzhen'
+      }],
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: ''
+    }
+  },
+  methods: {
+    handleSearch() {
+      this.$message({
+        message: `Search: ${this.value4}`,
+        type: 'success'
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Select Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -570,6 +689,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 |    —    | Option component list |
 | prefix  | content as Select prefix |
 | empty  | content when there is no options |
+| prepend | content to prepend before Select |
+| append  | content to append after Select |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

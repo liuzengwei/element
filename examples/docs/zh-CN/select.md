@@ -519,6 +519,125 @@
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
 
+### 复合型选择框 <version-badge version="2.15.5-xn.63" type="feature"/>
+
+可前置或后置元素，一般为标签或按钮
+
+:::demo 可通过 slot 来指定在 Select 中前置或者后置内容。
+```html
+<div>
+  <el-select v-model="value1" placeholder="请选择">
+    <template slot="prepend">类型</template>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value2" placeholder="请选择">
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options2"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value3" placeholder="请选择">
+    <template slot="prepend">Http://</template>
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options3"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value4" placeholder="请选择城市">
+    <template slot="append">
+      <el-button type="primary" @click="handleSearch">搜索</el-button>
+    </template>
+    <el-option
+      v-for="item in cities"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<script>
+export default {
+  data() {
+    return {
+      options: [{
+        value: 'option1',
+        label: '选项1'
+      }, {
+        value: 'option2',
+        label: '选项2'
+      }, {
+        value: 'option3',
+        label: '选项3'
+      }],
+      options2: [{
+        value: 'google',
+        label: 'google'
+      }, {
+        value: 'baidu',
+        label: 'baidu'
+      }, {
+        value: 'github',
+        label: 'github'
+      }],
+      options3: [{
+        value: 'www',
+        label: 'www'
+      }, {
+        value: 'api',
+        label: 'api'
+      }, {
+        value: 'admin',
+        label: 'admin'
+      }],
+      cities: [{
+        value: 'beijing',
+        label: '北京'
+      }, {
+        value: 'shanghai',
+        label: '上海'
+      }, {
+        value: 'guangzhou',
+        label: '广州'
+      }, {
+        value: 'shenzhen',
+        label: '深圳'
+      }],
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: ''
+    }
+  },
+  methods: {
+    handleSearch() {
+      this.$message({
+        message: `搜索: ${this.value4}`,
+        type: 'success'
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -563,8 +682,8 @@
 |   name  | 说明     |
 |---------|---------|
 |    —    | Option 组件列表 |
-| prefix  | Select 组件头部内容 |
-| empty | 无选项时的列表 |
+| prefix  | Select 组件头部内容 || prepend | Select 组件前置内容 |
+| append | Select 组件后置内容 || empty | 无选项时的列表 |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

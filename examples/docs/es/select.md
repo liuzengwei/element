@@ -531,6 +531,125 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 
 :::
 
+### Select compuesto
+
+Anteponer o añadir un elemento, generalmente una etiqueta o un botón
+
+:::demo Utilice slots para distribuir elementos que se anteponen o añaden a Select.
+```html
+<div>
+  <el-select v-model="value1" placeholder="Seleccione">
+    <template slot="prepend">Tipo</template>
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value2" placeholder="Seleccione">
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options2"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value3" placeholder="Seleccione">
+    <template slot="prepend">Http://</template>
+    <template slot="append">.com</template>
+    <el-option
+      v-for="item in options3"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<div style="margin-top: 15px;">
+  <el-select v-model="value4" placeholder="Seleccione ciudad">
+    <template slot="append">
+      <el-button type="primary" @click="handleSearch">Buscar</el-button>
+    </template>
+    <el-option
+      v-for="item in cities"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+<script>
+export default {
+  data() {
+    return {
+      options: [{
+        value: 'opcion1',
+        label: 'Opción1'
+      }, {
+        value: 'opcion2',
+        label: 'Opción2'
+      }, {
+        value: 'opcion3',
+        label: 'Opción3'
+      }],
+      options2: [{
+        value: 'google',
+        label: 'google'
+      }, {
+        value: 'baidu',
+        label: 'baidu'
+      }, {
+        value: 'github',
+        label: 'github'
+      }],
+      options3: [{
+        value: 'www',
+        label: 'www'
+      }, {
+        value: 'api',
+        label: 'api'
+      }, {
+        value: 'admin',
+        label: 'admin'
+      }],
+      cities: [{
+        value: 'beijing',
+        label: 'Beijing'
+      }, {
+        value: 'shanghai',
+        label: 'Shanghai'
+      }, {
+        value: 'guangzhou',
+        label: 'Guangzhou'
+      }, {
+        value: 'shenzhen',
+        label: 'Shenzhen'
+      }],
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: ''
+    }
+  },
+  methods: {
+    handleSearch() {
+      this.$message({
+        message: `Buscar: ${this.value4}`,
+        type: 'success'
+      });
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Select atributos
 | Atributo             | Descripción                              | Tipo     | Valores aceptados | Por defecto      |
 | -------------------- | ---------------------------------------- | -------- | ----------------- | ---------------- |
@@ -577,6 +696,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 |    —    | lista de los componentes Option |
 | prefix  | contenido prefix de un  Select |
 | empty | Lista sin opciones |
+| prepend | contenido que se antepone antes del Select |
+| append  | contenido que se añade después del Select |
 
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |

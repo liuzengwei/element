@@ -1,14 +1,27 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :class="[
+      selectSize ? 'el-select--' + selectSize : '',
+      {
+        'el-select-group': $slots.prepend || $slots.append,
+        'el-select-group--append': $slots.append,
+        'el-select-group--prepend': $slots.prepend
+      }
+    ]"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
-    <div
-      class="el-select__tags"
-      v-if="multiple"
-      ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
+    <!-- 前置元素 -->
+    <div class="el-select-group__prepend" v-if="$slots.prepend" @click.stop>
+      <slot name="prepend"></slot>
+    </div>
+    <!-- select 主体内容区域 -->
+    <div class="el-select__wrapper">
+      <div
+        class="el-select__tags"
+        v-if="multiple"
+        ref="tags"
+        :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -132,6 +145,11 @@
         </template>
       </el-select-menu>
     </transition>
+    </div>
+    <!-- 后置元素 -->
+    <div class="el-select-group__append" v-if="$slots.append" @click.stop>
+      <slot name="append"></slot>
+    </div>
   </div>
 </template>
 

@@ -98,7 +98,11 @@
             },
             {
               "path": "/select",
-              "title": "Select 选择器"
+              "title": "Select 选择器",
+              "badge": {
+                "version": "2.15.5-xn.63",
+                "type": "update"
+              }
             },
             {
               "path": "/cascader",
@@ -512,7 +516,11 @@
             },
             {
               "path": "/select",
-              "title": "Select"
+              "title": "Select",
+              "badge": {
+                "version": "2.15.5-xn.63",
+                "type": "update"
+              }
             },
             {
               "path": "/cascader",

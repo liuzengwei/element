@@ -12,6 +12,39 @@
   display: inline-block;
   position: relative;
 
+  @include e(wrapper) {
+    // wrapper 默认不影响布局
+  }
+
+  // 当有 prepend 或 append 时，调整为 table 布局
+  &.el-select-group {
+    line-height: normal;
+    display: inline-table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    .el-select__wrapper {
+      display: table-cell;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    &.el-select-group--append {
+      .el-input__inner {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &.el-select-group--prepend {
+      .el-input__inner {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
   .el-select__tags
     >span {
       display: contents;
@@ -147,6 +180,73 @@
         display: block;
         transform: translate(0, .5px);
       }
+    }
+  }
+}
+
+@include b(select-group) {
+  @include e((append, prepend)) {
+    background-color: $--background-color-base;
+    color: $--color-info;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border: $--border-base;
+    border-radius: $--input-border-radius;
+    padding: 0 20px;
+    width: 1px;
+    white-space: nowrap;
+    line-height: 1;
+
+    &:focus {
+      outline: none;
+    }
+
+    .el-select,
+    .el-button {
+      display: inline-block;
+      margin: -10px -20px;
+      vertical-align: middle;
+    }
+
+    button.el-button {
+      border: none;
+    }
+
+    div.el-select .el-input__inner,
+    div.el-select:hover .el-input__inner {
+      border-color: transparent;
+      background-color: transparent;
+      color: inherit;
+      border-top: 0;
+      border-bottom: 0;
+    }
+
+    .el-button,
+    .el-input {
+      font-size: inherit;
+    }
+  }
+
+  @include e(prepend) {
+    border-right-color: #e5e6eb;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    .el-button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  @include e(append) {
+    border-left-color: #e5e6eb;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    .el-button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }

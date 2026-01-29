@@ -320,13 +320,13 @@
   }
 
   @include e(prepend) {
-    border-right: 0;
+    border-right-color: #e5e6eb;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
   @include e(append) {
-    border-left: 0;
+    border-left-color: #e5e6eb;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }

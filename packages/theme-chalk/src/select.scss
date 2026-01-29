@@ -191,12 +191,12 @@
     vertical-align: middle;
     display: table-cell;
     position: relative;
-    border: $--border-base;
     border-radius: $--input-border-radius;
     padding: 0 20px;
     width: 1px;
     white-space: nowrap;
     line-height: 1;
+    overflow: hidden;
 
     &:focus {
       outline: none;

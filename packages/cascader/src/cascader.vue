@@ -106,6 +106,9 @@
             <li class="el-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
           </slot>
         </el-scrollbar>
+        <div v-if="$slots.footer" class="el-cascader__footer">
+          <slot name="footer"></slot>
+        </div>
       </div>
     </transition>
   </div>

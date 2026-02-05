@@ -180,4 +180,10 @@
       color: $--color-text-placeholder;
     }
   }
+
+  @include e(footer) {
+    padding: 8px;
+    border-top: 1px solid $--border-color-light;
+    text-align: center;
+  }
 }

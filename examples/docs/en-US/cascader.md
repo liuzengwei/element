@@ -1693,6 +1693,121 @@ You can customize the content of cascader node.
 ```
 :::
 
+### Footer slot
+
+You can customize content at the bottom of the dropdown.
+
+:::demo Use the `footer` slot to add custom content like buttons or statistics at the bottom of the cascader dropdown.
+```html
+<el-cascader
+  v-model="value"
+  :options="options"
+  placeholder="Please select">
+  <template slot="footer">
+    <div style="padding: 4px 0;">
+      <el-button size="mini" type="primary" @click="handleConfirm">Confirm</el-button>
+      <el-button size="mini" @click="handleClear">Clear</el-button>
+    </div>
+  </template>
+</el-cascader>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }]
+          }]
+        }]
+      };
+    },
+    methods: {
+      handleConfirm() {
+        this.$message.success('Confirmed: ' + this.value.join('/'));
+      },
+      handleClear() {
+        this.value = [];
+        this.$message.info('Cleared');
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Cascader panel
 
 `CascaderPanel` is the core component of `Cascader` which has various of features such as single selection, multiple selection, dynamic loading and so on.
@@ -1946,6 +2061,7 @@ You can customize the content of cascader node.
 |---------|-------------|
 | - | the custom content of cascader node, the parameter is { node, data }, which are current Node object and node data respectively. |
 | empty  | content when there is no matched options. |
+| footer  | content at the bottom of the dropdown. |
 
 ### CascaderPanel Attributes
 | Attribute | Description | Type  | Accepted Values | Default |

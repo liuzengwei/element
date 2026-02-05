@@ -106,7 +106,11 @@
             },
             {
               "path": "/cascader",
-              "title": "Cascader 级联选择器"
+              "title": "Cascader 级联选择器",
+              "badge": {
+                "version": "2.15.5-xn.64",
+                "type": "update"
+              }
             },
             {
               "path": "/switch",

@@ -1672,6 +1672,121 @@
 ```
 :::
 
+### 底部插槽 <version-badge version="2.15.5-xn.64" type="feature"/> 
+
+可以在下拉框底部自定义内容
+
+:::demo 通过 `footer` 插槽可以在级联选择器的下拉框底部添加自定义内容，如按钮、统计信息等。
+```html
+<el-cascader
+  v-model="value"
+  :options="options"
+  placeholder="请选择">
+  <template slot="footer">
+    <div style="padding: 4px 0;">
+      <el-button size="mini" type="primary" @click="handleConfirm">确认</el-button>
+      <el-button size="mini" @click="handleClear">清空</el-button>
+    </div>
+  </template>
+</el-cascader>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        options: [{
+          value: 'zhinan',
+          label: '指南',
+          children: [{
+            value: 'shejiyuanze',
+            label: '设计原则',
+            children: [{
+              value: 'yizhi',
+              label: '一致'
+            }, {
+              value: 'fankui',
+              label: '反馈'
+            }, {
+              value: 'xiaolv',
+              label: '效率'
+            }, {
+              value: 'kekong',
+              label: '可控'
+            }]
+          }, {
+            value: 'daohang',
+            label: '导航',
+            children: [{
+              value: 'cexiangdaohang',
+              label: '侧向导航'
+            }, {
+              value: 'dingbudaohang',
+              label: '顶部导航'
+            }]
+          }]
+        }, {
+          value: 'zujian',
+          label: '组件',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout 布局'
+            }, {
+              value: 'color',
+              label: 'Color 色彩'
+            }, {
+              value: 'typography',
+              label: 'Typography 字体'
+            }, {
+              value: 'icon',
+              label: 'Icon 图标'
+            }, {
+              value: 'button',
+              label: 'Button 按钮'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio 单选框'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox 多选框'
+            }, {
+              value: 'input',
+              label: 'Input 输入框'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber 计数器'
+            }, {
+              value: 'select',
+              label: 'Select 选择器'
+            }, {
+              value: 'cascader',
+              label: 'Cascader 级联选择器'
+            }]
+          }]
+        }]
+      };
+    },
+    methods: {
+      handleConfirm() {
+        this.$message.success('已确认选择: ' + this.value.join('/'));
+      },
+      handleClear() {
+        this.value = [];
+        this.$message.info('已清空');
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 级联面板
 
 级联面板是级联选择器的核心组件，与级联选择器一样，有单选、多选、动态加载等多种功能。
@@ -1925,6 +2040,7 @@
 |---------|-------------|
 | - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据 |
 | empty  | 无匹配选项时的内容 |
+| footer  | 下拉框底部的内容 |
 
 ### CascaderPanel Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

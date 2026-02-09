@@ -39,6 +39,18 @@ export declare class ElMessageBoxComponent extends Vue {
   confirmButtonDisabled: boolean
   cancelButtonClass: string
   editorErrorMessage: string
+  confirmButtonLoadingText: string
+  errorMessage: string
+  showErrorTip: boolean
+
+  /** Display error message in MessageBox */
+  showError(message: string): void
+
+  /** Clear error message */
+  clearError(): void
+
+  /** Manually set confirm button loading state */
+  setConfirmLoading(loading: boolean, text?: string): void
 }
 
 /** Options used in MessageBox */
@@ -129,6 +141,21 @@ export interface ElMessageBoxOptions {
 
   /** Whether to distinguish canceling and closing */
   distinguishCancelAndClose?: boolean
+
+  /** Callback before confirm, support async operations */
+  beforeConfirm?: (instance: ElMessageBoxComponent) => boolean | void | Promise<boolean | void>
+
+  /** Text displayed on confirm button when loading */
+  confirmButtonLoadingText?: string
+
+  /** Whether to keep MessageBox open when async operation fails */
+  keepOpenOnError?: boolean
+
+  /** Whether to show error message automatically */
+  showErrorMessage?: boolean
+
+  /** Duration for error message display (ms) */
+  errorMessageDuration?: number
 }
 
 export interface ElMessageBoxShortcutMethod {

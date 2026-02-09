@@ -195,6 +195,103 @@
 `message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
 :::
 
+### 异步确认操作
+
+使用 `beforeConfirm` 钩子可以轻松实现异步确认操作，支持自动 loading 管理和错误处理。
+
+:::demo 使用 `beforeConfirm` 属性可以在确认前执行异步操作。该钩子仅在点击确认按钮时触发，支持返回 Promise 进行异步处理。异步操作期间会自动显示 loading 状态，操作成功后自动关闭弹框，失败时默认保持弹框打开并显示错误提示。
+
+```html
+<template>
+  <el-button type="text" @click="open">异步删除操作</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open() {
+        this.$confirm('确定要删除该文件吗？', '提示', {
+          type: 'warning',
+          beforeConfirm: (instance) => {
+            // 模拟异步删除操作，返回 Promise
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                // 模拟随机成功或失败
+                Math.random() > 0.5 ? resolve() : reject(new Error('删除失败'));
+              }, 2000);
+            });
+          },
+          confirmButtonLoadingText: '删除中...'
+        }).then(() => {
+          this.$message.success('删除成功');
+        }).catch(error => {
+          if (error !== 'cancel') {
+            this.$message.error('操作失败');
+          }
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### beforeConfirm 进阶用法
+
+可以在 `beforeConfirm` 中进行同步验证、异步 API 调用、显示错误提示等操作。
+
+:::demo 通过返回 `false` 可以阻止弹框关闭，使用 `instance.showError()` 可以在弹框内显示错误提示。示例中还展示了如何在异步操作期间禁用取消按钮，防止用户中断操作。
+
+```html
+<template>
+  <div>
+    <el-checkbox v-model="formValid">模拟表单验证通过</el-checkbox>
+    <el-button type="text" @click="open" style="margin-left: 10px;">表单提交验证</el-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        formValid: false
+      };
+    },
+    methods: {
+      open() {
+        this.$msgbox({
+          title: '提交确认',
+          message: '确定要提交该表单吗？',
+          showCancelButton: true,
+          beforeConfirm: (instance) => {
+            // 1. 同步验证
+            if (!this.formValid) {
+              instance.showError('表单验证失败，请先勾选复选框');
+              return false; // 阻止关闭
+            }
+            
+            // 2. 异步提交期间禁用取消按钮
+            instance.showCancelButton = false;
+            
+            // 3. 异步提交，返回 Promise
+            return new Promise((resolve) => {
+              setTimeout(resolve, 1500);
+            }).finally(() => {
+              // 恢复取消按钮（虽然弹框会关闭，但这是好习惯）
+              instance.showCancelButton = true;
+            });
+          },
+          confirmButtonLoadingText: '提交中...'
+        }).then(() => {
+          this.$message.success('提交成功');
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 区分取消与关闭
 
 有些场景下，点击取消按钮与点击关闭按钮有着不同的含义。
@@ -304,6 +401,11 @@ import { MessageBox } from 'element-ui';
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm', 'cancel'或'close', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
 | showClose | MessageBox 是否显示右上角关闭按钮 | boolean | — | true |
 | beforeClose | MessageBox 关闭前的回调，会暂停实例的关闭 | function(action, instance, done)，action 的值为'confirm', 'cancel'或'close'；instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法；done 用于关闭 MessageBox 实例 | — | — |
+| beforeConfirm | 确认前的钩子函数，仅在点击确认按钮时触发，支持异步操作。返回 false 可以阻止关闭，返回 Promise 可以执行异步操作 | function(instance)，instance 为 MessageBox 实例 | — | — |
+| confirmButtonLoadingText | 确认按钮 loading 时显示的文本 | string | — | — |
+| keepOpenOnError | 异步操作失败时是否保持弹框打开 | boolean | — | true |
+| showErrorMessage | 是否自动显示错误提示 | boolean | — | true |
+| errorMessageDuration | 错误提示显示时长（毫秒） | number | — | 3000 |
 | distinguishCancelAndClose | 是否将取消（点击取消按钮）与关闭（点击关闭按钮或遮罩层、按下 ESC 键）进行区分 | boolean | — | false |
 | lockScroll | 是否在 MessageBox 出现时将 body 滚动锁定 | boolean | — | true |
 | showCancelButton | 是否显示取消按钮 | boolean | — | false（以 confirm 和 prompt 方式调用时为 true） |
@@ -324,3 +426,11 @@ import { MessageBox } from 'element-ui';
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
 | center | 是否居中布局 | boolean | — | false |
 | roundButton | 是否使用圆角按钮 | boolean | — | false |
+
+### Methods
+
+| 方法名 | 说明 | 参数 |
+|--------|------|------|
+| showError | 在弹框内显示错误提示 | message: 错误信息文本 |
+| clearError | 清除错误提示 | — |
+| setConfirmLoading | 手动设置确认按钮 loading 状态 | loading: 是否加载中, text: 可选的按钮文本 |

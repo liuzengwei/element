@@ -30,7 +30,13 @@ const defaults = {
   dangerouslyUseHTMLString: false,
   center: false,
   roundButton: false,
-  distinguishCancelAndClose: false
+  distinguishCancelAndClose: false,
+  // 新增: 异步确认配置
+  beforeConfirm: null,
+  confirmButtonLoadingText: '',
+  keepOpenOnError: true,
+  showErrorMessage: true,
+  errorMessageDuration: 3000
 };
 
 import Vue from 'vue';

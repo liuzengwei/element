@@ -49,6 +49,15 @@
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
+          <transition name="el-message-fade">
+            <div 
+              v-if="showErrorTip" 
+              class="el-message-box__error-tip"
+              role="alert">
+              <i class="el-icon-warning"></i>
+              <span>{{ errorMessage }}</span>
+            </div>
+          </transition>
         </div>
         <div class="el-message-box__btns">
           <el-button
@@ -63,6 +72,7 @@
           </el-button>
           <el-button
             :loading="confirmButtonLoading"
+            :disabled="confirmButtonLoading"
             ref="confirm"
             :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
@@ -70,7 +80,7 @@
             size="small"
             @click.native="handleAction('confirm')"
             @keydown.enter="handleAction('confirm')">
-            {{ confirmButtonText || t('el.messagebox.confirm') }}
+            {{ confirmButtonLoading && confirmButtonLoadingText || confirmButtonText || t('el.messagebox.confirm') }}
           </el-button>
         </div>
       </div>
@@ -189,6 +199,24 @@
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
         }
+
+        // 新增: 执行 beforeConfirm
+        if (action === 'confirm' && typeof this.beforeConfirm === 'function') {
+          this.executeBeforeConfirm().then((canContinue) => {
+            if (canContinue === false) {
+              return; // 阻止关闭
+            }
+            this.proceedWithAction(action);
+          }).catch((error) => {
+            this.handleConfirmError(error);
+          });
+          return;
+        }
+
+        this.proceedWithAction(action);
+      },
+
+      proceedWithAction(action) {
         this.action = action;
         if (typeof this.beforeClose === 'function') {
           this.close = this.getSafeClose();
@@ -236,6 +264,69 @@
       },
       handleClose() {
         this.handleAction('close');
+      },
+
+      // 新增: 显示错误提示
+      showError(message) {
+        this.errorMessage = message;
+        this.showErrorTip = true;
+        if (this.errorMessageDuration) {
+          setTimeout(() => {
+            this.clearError();
+          }, this.errorMessageDuration);
+        }
+      },
+
+      // 新增: 清除错误提示
+      clearError() {
+        this.showErrorTip = false;
+        this.errorMessage = '';
+      },
+
+      // 新增: 手动设置确认按钮 loading
+      setConfirmLoading(loading, text) {
+        this.confirmButtonLoading = loading;
+        if (text !== undefined) {
+          this.confirmButtonText = text;
+        }
+      },
+
+      // 新增: 执行 beforeConfirm
+      executeBeforeConfirm() {
+        this.clearError();
+        this.originalConfirmButtonText = this.confirmButtonText;
+
+        // 开启 loading
+        this.confirmButtonLoading = true;
+        if (this.confirmButtonLoadingText) {
+          this.confirmButtonText = this.confirmButtonLoadingText;
+        }
+
+        return Promise.resolve(this.beforeConfirm(this)).then((result) => {
+          // 恢复状态
+          this.confirmButtonLoading = false;
+          this.confirmButtonText = this.originalConfirmButtonText;
+          return result;
+        }).catch((error) => {
+          // 恢复状态
+          this.confirmButtonLoading = false;
+          this.confirmButtonText = this.originalConfirmButtonText;
+          throw error;
+        });
+      },
+
+      // 新增: 处理确认错误
+      handleConfirmError(error) {
+        if (this.keepOpenOnError !== false) {
+          // 保持弹框打开
+          if (this.showErrorMessage !== false && error && error.message) {
+            this.showError(error.message);
+          }
+        } else {
+          // 关闭弹框并 reject
+          this.action = 'error';
+          this.doClose();
+        }
       }
     },
 
@@ -325,7 +416,16 @@
         dangerouslyUseHTMLString: false,
         focusAfterClosed: null,
         isOnComposition: false,
-        distinguishCancelAndClose: false
+        distinguishCancelAndClose: false,
+        // 新增: 异步确认相关字段
+        confirmButtonLoadingText: '',
+        originalConfirmButtonText: '',
+        errorMessage: '',
+        showErrorTip: false,
+        beforeConfirm: null,
+        keepOpenOnError: true,
+        showErrorMessage: true,
+        errorMessageDuration: 3000
       };
     }
   };

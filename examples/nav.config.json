@@ -236,7 +236,11 @@
             },
             {
               "path": "/message-box",
-              "title": "MessageBox 弹框"
+              "title": "MessageBox 弹框",
+              "badge": {
+                "version": "2.15.5-xn.64",
+                "type": "feature"
+              }
             },
             {
               "path": "/notification",
@@ -638,7 +642,11 @@
             },
             {
               "path": "/message-box",
-              "title": "MessageBox"
+              "title": "MessageBox",
+              "badge": {
+                "version": "2.15.5-xn.63",
+                "type": "new"
+              }
             },
             {
               "path": "/notification",
@@ -1000,7 +1008,11 @@
             },
             {
               "path": "/message-box",
-              "title": "MessageBox"
+              "title": "MessageBox",
+              "badge": {
+                "version": "2.15.5-xn.63",
+                "type": "new"
+              }
             },
             {
               "path": "/notification",
@@ -1362,7 +1374,11 @@
             },
             {
               "path": "/message-box",
-              "title": "MessageBox"
+              "title": "MessageBox",
+              "badge": {
+                "version": "2.15.5-xn.63",
+                "type": "new"
+              }
             },
             {
               "path": "/notification",

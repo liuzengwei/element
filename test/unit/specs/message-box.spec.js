@@ -260,4 +260,178 @@ describe('MessageBox', () => {
       }, 50);
     });
   });
+
+  describe('beforeConfirm async confirm', () => {
+    it('should show loading when beforeConfirm returns Promise', done => {
+      let resolveConfirm;
+      const confirmPromise = new Promise(resolve => {
+        resolveConfirm = resolve;
+      });
+
+      MessageBox({
+        message: 'test async',
+        beforeConfirm: () => confirmPromise
+      });
+
+      setTimeout(() => {
+        const confirmBtn = document.querySelector('.el-message-box__wrapper .el-button--primary');
+        confirmBtn.click();
+
+        setTimeout(() => {
+          const loading = confirmBtn.querySelector('.el-icon-loading');
+          expect(loading).to.exist;
+
+          resolveConfirm();
+          setTimeout(() => {
+            done();
+          }, 100);
+        }, 50);
+      }, 50);
+    });
+
+    it('should keep dialog open when beforeConfirm rejects', done => {
+      MessageBox({
+        message: 'test async',
+        beforeConfirm: () => Promise.reject(new Error('error'))
+      });
+
+      setTimeout(() => {
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+
+        setTimeout(() => {
+          const msgbox = document.querySelector('.el-message-box__wrapper');
+          expect(msgbox).to.exist;
+          done();
+        }, 100);
+      }, 50);
+    });
+
+    it('should block confirm when beforeConfirm returns false', done => {
+      MessageBox({
+        message: 'test block',
+        beforeConfirm: () => false
+      });
+
+      setTimeout(() => {
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+
+        setTimeout(() => {
+          const msgbox = document.querySelector('.el-message-box__wrapper');
+          expect(msgbox).to.exist;
+          done();
+        }, 100);
+      }, 50);
+    });
+
+    it('should show error tip when calling showError', done => {
+      MessageBox({
+        message: 'test error',
+        beforeConfirm: (instance) => {
+          instance.showError('validation error');
+          return false;
+        }
+      });
+
+      setTimeout(() => {
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+
+        setTimeout(() => {
+          const errorTip = document.querySelector('.el-message-box__error-tip');
+          expect(errorTip).to.exist;
+          expect(errorTip.textContent).to.include('validation error');
+          done();
+        }, 100);
+      }, 50);
+    });
+
+    it('should update loading text when confirmButtonLoadingText is set', done => {
+      let resolveConfirm;
+      const confirmPromise = new Promise(resolve => {
+        resolveConfirm = resolve;
+      });
+
+      MessageBox({
+        message: 'test',
+        confirmButtonText: 'Confirm',
+        confirmButtonLoadingText: 'Submitting...',
+        beforeConfirm: () => confirmPromise
+      });
+
+      setTimeout(() => {
+        const confirmBtn = document.querySelector('.el-message-box__wrapper .el-button--primary');
+        const btnText = confirmBtn.querySelector('span');
+        expect(btnText.textContent).to.equal('Confirm');
+
+        confirmBtn.click();
+
+        setTimeout(() => {
+          expect(btnText.textContent).to.equal('Submitting...');
+
+          resolveConfirm();
+          setTimeout(() => {
+            done();
+          }, 100);
+        }, 50);
+      }, 50);
+    });
+
+    it('should work with beforeClose', done => {
+      const executionOrder = [];
+
+      MessageBox({
+        message: 'test',
+        beforeConfirm: async() => {
+          executionOrder.push('beforeConfirm');
+        },
+        beforeClose: (action, instance, done) => {
+          executionOrder.push('beforeClose');
+          done();
+        }
+      });
+
+      setTimeout(() => {
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+
+        setTimeout(() => {
+          expect(executionOrder).to.deep.equal(['beforeConfirm', 'beforeClose']);
+          done();
+        }, 100);
+      }, 50);
+    });
+
+    it('should clear error when clicking confirm again', done => {
+      let shouldFail = true;
+
+      MessageBox({
+        message: 'test',
+        beforeConfirm: (instance) => {
+          if (shouldFail) {
+            instance.showError('first error');
+            shouldFail = false;
+            return false;
+          }
+          return true;
+        }
+      });
+
+      setTimeout(() => {
+        const confirmBtn = document.querySelector('.el-message-box__wrapper .el-button--primary');
+
+        // First click - should show error
+        confirmBtn.click();
+        setTimeout(() => {
+          let errorTip = document.querySelector('.el-message-box__error-tip');
+          expect(errorTip).to.exist;
+
+          // Second click - should clear error
+          confirmBtn.click();
+          setTimeout(() => {
+            errorTip = document.querySelector('.el-message-box__error-tip');
+            expect(errorTip).to.not.exist;
+            done();
+          }, 100);
+        }, 50);
+      }, 50);
+    });
+  });
 });

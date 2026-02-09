@@ -195,7 +195,7 @@
 `message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
 :::
 
-### 异步确认操作
+### 异步确认操作 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 使用 `beforeConfirm` 钩子可以轻松实现异步确认操作，支持自动 loading 管理和错误处理。
 
@@ -236,7 +236,7 @@
 ```
 :::
 
-### beforeConfirm 进阶用法
+### beforeConfirm 进阶用法 <version-badge version="2.15.5-xn.30" type="feature"/>
 
 可以在 `beforeConfirm` 中进行同步验证、异步 API 调用、显示错误提示等操作。
 

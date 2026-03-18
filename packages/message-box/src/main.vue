@@ -424,7 +424,7 @@
         showErrorTip: false,
         beforeConfirm: null,
         keepOpenOnError: true,
-        showErrorMessage: true,
+        showErrorMessage: false,
         errorMessageDuration: 3000
       };
     }
